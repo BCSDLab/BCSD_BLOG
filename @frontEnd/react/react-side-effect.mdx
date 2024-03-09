@@ -1,0 +1,774 @@
+---
+date: 2023-10-15
+authors: d0dam
+title: "리액트 사이드 이펙트 탐구하기"
+description: "리액트에서 말하는 사이드 이펙트는 무엇을 말하는 걸까요? 그리고 사이드 이펙트를 잘 사용하려면 어떻게 해야할까요? 사이드 이펙트에 대한 전반적인 이야기를 다루어보려고 합니다."
+keywords: ["React", "side effect", "useEffect"]
+tags:
+  - react
+  - side effect
+  - useEffect
+---
+
+리액트에서 말하는 사이드 이펙트는 무엇을 말하는 걸까요? 그리고 사이드 이펙트를 잘 사용하려면 어떻게 해야할까요? 사이드 이펙트에 대한 전반적인 이야기를 다루어보려고 합니다.
+
+<!--truncate-->
+
+## 시작에 앞서...
+
+이번 포스트는 [react.dev 공식문서](https://react.dev/learn/synchronizing-with-effects)를 참고해 제 의견을 덧붙여 만든 글입니다.
+더 자세하고 구체적인 내용을 찾아보시려면 공식문서를 참고해주세요.
+
+## 시작
+
+리액트 프로젝트를 할 때마다 데이터 요청은 빠지지 않는 것 같습니다.
+페이지가 뜨는 순간 데이터를 요청하고, 응답 받은 내용을 바탕으로 화면을 보여주기 위한 상황이 많이 있습니다.
+그럴 때 마다 당연하다는 식으로 다른 라이브러리를 쓰지 않는다면 useEffect 를 이용해 데이터를 받아옵니다.
+
+이 뿐만 아니라 의도치 않게 외부의 특정 값이 변화한다면 특정 데이터 요청을 해야되는 경우도 많이 만나볼 수 있습니다.
+
+이와 같이 리액트에서 의도치않은 부수 효과를 일으키는 것을 어떻게 정의해야하고, 어떻게 올바르게 사용할 수 있을까요?
+
+## 리액트 컴포넌트 순수성
+
+리액트의 side effect 를 설명하기 위해 리액트의 순수성을 한 번 짚고 넘어가겠습니다.
+
+리액트는 우리가 작성하는 모든 컴포넌트가 **순수 함수**라고 가정합니다.
+
+순수함수를 가볍게 짚고 넘어가자면 다음과 같은 특징이 있습니다.
+
+- **자신의 일에만 신경씁니다.** 호출되기 전에 존재했던 객체나 변수를 변경하지 않습니다.
+- **동일 입력, 동일 출력.** 동일한 입력이 주어지면 항상 동일한 결과를 반환해야 합니다.
+
+리액트 컴포넌트의 렌더링 코드는 컴포넌트 최상위 레벨에 있습니다.
+여기서 props와 state를 가져와 변환하고 화면에 표시할 JSX를 반환합니다.
+이 과정은 **반드시 순수**해야합니다.
+
+## 이벤트 핸들러
+
+이벤트 핸들러는 컴포넌트 내부에 있는 중첩된 함수입니다.
+
+이벤트가 일어나면 사용자가 보는 화면을 바꾸거나, 데이터 요청을 보내거나, 화면 전환을 시켜줄 수도 있겠죠.
+
+이렇게 화면이 변화하거나 데이터를 보내는 작업이 가능하려면 프로그램이 가진 상태를 변경할 필요가 있습니다.
+
+그래서 이벤트 핸들러에는 사용자 행동(예:버튼 클릭 또는 입력)으로 인해 발생하는 **사이드 이펙트**(프로그램의 state를 변경함)가 포함되어 있습니다.
+
+:::note Side Effect
+
+computer science 에서는 다음과 같이 [Side Effect](<https://ko.wikipedia.org/wiki/%EB%B6%80%EC%9E%91%EC%9A%A9_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)>) 를 설명합니다.
+
+> 컴퓨터 과학에서 함수가 결과값 이외에 다른 상태를 변경시킬 때 부작용이 있다고 말한다. 예를 들어, 함수가 전역변수나 정적변수를 수정하거나, 인자로 넘어온 것들 중 하나를 변경하거나 화면이나 파일에 데이터를 쓰거나, 다른 부작용이 있는 함수에서 데이터를 읽어오는 경우가 있다.
+
+이 말은 즉슨, 프로그램의 어떠한 상태를 변경하게 되면 side Effect 를 발생시켰다고 할 수 있습니다.
+:::
+
+맞습니다. 정확히 이야기하자면, 리액트에서 useEffect 만을 동해 side Effect 를 처리한다는 것은 잘못된 표현이라고 할 수 있습니다.
+
+익숙하겠지만, 여러분은 이벤트를 핸들러를 통해서 리액트가 가진 상태를 변화 시키는 행동을 통해 side Effect를 일으키고 있다고 이야기 할 수 있습니다.
+
+## 리액트에서의 Side effect
+
+본론으로 넘어와서 그렇다면 리액트가 말하는 Side effect 란 무엇일까요?
+
+여러분도 경험해 보셨겠지만, 이벤트를 통해서만 화면을 변화시킬수는 없습니다.
+화면이 켜지는 순간 어떤 작업을 하고 싶은 경우도 있겠죠.
+
+이와 같은 경우를 리액트에서 정의한다면 **"렌더링 자체로 인해 발생하는 것"** 이라고 할 수 있겠네요.
+이를 리액트에서는 **“Effect”** 라고 정의합니다. **Effect 는 React 에 한정된 정의**이며, 즉,**렌더링으로 인해 발생하는 사이드 이펙트**를 나타냅니다.
+그래서 리액트에서 Effect를 사용하면 특정 이벤트가 아닌 렌더링 자체로 인해 발생하는 사이드 이펙트를 명시할 수 있습니다.
+
+## Effect 사용하기
+
+Effect 를 사용할 때는 크게 3 단계를 따릅니다.
+
+### 1. Effect를 선언
+
+다음과 같이 useEffect 훅을 사용합니다.
+
+```tsx
+import { useEffect } from "react";
+
+function MyComponent() {
+  useEffect(() => {
+    // 여기의 코드는 매 렌더링 후에 실행됩니다.
+  });
+
+  return <div />;
+}
+```
+
+컴포넌트가 렌더링될 때마다 React 는 화면을 업데이트하고 useEffect 내부의 코드를 실행합니다.
+즉, useEffect 는 해당 렌더링이 화면에 반영이 될 때까지 useEffect 내부 코드 실행을 지연시킵니다.
+
+### 2. Effect의 의존성을 명시
+
+useEffect 의 두 번째 인자를 통해 의존성을 전달할 수 있습니다.
+
+기본적으로 작성하지 않을 경우, 매 렌더링 후에 useEffect 내부 함수가 실행됩니다.
+의존성이 빈경우 최초의 렌더링 후에만 실행되고, 의존성 안에 특정 값 a 가 있는 경우 최초의 경우와 a 가 변화한 경우 실행됩니다.
+
+```tsx
+import { useEffect } from "react";
+
+function MyComponent({ a }) {
+  useEffect(() => {
+    // 여기의 코드는 최초의 렌더링 후에만 실행됩니다.
+  }, []);
+
+  useEffect(() => {
+    // 여기의 코드는 최초의 렌더링과 a 의 값이 변화할 때 실행됩니다.
+  }, [a]);
+
+  return <div />;
+}
+```
+
+### 3. 필요한 경우 클린업 추가
+
+일부 Effect는 **수행중이던 작업을 중지, 취소 또는 정리**하는 방법을 명시해야합니다.
+
+다음 코드는 서버와의 연결을 위한 connection 을 만들고 연결을 실행시킵니다.
+
+```tsx
+import { useEffect } from "react";
+
+function MyComponent({ a }) {
+  useEffect(() => {
+    const connection = createConnection();
+    connection.connect();
+  }, []);
+
+  return <div />;
+}
+```
+
+MyComponent가 렌더링되면 그 이후에 서버와 연결되는데, 이렇게 되면 다시 서버와의 연결이 불필요해 졌을 때 연결을 끊을 수가 없습니다.
+
+이 경우에 clean up 함수를 추가해 해당 컴포넌트가 쓰이지 않게 되었을 때 연결을 끊을 수 있습니다.
+
+```tsx
+useEffect(() => {
+  const connection = createConnection();
+  connection.connect();
+  return () => {
+    connection.disconnect();
+  };
+}, []);
+```
+
+대표적으로 다음과 같은 경우 clean up 함수를 사용합니다.
+
+- 서버와의 지속 연결을 끊을 때 (위의 예시입니다.)
+- timer 기능을 쓸 때
+- 쓰로틀링, 디바운싱
+- 특정 요소나 window, document 에 이벤트를 등록하고 삭제할 때
+
+```tsx
+useEffect(() => {
+  function handleScroll(e) {
+    console.log(window.scrollX, window.scrollY);
+  }
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+```
+
+- fetch 를 하고 이를 삭제하거나 무시할 때
+
+```tsx
+useEffect(() => {
+  let ignore = false;
+
+  async function startFetching() {
+    const json = await fetchTodos(userId);
+    if (!ignore) {
+      setTodos(json);
+    }
+  }
+
+  startFetching();
+
+  return () => {
+    ignore = true;
+  };
+}, [userId]);
+```
+
+- 애니메이션을 적용할 때
+
+```tsx
+useEffect(() => {
+  const node = ref.current;
+  node.style.opacity = 1; // 애니메이션 촉발
+  return () => {
+    node.style.opacity = 0; // 초기값으로 재설정
+  };
+}, []);
+```
+
+## data fetch 와 useEffect
+
+컴포넌트를 렌더링 한 후에 바로 데이터를 입히기 위해서 useEffect 를 많이 사용합니다.
+
+다들 많이 사용하지만, 이 방법에는 단점이 꽤 많습니다.
+
+- **Effects는 서버에서 실행되지 않습니다.** 즉,초기 서버에서 렌더링되는 HTML에는 데이터가 없는 로딩 state만 포함됩니다. 클라이언트 컴퓨터는 모든 JavaScript를 다운로드하고 앱을 렌더링하고 나서야 비로소 데이터를 로드해야 한다는 사실을 발견해 냅니다. 이것은 그다지 효율적이지 않습니다.
+- **Effect에서 직접 페치하면 “네트워크 워터폴”이 만들어지기 쉽습니다.** 상위 컴포넌트를 렌더링하면, 상위 컴포넌트가 일부 데이터를 페치하고, 하위 컴포넌트를 렌더링한 다음, 다시 하위 컴포넌트의 데이터를 페치하기 시작합니다. 네트워크가 매우 빠르지 않다면, 모든 데이터를 병렬로 페치하는 것보다 훨씬 느립니다.
+- **Effect에서 직접 페치하는 것은 일반적으로 데이터를 미리 로드하거나 캐시하지 않음을 의미합니다.** 예를 들어, 컴포넌트가 마운트 해제되었다가 다시 마운트되면, 데이터를 다시 페치할 것입니다.
+
+그래서 react 에서는 다음과 같은 방식은 권합니다.
+
+- 프레임 워크 사용 시 빌트 인 fetch 메커니즘 사용하기
+- 클라이언트측 캐시를 사용하거나 직접 구축하기.
+- React Query, useSWR, React Router 6.4+. 등의 오픈 소스 활용하기
+
+## Effect 올바르게 사용하기
+
+Effect를 올바르게 사용하기 위해 다음과 같은 생각을 거쳐봅시다.
+
+### 특정 이벤트로 인해 발생시켜야 하는 로직인가, 렌더링 후에 일어나야 하는 로직인가?
+
+이벤트 핸들러를 이용해야하는 것인지, useEffect 를 사용해야 하는 것인지 구분합시다.
+
+### 렌더링을 위해 데이터를 변환하는가?
+
+이 경우는 대부분 useState 의 set 함수와 이벤트를 사용하면 해결됩니다. 특정 상태를 변경 했을 때 특정 상태를 변경하는 Effect 는 좋지 않습니다.
+
+### 렌더링 중에 해결할 수 있는 로직인가?
+
+이 항목은 예시를 들어볼까요?
+
+firstName 과 lastName 으로 fullName을 만들어 렌더링 시 반환하고 싶다고 하면 다음과 같은 방법을 생각 할 수 있습니다.
+
+```tsx
+function Form() {
+  const [firstName, setFirstName] = useState("Taylor");
+  const [lastName, setLastName] = useState("Swift");
+  const [fullName, setFullName] = useState("");
+
+  useEffect(() => {
+    setFullName(firstName + " " + lastName);
+  }, [firstName, lastName]);
+  // ...
+}
+```
+
+그런데 이렇게 안해도 렌더링 중에 처리할 수 있습니다.
+
+```tsx
+function Form() {
+  const [firstName, setFirstName] = useState("Taylor");
+  const [lastName, setLastName] = useState("Swift");
+
+  const fullName = firstName + " " + lastName;
+  // ...
+}
+```
+
+## Prop 에 의한 Effect
+
+prop 이 바뀔 때 특정 작업을 해 주고 싶은 경우도 있을 거에요. 이 때 무작정 Effect 를 사용하지 말고, 다음과 같은 생각을 거쳐봅시다.
+
+### prop 이 변경될 때 모든 state 가 초기값으로 재설정이 필요한가?
+
+userId 에 따라 ProfilePage 가 가진 모든 상태를 초기 값으로 초기화 해주어야 한다고 해봅시다.
+
+그렇다면 다음과 같이 userId 가 변할 때 상태를 초기 값으로 초기화 해줄 수 있습니다.
+
+```tsx
+export default function ProfilePage({ userId }) {
+  const [comment, setComment] = useState("");
+
+  useEffect(() => {
+    setComment("");
+  }, [userId]);
+  // ...
+}
+```
+
+하지만 이와 같은 방법은 useEffect 특성상 기존 값으로 렌더링을 진행한 후에 setComment('') 을 실행시켜 comment 를 변경시키기 때문에 효율적이지 않습니다.
+
+이 경우 key 값을 주면 key 값이 변화함에 따라 해당 컴포넌트를 새로 칠할 수 있습니다.
+
+```tsx
+export default function ProfilePage({ userId }) {
+  return (
+    <Profile
+      userId={userId}
+      key={userId} // 이렇게 key 값을 줍니다.
+    />
+  );
+}
+
+function Profile({ userId }) {
+  // key가 변하면 이 컴포넌트 및 모든 자식 컴포넌트의 state가 자동으로 재설정됨
+  const [comment, setComment] = useState("");
+  // ...
+}
+```
+
+### props가 변경될 때 일부 state 조정이 필요한가?
+
+다음과 같이 List 컴포넌트의 props인 items 가 변경 될 때 selection 을 null 로 만들어주기 위해 useEffect 를 사용했다고 해 봅시다.
+
+```tsx
+function List({ items }) {
+  const [isReverse, setIsReverse] = useState(false);
+  const [selection, setSelection] = useState(null);
+
+  useEffect(() => {
+    setSelection(null);
+  }, [items]);
+  // ...
+}
+```
+
+이 코드가 부적절한 이유는 Effect 가 발생하기 전에 렌더링을 할 때는 items 가 바뀌어도 예전의 selection 으로 렌더링 하기 때문입니다.
+렌더링을 한 번거친 후에 다시 selection 을 null 로 초기화 시켜 리렌더링 되었을 때 비로소 원하는 결과값을 얻을 수 있죠.
+
+그래서 다음과 같은 방법을 생각해 볼 수 있습니다.
+
+```tsx
+function List({ items }) {
+  const [isReverse, setIsReverse] = useState(false);
+  const [selection, setSelection] = useState(null);
+  const [prevItems, setPrevItems] = useState(items);
+
+  if (items !== prevItems) {
+    setPrevItems(items);
+    setSelection(null);
+  }
+  // ...
+}
+```
+
+이렇게 하면 렌더링 중에 item 가 바뀌었을 때 selection 을 null 로 초기화 시켜줄 수 있죠.
+
+이 방법은 Effect 를 사용하는 것보다는 낫긴 하지만, 그래도 props 값 변화로 렌더링 중에 상태 값을 바꾸는 것 또한 흐름을 파악하기 힘들고 읽기 어려운 코드가 됩니다.
+
+사실 대체적으로 이런 경우가 일어나지 않게 item 에 대해서는 그에 맞는 id 가 존재할 겁니다.
+
+그렇다면 다음과 같이 처리할 수 있죠.
+
+```tsx
+function List({ items }) {
+  const [isReverse, setIsReverse] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
+  const selection = items.find((item) => item.id === selectedId) ?? null;
+  // ...
+}
+```
+
+## 반응형 값과 반응형 로직
+
+컴포넌트 본문 내부에 선언된 props, state, 변수를 반응형 값이라고 합니다.
+반대로 외부나 내부에 정해져 있는 값들은 비반응형 값이 되겠죠.
+
+밑의 예제를 살펴볼까요?
+
+```tsx
+const serverUrl = "https://localhost:1234"; // 비반응형 값
+
+function ChatRoom({ roomId }) {
+  // props 는  바뀔 수 있으니 반응형 값
+  const [message, setMessage] = useState(""); // 반응형 값
+
+  // ...
+}
+```
+
+serverUrl은 반응형 값이 아니지만 roomId와 message는 반응형 값입니다.
+반응형 값은 렌더링 데이터 흐름에 참여하게 됩니다.
+
+반응형 값을 다루는 데에는 이벤트 핸들러와 Effect 가 사용될 수 있습니다.
+
+이 때 이벤트 핸들러와 Effect 의 로직은 반응형 로직일까요?
+
+### 이벤트 핸들러 내부의 로직은 반응형이 아닙니다
+
+이벤트 핸들러는 사용자가 동일한 상호작용(예: 클릭)을 다시 수행하지 않는 한 다시 실행되지 않습니다.
+
+이 말은 곧, 반응형 값의 변경에 "반응" 하지 않을 수 있고, 또한 반응형 값이 "반응" 하지 않더라도 촉발 될 수 있다는 말입니다.
+
+예시를 확인해 봅시다.
+
+```tsx
+sendUserMessage(message);
+```
+
+여기서 message 인자는 충분히 바뀔 수 있는 반응형 값입니다.
+
+그렇다면 이 함수는 message 라는 값이 반응 할 때 일어나야 하는 함수일까요?
+
+사용자 관점에서 message 가 바뀐다고 해서 sendUserMessage 함수를 실행시키기를 원하는지 생각해 봅시다. 그렇다면 전 아니라고 답하고 싶네요.
+
+일반적으로는 message 를 '메세지 보내기' 와 같은 이벤트를 클릭하는 행동을 해서 메세지를 보내고 싶을 것 같아요.
+
+이 메세지는 반응형 값이라고 했으니 props 로 전달된 값일 수도, useState 로 전달된 값일 수도 있겠죠.
+
+```tsx
+function Example({ message1 = "" }) {
+  const [message2, setMessage2] = useState("");
+
+  const click = () => sendUserMessage("message1 or message2");
+
+  return (
+    <>
+      <button onClick={click}>메세지 보내기</button>
+      ...
+    </>
+  );
+}
+```
+
+이제는 click 이벤트가 발생하면 메세지를 보내는 로직이 실행됩니다. 메세지 상태가 반응하면 click 이벤트가 발생하는게 아니라는 말이죠.
+
+즉, 이벤트 핸들러는 반응형 값이 변경되었다는 이유로 실행되면 안됩니다. 이벤트 핸들러는 비반응형으로 설계합시다.
+
+### Effect 내부의 로직은 반응형입니다
+
+그렇다면 다음과 같은 로직은 어떨까요?
+
+```tsx
+const connection = createConnection(serverUrl, roomId);
+connection.connect();
+```
+
+저는 이 로직을 사용자 입장에서 보면 roomId 가 변경 되었을 때 연결이 이루어져야 한다고 봅니다.
+
+roomId 나 serverUrl 이 바뀌어도 연결이 맞게 바뀌지 않으면 당황스러울 것 같아요.
+
+그렇다면 이 로직은 반응형 값이 반응 했을 때 반응 한 값에 맞추어 위의 로직이 반응하기를 원합니다. 즉, roomId 나 serverUrl 이 반응 했을 때 로직이 반응하면 되겠군요.
+
+이 경우 Effect 로 분리해 처리를 해 주어야 하고, 의존성에 로직이 갖는 반응형 값을 명시해 주어야 합니다.
+
+```tsx
+function ({serverUrl, roomId}) {
+
+useEffect(() => {
+    const connection = createConnection(serverUrl, roomId);
+    connection.connect();
+
+    return () => {
+      connection.disconnect()
+    };
+  }, [roomId, serverUrl]); // 이렇게 말이죠
+
+  return <div>연결!</div>;
+}
+```
+
+## Effect 의존성 제거하기
+
+### 반응형 값을 비반응형으로 변경하기
+
+코드예시를 다시 살펴보죠.
+
+```tsx
+function ({serverUrl, roomId}) {
+
+useEffect(() => {
+    const connection = createConnection(serverUrl, roomId);
+    connection.connect();
+
+    return () => {
+      connection.disconnect()
+    };
+  }, [roomId, serverUrl]); // 이렇게 말이죠
+
+  return <div>연결!</div>;
+}
+```
+
+만약 serverUrl 은 서비스에서 바뀌는 값이 아닌 걸 알기 때문에 의존성에서 제거하고 싶을 수도 있습니다.
+
+하지만 제거하게 된다면 lint 에러가 뜨겠죠. 왜냐하면 serverUrl 또한 props 에서 전달받은 반응형 값이니까요.
+
+그렇다면 serverUrl 을 비반응형 값으로 만들어주면 됩니다. props에서 제거하면 되겠죠.
+
+```tsx
+const serverUrl = 'https://api.example.com';
+
+function ({ roomId }) {
+
+useEffect(() => {
+    const connection = createConnection(serverUrl, roomId);
+    connection.connect();
+
+    return () => {
+      connection.disconnect()
+    };
+  }, [roomId]); // 이제 serverUrl 은 비반응형 값이기 때문에 의존성에 추가하지 않아도 됩니다.
+
+  return <div>연결!</div>;
+}
+```
+
+### 반응형 값을 비반응형으로 변경하지 못할 때
+
+그렇지만 가끔가다보면 반응형 값을 비반응형 값으로 변경하지 못하는데, 의존성에서는 제거하고 싶은 경우가 있습니다.
+
+예를 들어볼까요?
+
+사용자가 채팅에 연결할 때 알림을 표시하고 싶다고 가정해 봅시다. props에서 현재 테마(dark or light)를 읽어 올바른 색상으로 알림을 표시합니다.
+
+```tsx
+function ChatRoom({ roomId, theme }) {
+  useEffect(() => {
+    const connection = createConnection(serverUrl, roomId);
+    connection.on("connected", () => {
+      showNotification("Connected!", theme);
+    });
+    connection.connect();
+    return () => {
+      connection.disconnect();
+    };
+  }, [roomId, theme]); // 이 경우 theme 가 의존성에 추가됩니다.
+
+  //...
+}
+```
+
+하지만 여기서 이상한게 있습니다. theme 가 추가되어서 roomId 가 바뀌었을 때 연결을 만들어 알람을 만들고 싶었는데, theme 가 중간에 바뀌어도 다시 연결을 하고 알람을 보내는 과정을 진행하게 됩니다.
+
+그래서 theme 의존성을 그냥 제거하게 된다면 lint 에러가 또 뜨게 되겠죠.
+
+결국 아래의 로직이 반응형이 되기를 원치 않는다는 것입니다.
+
+```tsx
+showNotification("Connected!", theme);
+```
+
+이럴 때 사용할 수 있게 react 에서는 **Effect Event** 라는 것을 선언할 수 있게 해줍니다.
+
+:::info
+아직 이 API는 React로 출시되지 않은 실험적인 API에 해당합니다.
+
+다음 [링크](https://react.dev/reference/react/experimental_useEffectEvent)를 참고해 주세요.
+:::
+
+이 비반응형 로직을 Effect에서 추출하려면 **useEffectEvent**라는 특수 Hook을 사용합니다.
+
+```tsx
+function ChatRoom({ roomId, theme }) {
+  const onConnected = useEffectEvent(() => {
+    // 이렇게 반응형 로직을 비반응형 로직으로 동작하게 할 수 있습니다.
+    showNotification("Connected!", theme);
+  });
+
+  useEffect(() => {
+    const connection = createConnection(serverUrl, roomId);
+    connection.on("connected", () => {
+      onConnected();
+    });
+    connection.connect();
+    return () => connection.disconnect();
+  }, [roomId]); // 따라서 이제 의존성에 theme 는 들어가지 않습니다.
+  // ...
+}
+```
+
+여기서 onConnected는 Effect Event라고 불리며, Effect 로직의 일부이지만 이벤트 핸들러처럼 동작합니다.
+그 내부의 로직은 반응형으로 동작하지 않으며, 항상 props와 state의 최신 값을 “확인”합니다.
+
+useEffectEvent 를 사용할 때는 다음의 주의사항을 지켜주세요.
+
+- Effect 내부에서만 호출할 수 있습니다.
+- 다른 컴포넌트나 Hook에 전달하지 마세요.
+
+:::tip Question
+Q: 그렇다면 lint 로 의존성을 억제하지 말아야 할까요?
+
+A: 네, useEffectEvent가 React의 안정적인 API가 된 후에는 Linter를 억제하지 않는 것이 좋습니다.
+
+더 자세한 내용은 다음 [링크1](https://react.dev/learn/separating-events-from-effects#is-it-okay-to-suppress-the-dependency-linter-instead)와 [링크2](https://react.dev/learn/removing-effect-dependencies#why-is-suppressing-the-dependency-linter-so-dangerous)를 참고해주세요.
+:::
+
+### Effect 에서 상태를 set 할 경우
+
+어쩔 수 없이 Effect 내부에서 상태를 set 해야 되는 경우가 존재합니다. 이 경우에도 불필요한 의존성이 들어갈 수 있습니다.
+
+다음 예시를 볼까요?
+
+```tsx
+function ChatRoom({ roomId }) {
+  const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    const connection = createConnection();
+    connection.connect();
+    connection.on("message", (receivedMessage) => {
+      setMessages([...messages, receivedMessage]); // setMessages 에서 messages 라는 반응형 값을 다룬다.
+    });
+    return () => connection.disconnect();
+  }, [roomId, messages]); // 따라서 messages 가 의존성에 들어간다.
+  // ...
+}
+```
+
+이와 같은 구조가 되어버리면 사용자가 메세지만 보내게 되도 서버 연결을 다시하게 되는 문제가 발생합니다.
+
+그래서 messages 를 제거하고 싶을 게에요.
+
+이와 같은 경우에는 아래와 같이 바꿀 수 있습니다.
+
+```tsx
+function ChatRoom({ roomId }) {
+  const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    const connection = createConnection();
+    connection.connect();
+    connection.on("message", (receivedMessage) => {
+      setMessages((msgs) => [...msgs, receivedMessage]); // 이렇게 한다면 messages 를 가져오지 않아도 정상적으로 set 함수가 동작한다.
+    });
+    return () => connection.disconnect();
+  }, [roomId]); // messages 의존성을 제거했다.
+  // ...
+}
+```
+
+이렇게 set 함수의 이전 상태를 가져오는 방법을 활용해 의존성을 제거할 수 있습니다.
+
+## 화면을 그리기 전에 Effect 실행시키기
+
+기존의 useEffect 의 경우 렌더링 이후 화면이 paint 되고 나서 Effect 내부 로직을 수행합니다.
+그리고 다시 내부 로직에 의해 변경된 DOM을 리렌더링 하죠.
+
+<img
+  src="/img/blog/react-side-effect/useEffect-lifecycle.png"
+  alt="이미지"
+  style={{ marginBottom: "20px" }}
+/>
+
+하지만 렌더링후 화면에 paint 가 되기 전에 Effect 가 일어나길 원할수도 있습니다. 이 때 useLayoutEffect 를 사용하면 됩니다.
+
+### useLayoutEffect
+
+useLayoutEffect 는 다음과 같은 순서를 거칩니다.
+
+<img
+  src="/img/blog/react-side-effect/useLayoutEffect-lifecycle.png"
+  alt="이미지"
+  style={{ marginBottom: "20px" }}
+/>
+
+그래서 화면에 paint 를 하기 전에 Effect 를 실행시킬 수 있죠. 하지만 이렇게 되면 Effect 가 가지는 로직이 길어지면 길어질수록 화면에 그려지는 시간이 늦어집니다.
+따라서 웬만해서는 useEffect 를 사용하는 것이 좋습니다.
+
+하지만 다음과 같은 경우에서는 useLayoutEffect 를 생각해 볼 수 있습니다.
+
+```tsx
+function Tooltip() {
+  const ref = useRef(null);
+  const [tooltipHeight, setTooltipHeight] = useState(0); // 아직 height 값이 0이기 때문에 height 가 0인 상태로 화면을 그립니다.
+
+  useEffect(() => {
+    const { height } = ref.current.getBoundingClientRect();
+    setTooltipHeight(height); // 실제 높이를 구한 후 리렌더링을 하고 화면을 다시 그립니다.
+  }, []);
+
+  // ...아래에 작성될 렌더링 로직에 tooltipHeight를 사용합니다...
+}
+```
+
+Tooltip 이라는 컴포넌트는 ref 를 이용해 ref 가 적용된 요소의 height 를 알아내고 이 높이를 tooltipHeight 에 저장해 높이에 맞게 툴팁을 띄워줍니다.
+
+초기값이 0 이기 때문에 useEffect 실행되기 전에 height 가 0인 상태로 툴팁이 그려질 것이고 이후 useEffect 가 실행되어 height 값이 들어가 값에 맞게 다시 리렌더링 되고, 화면이 그려질 것입니다.
+
+이 때 깜빡임 현상이 발생할 수 있죠.
+
+이와 같이 렌더링을 해야지 얻을 수 있는 값을 활용해 화면을 다시 그려야 할 때 useLayoutEffect 를 사용을 고려해 볼 수 있습니다.
+
+```tsx
+function Tooltip() {
+  const ref = useRef(null);
+  const [tooltipHeight, setTooltipHeight] = useState(0);
+  // 아직 height 값이 0 입니다. 하지만 사용자는 height 가 0 인 화면을 볼 수 없습니다.
+
+  useLayoutEffect(() => {
+    // useLayoutEffect를 사용했기 때문에 렌더링이 일어난 이후 화면을 그리지 않고 아래 작업을 수행합니다.
+    const { height } = ref.current.getBoundingClientRect();
+    setTooltipHeight(height); // 실제 높이를 구한 후 리렌더링을 하고 화면을 그립니다.
+  }, []);
+
+  // ...아래에 작성될 렌더링 로직에 tooltipHeight를 사용합니다...
+}
+```
+
+이 경우 height 가 0 인 화면을 렌더링하지만 useLayoutEffect 에서 화면을 그리기 전에 다시 리렌더링을 하기 때문에 최종적으로 사용자는 한 번만 화면이 그려지게 보입니다.
+
+다른말로, 사용자는 렌더링이 2번 일어났다는 것을 인지할 수 없습니다. 왜냐하면 화면이 한 번만 그려졌다고 생각하기 때문이죠.
+
+원래는 브라우저는 렌더링을 하면 그에 맞게 화면을 다시 그립니다. **useLayoutEffect 는 이 것을 차단**합니다.
+따라서 react 에서 **useLayoutEffect 에 엮인 state 가 업데이트 되어도 브라우저가 화면을 다시 그리는 것을 차단**합니다.
+
+## DOM 이 바뀌기 전에 style 을 주입하기
+
+우선 css-in-js 와 같은 것을 개발하는 게 DOM이 바뀌기 전에 style 을 주입할 일이 없습니다.
+
+하지만 만약 css-in-js 와 같은 라이브러리를 개발해야 해서 DOM이 바뀌기 전에 style 을 주입 하고 싶다면 어떻게 해야 할까요?
+
+그냥 useLayoutEffect 를 사용하면 화면이 그려지기 전에 원하는 style 을 주입하는 것은 가능합니다. 하지만 이 때 렌더링이 두 번 일어나는 문제가 일어나죠.
+
+그래서 렌더링 도중, DOM이 바뀌기 전에 원하는 style 을 주입할 방법이 필요합니다.
+
+### useInsertionEffect
+
+useInsertionEffect 의 가장 큰 특징은 DOM 변이 전에 실행된다는 것입니다. 따라서 이를 이용해 style을 주입시켜줄 수 있죠.
+
+예를 틀어 버튼이라는 태그는 기본적인 css 규칙을 가지고 있습니다. 외부에서 rule 을 넣어주지 않는다면 기존 rule 을 유지하고 싶다고 한다면 다음과 같이 Button 컴포넌트를 설계할 수 있습니다.
+
+```tsx
+let isInserted = new Set();
+
+function useCSS(rule) {
+  useInsertionEffect(() => {
+    if (!isInserted.has(rule)) {
+      isInserted.add(rule);
+      document.head.appendChild(getStyleForRule(rule));
+    }
+  });
+  return rule;
+}
+
+function Button() {
+  const className = useCSS("...");
+  return <div className={className} />;
+}
+```
+
+## 조건에 따라 의존성 달리하기
+
+거의 없겠지만 어떤 경우에는 조건에 따라 의존성을 달리 하고 싶을 수 있습니다.
+
+예를 들어 데스크탑에서는 의존성에 isHover 라는 반응형 값을 의존성에 넣어햐 하지만 모바일에서는 굳이 hover 라는 이벤트가 발생하지 않기 때문에 isHover 를 싫을 수 있죠.
+
+이 경우 다음과 같이 의존성을 달리해 볼 수 있습니다.
+
+```tsx
+function Example() {
+  const [isHovered, setIsHovered] = useState(false);
+  const { isMobile } = useMediaQuery();
+
+  useEffect(
+    () => {
+      // 최초 렌더링 시와 isHover 가 변화할 때 들어갈 로직을 넣습니다.
+    },
+    isMobile ? [] : [isHovered] // 삼항 연산자를 활용해 의존성을 이디어 환경에 따라 변경합니다.
+  );
+  //...
+}
+```
+
+## 마치며
+
+리액트에서 Effect 가 무엇이고 어떻게 처리하는지, 어떠한 개념을 가지고 특정 작업을 Effect 로 인식 해야 해는지 알아보았습니다.
+
+불필요한 의존성을 제거하는 여러 방법을 살펴보면서 의존성을 올바르게 정의하고 있는지 살펴 볼 수 있었습니다.
+
+그리고 앞으로 반응형 로직이 비반응형으로 동작되기를 원할 때 쓰일 `useEffectEvent` hook 도 기대가 되네요.
+
+당연히 알고 있다고 생각한 개념을 좀 더 깊게 알아보면서 놓친 부분까지 채운 느낌을 받았습니다.
+
+이 글을 통해 여러분도 리액트의 Effect 를 더 깊이 알 수 있었으면 합니다.
