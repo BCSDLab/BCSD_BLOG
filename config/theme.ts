@@ -12,12 +12,42 @@ const navbar = {
   items: [
     {
       to: "front-end",
-      label: "프론트엔드",
+      label: "FrontEnd",
       position: "left",
     },
     {
       to: "back-end",
-      label: "백엔드",
+      label: "BackEnd",
+      position: "left",
+    },
+    {
+      to: "android",
+      label: "Android",
+      position: "left",
+    },
+    {
+      to: "ios",
+      label: "IOS",
+      position: "left",
+    },
+    {
+      to: "game",
+      label: "Game",
+      position: "left",
+    },
+    {
+      to: "ui-ux",
+      label: "UI/UX",
+      position: "left",
+    },
+    {
+      to: "product-management",
+      label: "PM",
+      position: "left",
+    },
+    {
+      to: "data-analytics",
+      label: "DA",
       position: "left",
     },
     {

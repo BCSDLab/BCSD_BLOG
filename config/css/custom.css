@@ -22,6 +22,20 @@
   --ifm-color-primary-light: #927bf4;
   --ifm-color-primary-lighter: #9f8af6;
   --ifm-color-primary-lightest: #c5b9f9;
+
+  /* 포스트 미리보기 제목 */
+  .col--7 > article > header {
+    color: #fff;
+
+    & > h2 > a {
+      font-size: 32px;
+      color: #fff;
+
+      &:hover {
+        color: #795cf2;
+      }
+    }
+  }
 }
 
 /* 폰트 */
@@ -32,7 +46,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 /* 포스트 미리보기 */
 .col--7 > article {
   margin-bottom: 40px !important;
