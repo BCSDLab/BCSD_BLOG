@@ -1,3 +1,3 @@
 export default function HomepageFeatures(): JSX.Element {
-  return <section />;
+  return <div>안녕</div>;
 }
