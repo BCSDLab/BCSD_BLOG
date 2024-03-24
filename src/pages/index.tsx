@@ -1,11 +1,5 @@
-import React from 'react';
-import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import { Redirect } from "@docusaurus/router";
 
 export default function Home(): JSX.Element {
-  return (
-    <Layout>
-      <HomepageFeatures />
-    </Layout>
-  );
+  return <Redirect to="/main/react/main" />;
 }
