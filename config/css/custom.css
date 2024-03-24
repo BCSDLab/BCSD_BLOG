@@ -22,20 +22,20 @@
   --ifm-color-primary-light: #927bf4;
   --ifm-color-primary-lighter: #9f8af6;
   --ifm-color-primary-lightest: #c5b9f9;
+}
 
-  /* 포스트 미리보기 제목 */
-  .col--7 > article > header {
-    color: #fff;
+/* 포스트 미리보기 제목 */
+html[data-theme="dark"] .col--7 > article > header {
+  color: #fff;
+}
 
-    & > h2 > a {
-      font-size: 32px;
-      color: #fff;
+html[data-theme="dark"] .col--7 > article > header > h2 > a {
+  font-size: 32px;
+  color: #fff;
+}
 
-      &:hover {
-        color: #795cf2;
-      }
-    }
-  }
+html[data-theme="dark"] .col--7 > article > header > h2 > a:hover {
+  color: #795cf2;
 }
 
 /* 폰트 */
@@ -55,26 +55,26 @@
 /* 포스트 미리보기 제목 */
 .col--7 > article > header {
   color: #222;
+}
 
-  & > h2 > a {
-    font-size: 32px;
-    color: #222;
+.col--7 > article > header > h2 > a {
+  font-size: 32px;
+  color: #222;
+}
 
-    &:hover {
-      color: #795cf2;
-    }
-  }
+.col--7 > article > header > h2 > a:hover {
+  color: #795cf2;
 }
 
 /* 포스트 미리보기 작성자 */
 .col--7 > article > header > div:last-child > div > div {
   display: flex;
   gap: 8px;
+}
 
-  & > a > img {
-    width: 32px;
-    height: 32px;
-  }
+.col--7 > article > header > div:last-child > div > div > a > img {
+  width: 32px;
+  height: 32px;
 }
 
 /* 포스트 미리보기 자세히보기 */
