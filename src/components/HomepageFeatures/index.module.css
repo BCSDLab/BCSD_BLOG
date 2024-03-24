@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 100px auto;
+  /* align-items: center; */
+}
+
+.img_wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+.img {
+  width: 250px;
+}
+
+.rule {
+  font-size: 18px;
+  font-weight: 600;
+}
