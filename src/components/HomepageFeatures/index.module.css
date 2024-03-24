@@ -1,9 +1,8 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 50%;
   margin: 100px auto;
-  /* align-items: center; */
 }
 
 .img_wrapper {
