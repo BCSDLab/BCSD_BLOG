@@ -11,6 +11,11 @@ const navbar = {
   },
   items: [
     {
+      to: "guideline",
+      label: "Guideline",
+      position: "left",
+    },
+    {
       to: "front-end",
       label: "FrontEnd",
       position: "left",
