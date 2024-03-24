@@ -1,0 +1,102 @@
+---
+sidebar_position: 1
+---
+
+블로그를 작성하기 위한 템플릿입니다. 아래의 코드박스를 복사해서 사용하세요.
+
+````
+---
+date: 2022-22-22
+authors: 권한명
+title: "제목"
+description: "설명"
+keywords: ["키워드", "여기에"]
+tags:
+  - 태그는
+  - 여기에
+---
+
+미리보기 글, 사진
+
+{/* truncate */}
+
+동영상을 넣을 거라면 살리고 아니면 지우기
+
+import videoUrl from "./videos/비디오파일명";
+import ReactPlayer from "react-player";
+
+
+# 대제목
+## 제목
+### 소제목
+
+- 코드 박스
+
+`간단한 마크다운 사용해보기`
+
+- 굵게
+
+**간단한 마크다운 사용해보기**
+
+- 기울이기
+
+_간단한 마크다운 사용해보기_
+
+- 링크
+
+[간단한 마크다운 사용해보기](https://bcsdlab.com)
+
+- 1
+  - 2
+    - 3
+
+1. 첫번째
+1. 첫첫번째
+1. 두번째
+
+개행. <br /> 개행.
+
+```언어명(ts, js, java, etc) title="제목"
+
+const example = '예시';
+
+// highlight-start
+const highlight = '진하게!';
+// highlight-end
+
+```
+
+:::note 여기에도 제목을 줄 수 있어요!
+여기에도 `동일한` **마크다운** 문법을 _적으면_ 됩니다. 이렇게 [링크로 가기 `click`](#) 도 할 수 있어요.
+:::
+
+:::tip
+여기에도 `동일한` **마크다운** 문법을 _적으면_ 됩니다. 이렇게 [링크로 가기 `click`](#) 도 할 수 있어요.
+:::
+
+:::info
+여기에도 `동일한` **마크다운** 문법을 _적으면_ 됩니다. 이렇게 [링크로 가기 `click`](#) 도 할 수 있어요.
+:::
+
+:::warning
+여기에도 `동일한` **마크다운** 문법을 _적으면_ 됩니다. 이렇게 [링크로 가기 `click`](#) 도 할 수 있어요.
+:::
+
+:::danger
+여기에도 `동일한` **마크다운** 문법을 _적으면_ 됩니다. 이렇게 [링크로 가기 `click`](#) 도 할 수 있어요.
+:::
+
+사진이 필요하다면? static 기준 절대경로
+
+<img src="/나머지 경로" style={{ marginBottom: "20px" }} />
+
+동영상을 사용한다면?
+
+<ReactPlayer
+  controls
+  playing
+  loop
+  url={videoUrl}
+  style={{ marginBottom: "20px" }}
+/>
+````

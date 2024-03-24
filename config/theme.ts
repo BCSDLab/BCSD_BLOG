@@ -56,6 +56,12 @@ const navbar = {
       position: "left",
     },
     {
+      type: "doc",
+      docId: "overview",
+      position: "left",
+      label: "Documents",
+    },
+    {
       href: "https://github.com/BCSDLab/BCSD_BLOG",
       label: "GitHub",
       position: "right",
