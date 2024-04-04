@@ -17,6 +17,17 @@ const config = {
       {
         blog: {
           showReadingTime: true,
+          feedOptions: {
+            type: 'rss',
+            copyright: `Copyright © ${new Date().getFullYear()} BCSD Lab. All rights reserved.`,
+            createFeedItems: async (params) => {
+              const {blogPosts, defaultCreateFeedItems, ...rest} = params;
+              return defaultCreateFeedItems({
+                blogPosts: blogPosts,
+                ...rest,
+              });
+            },
+          },
         },
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
