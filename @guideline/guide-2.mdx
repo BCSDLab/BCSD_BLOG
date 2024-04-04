@@ -1,0 +1,80 @@
+---
+date: 2024-04-04
+authors: kimeodml
+title: "VSCode 기반 업로드 방법"
+description: "VSCode 기반 업로드 방법"
+keywords: ["가이드", "업로드 방법"]
+tags:
+  - 가이드
+  - 업로드 방법
+---
+
+리액트를 기반으로 한 프로젝트이기 때문에 **VSCode**를 권장합니다.
+
+작성한 글의 결과물을 로컬 환경에서 확인하고 싶은 분들은 참고 바랍니다.
+
+{/* truncate */}
+
+## vscode에서 Git 연동하기
+
+해당 [링크](https://velog.io/@ahnsanghyeon/VSCode%EC%97%90%EC%84%9C-Git-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0)를 참고하 Git 연동을 진행해 줍니다.
+
+## 블로그 실행하기
+
+[repo](https://github.com/BCSDLab/BCSD_BLOG) 링크를 들어가시면 현재 트랙별로 분류해 놓은 것을 보실 수 있습니다.
+
+<img src="/img/@guideline/guide-2/Untitled.png" />
+
+**Code** 버튼을 누르면 해당 repo의 깃헙 링크를 확인할 수 있습니다. 
+<br/>
+위의 링크를 복사한 후에 자신의 **터미널**에 아래의 명령문을 입력하면 해당 repo가 복사됩니다.
+
+```jsx
+git clone https://github.com/BCSDLab/BCSD_BLOG
+```
+
+<img src="/img/@guideline/guide-2/Untitled 1.png"style={{ marginBottom: "30px" }} />
+
+
+프로젝트를 실행하기 위해서 패키지 툴이 필요합니다. 아래의 명령문을 터미널에 실행하면 프로젝트가 실행됩니다!
+
+```jsx
+npm install
+
+npm start 
+```
+<br/>
+
+아래와 같이 [`http://localhost:3000/`](http://localhost:3000/) 에서 확인하실 수 있습니다. 이제 글을 작성하면서 실시간으로 확인할 수 있습니다.
+<img src="/img/@guideline/guide-2/Untitled 2.png" />
+
+## 글 작성
+
+이제 Notion에서 작성한 후 export해서 글을 복사/붙여 넣기 하거나 직접 마크다운으로 작성하면 됩니다. 해당 [템플릿 사용 가이드](https://blog.bcsdlab.com/guideline/template)를 참고하여 필수적으로 들어가야 할 블로깅 정보를 꼭 기재한 후에 작성하기를 바랍니다.
+
+- [이미지](https://blog.bcsdlab.com/guideline/template#%EC%82%AC%EC%A7%84-%EC%82%AC%EC%9A%A9-%EC%98%88%EC%8B%9C)와 [비디오](https://blog.bcsdlab.com/guideline/template#%EB%B9%84%EB%94%94%EC%98%A4-%EC%82%AC%EC%9A%A9-%EC%98%88%EC%8B%9C)는 해당 링크를 참고하여 진행해 주면 됩니다.
+
+## 업로드 방식
+
+이제 업로드 방식을 알려드리겠습니다. 우선 git-flow를 확인해야겠죠! VSCode에는 git-flow를 확인할 수 있는 다양한 확장자가 있습니다. 아래 Git Graph는 추천 확장자입니다.
+
+<img src="/img/@guideline/guide-2/Untitled 3.png" style={{ marginBottom: "30px" }}/>
+
+git-graph 버튼을 누르면 `main` 브랜치만 있는 것을 확인할 수 있습니다.
+
+<img src="/img/@guideline/guide-2/Untitled 4.png" style={{ marginBottom: "30px" }}/>
+
+*작성자의 트랙에 맞게* 파일을 생성한 후에 작성해 주시면 됩니다. **파일명의 경우 커밋명과 동일하게 진행해 주세요.** 
+
+- ex) 파일명이 `react-hook.mdx` 라면 커밋명은 `docs: rect-hook`
+
+<p align="center">
+  <img src="/img/@guideline/guide-2/Untitled 5.png" />
+</p>
+
+
+변경된 사항을 **스테이징된 변경 사항**으로 올린 후 `commit` 한 후 `push`를 하면 작성 완료입니다!
+
+<img src="/img/@guideline/guide-2/Untitled 6.png" style={{ marginBottom: "50px" }}/>
+
+*위의 프로세스가 어렵다면 노션에 작성한 글을 markdown 형식으로 내보내기한 후에  소그룹 블로그팀에게 전달 부탁드립니다.*
