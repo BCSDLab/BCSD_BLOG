@@ -32,7 +32,7 @@ const navbar = {
     },
     {
       to: "ios",
-      label: "IOS",
+      label: "iOS",
       position: "left",
     },
     {

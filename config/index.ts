@@ -38,9 +38,16 @@ const config = {
       },
     ],
   ],
-  i18n,
+  // i18n,
   plugins,
-  themeConfig,
+  themeConfig: {
+    ...themeConfig,
+    metadata: [
+      {name: 'keyword', content: 'BCSD Lab, Blog'},
+      {name: 'author', content: 'BCSD Lab'},
+      {name: 'description', content: 'BCSD Lab 전용 블로그입니다.'},
+    ]
+  }
 };
 
 module.exports = config;
