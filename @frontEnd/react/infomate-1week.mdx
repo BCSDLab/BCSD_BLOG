@@ -1,0 +1,518 @@
+---
+date: 2024-02-24
+authors: hanagertrudeKim
+title: "인포메이트 1주차 공유(JS)"
+description: "인포메이트 1주차 공유(툴) 모음입니다."
+keywords: ["인포메이트", "JS", "TS"]
+tags:
+  - 인포메이트
+  - JS
+  - TS
+---
+
+인포메이트 1주차 공유(툴) 모음입니다.    
+import로 인한 순환 참조 문제를 해결하는 방법 - 김하나    
+js의 Currying 이란? - 윤해진    
+JS의 주석은 //과 /* */뿐만이 아니다 - 곽승주
+실행 컨텍스트가 무엇인가요? - 이해루 
+
+{/* truncate */}
+
+import videoUrl from "../videos/scale-up.mp4";
+import ReactPlayer from "react-player";
+
+
+# import로 인한 순환 참조 문제를 해결하는 방법 - 김하나
+
+### Intro
+
+프로젝트 규모가 점차 커질수록 분리되는 파일들도 늘어나고 `import` `export` 관계가 복잡해질 수 있습니다. 이런 경우 어떤 한 파일에 다른 파일이 서로 참조하는 문제가 발생할 수 있습니다.
+
+실제로 프로젝트에서도 저는 정말 가끔씩 `import` 되는 모듈 파일을 인식하지 못해 알 수 없는 빨간줄 에러가 뜬 적이 있는데, ‘순환 참조 (circular dependency) 문제’ 와 연관이 있을수도 있겠다는 생각이 들었습니다.
+
+따라서 순환 참조가 무엇인지 인식하고 순환 참조를 해결/예방하기 위한 간단한 패턴들을 소개해보겠습니다.
+
+### 순환 참조란?
+
+자바스크립트 모듈 시스템에서는 기본적으로 순환 참조를 허용합니다. 순환 참조란 서로가 서로를 참조하는 상태를 이야기합니다. JS 에서는 이를 시스템에서 걸러내지 않고, 한쪽의 `export` 를 빈 객체로 만들어 버립니다.
+
+아래 예시는 순환 참조의 대표적 예시입니다.
+
+```jsx
+// index.js
+import './a.js';
+
+// a.js
+import { sayHello } from './b.js';
+
+export const NAME = 'mike';
+
+console.log('module_a');
+sayHello();
+
+// b.js
+import { NAME } from './a.js';
+
+console.log('module_b');
+
+export const sayHello = () => {
+  console.log('hello~!', NAME);
+};
+```
+
+여기서 `b.js` 에서 `sayHello()` 함수를 읽는 형태는 다음과 같습니다.
+
+```jsx
+export const sayHello = () => {
+	console.log('hello~!', aModuleObject.Name);
+};
+```
+
+NAME 을 a 모듈의 객체라고 읽을 수 있는 이유는 `a.js` 에서 NAME 변수를 내보내는 시점이 `sayHello()` 호출부 이전 이기 때문입니다. 
+
+만약 NAME 변수 내보내는 시점을 `sayHello()` 호출부 이후로 보내면 에러가 발생하게 됩니다. 이러한 문제들이 겹치게 되면, 순환 참조 문제가 생기게 된다고 설명합니다.
+
+### 순환 참조에서 문제가 났을때 알아차리기 힘든 이유
+
+- ESM 에서는 모듈에서 없는 속성을 가져올때 에러가 발생합니다.
+⇒ 명시적으로 에러가 발생하기 때문에 순환 참조 오류를 빠르게 인식할 수 있습니다.
+- commonJS 에서는 모듈에서 없는 속성을 가져오면 일반적인 객체처럼 `undefined`가 반환되고 에러를 발생시키지 않습니다. 
+⇒ 순환 참조 문제를 쉽게 알아차리지 못합니다. (commonJS을 사용하는 웹팩의 경우 순환 참조 문제를 발견하기 힘듭니다.)
+
+### 가장 명시적인 해결 방법 - 내부 모듈 패턴(Internal module pattern)
+
+가장 명시적인 해결 방법은 모듈의 평가 순서를 내부적으로 정의하는 파일을 만드는 것 입니다.
+
+따라서, 모듈을 가져올때 항상 그 파일로부터 가져오는 형태를 갖추게 됩니다.
+
+핵심은 다른 모듈들을 직접적으로 불러오지 않도록 하는 것 입니다.
+
+위의 예시의 모듈을의 순서를 다음과 같이 `modules.js` 파일에 정의할 수 있습니다.
+
+```jsx
+// modules.js
+export * from './b.js';
+export * from './a.js';
+```
+
+모듈 호출부는 다음과 같이 달라질 것입니다.
+
+```jsx
+//index.js
+import { NAME,   sayHello ) from './modules.js';
+//a.js
+import { sayHello } from './modules.js';
+//b.js
+import { NAME } from './modules.js';
+```
+
+### 요약
+
+- 순환 참조는 서로가 서로를 참조하는 형태입니다.  (a모듈 ↔ b모듈)
+- 순환 참조는 CommonJS 환경에서 쉽게 발견하지 못합니다.
+- 내부적으로 모듈 평가 순서를 정의하는 파일을 따로 만들어 순환 참조 문제를 해결할 수 있습니다.
+
+[How to fix nasty circular dependency issues once and for all in JavaScript & TypeScript](https://medium.com/visual-development/how-to-fix-nasty-circular-dependency-issues-once-and-for-all-in-javascript-typescript-a04c987cf0de)
+
+[JS 모듈 시스템과 순환 참조 문제](https://ljs0705.medium.com/js-모듈-시스템과-순환-참조-문제-a9e0c90c07e5)
+
+# js의 Currying 이란? - 윤해진    
+
+### Intro
+
+코드 리뷰로 다른 동료분께 커링을 사용하는 것도 좋아 보이네요!라는 이야기를 들었습니다. 
+
+부끄럽지만 그때는 커링이 무엇인지 몰랐었습니다. 커링에 대해 찾아보니 함수형 프로그래밍에 있어 보다 함수의 재사용성을 높일 수 있는 방법이라는 것을 알게 되어 이번 기회로 공유를 해보려 합니다. 😃
+
+### Currying(쿼링)이 무엇인가?
+
+- 여러 개의 인수를 함수가 중첩되는 순서대로 보내는 하나의 과정
+
+Currying은 모든 인수들이 사용될 때까지 계속 새로운 함수를 반환합니다.
+
+```jsx
+//모든 인수를 가지고 함수를 호출
+
+function multiply (a, b, c) {
+    return a * b * c;
+}
+
+multiply(1, 2, 3); 
+
+```
+
+⇒
+
+```jsx
+//curried된 함수의 호출
+
+function multiply (a) {
+    return (b) => {
+        return (c) => {
+            return a * b * c;
+        };
+    };
+}
+
+multiply(1)(2)(3);  
+
+```
+
+하나의 함수가 여러 함수의 조합으로 분해가 된 것을 볼 수 있습니다.
+
+**즉, Currying은 여러 개의 인수를 가진 함수를 `각각이 하나의 인수를 갖는 일련의 함수`들로 변환합니다.**
+
+그러나, **이미 반환된 외부 함수의 return 값에 어떻게 접근을 하는 것일까요?** 🤔
+
+⇒ 이 부분은 JavaScript에서는 **클로저(Closure)**라는 개념을 통해 **이미 반환된 외부 함수의 지역 변수에 접근할 수 있었습니다.**
+
+이는 함수가 실행될 때 자신이 생성될 당시의 환경에 있는 변수들에 접근할 수 있습니다. 따라서 위 예시에서는 
+
+- **multiply(1)**은 **a** 가 **1**로 고정된 새로운 함수를 반환합니다.
+- **(2)**(이전 단계에서 반환된 함수에 대한 호출)는 **b** 가 **2**로 고정되고, **c** 를 받는 또 다른 새로운 함수를 반환합니다.
+- **(3)**(두 번째 단계에서 반환된 함수에 대한 호출)은 **c** 가 **3**으로 고정되고, 이제 모든 인자가 준비되었으므로 **a * b * c 계산을 수행하고 그 결과를 반환합니다.**
+
+이 과정에서 **a**와 **b**는 각각의 클로저 내에서 "살아있는" 상태로 유지되며, 마지막 함수에서 **a**, **b**, 그리고 **c**의 값을 사용하여 계산을 수행할 수 있습니다.
+
+### Currying(쿼링)은 유용한가?
+
+1. 재사용 가능하고 쉽게 구성할 수 있는 작은 코드 모듈 작성합니다.
+    - 만약, 매번 고객에게 10%의 할인을 적용해 주고자 합니다.
+    
+    ```jsx
+    function discountedPrice(price, discountRate) {
+        return price * (1 - discountRate);
+    }
+    ```
+    
+    위와 같은 코드로 할인 가격을 산출해 낼 수 있습니다.
+    
+    그러나, 이는 장기적으로 매번 10%의 할인을 계산하게 됩니다.
+    
+    ```jsx
+    const price = discountedPrice(1500000, 0.1);  //=> 1,350,000
+    const price = discountedPrice(50000, 0.1);    //=> 45,000
+    const price = discountedPrice(300000, 0.1);   //=> 270,000
+    ```
+    
+    이때, **discountedPrice 함수**를 curry로 할 수 있습니다. 그러면 매번 0.1 할인율을 추가하지 않아도 됩니다!
+    
+    ```jsx
+    function discountedPrice(discountRate) {
+        return (price) => {
+            return price * (1 - discountRate);
+        };
+    }
+    
+    const tenPercentDiscount = discountedPrice(0.1);
+    
+    tenPercentDiscount(500000);  //=> 450000
+    ```
+    
+
+curry를 이용함으로 고객이 사는 물건의 가격만 가지고 계산을 할 수 있게 되었습니다.
+
+또한, 더욱 스페셜한 고객에게는 `const twentyPercentDiscount = discountedPrice(0.2);`로 활용할 수도 있습니다.
+
+1. 같은 인수를 가지고 자주 함수를 호출하는 것을 피할 수 있다.
+    - 예시로 실린더의 부피를 계산하는 함수가 있습니다
+    
+    ```jsx
+    function volume(length, width, height) {
+        return length * width * height;
+    }
+    ```
+    
+    여기서 어떤 실린더의 height가 모두 100이라고 한다면, 사용자는 반복해서 height 인수에 100을 넣어서 호출해야 합니다.
+    
+    이를 해결하기 위해, volumn 함수를 curried 할 수 있습니다.
+    
+    ```jsx
+    function volumn (height) {
+        return (width) => {
+            return (length) => {
+                return length * width * height;
+            };
+        };
+    }
+    ```
+    
+    특정한 높이에 대해서 함수를 정의할 수 있습니다.
+    
+    ```jsx
+    const hundredCylinderHeight = volumn(100);
+    
+    hundredCylinderHeight(200)(30);
+    ```
+    
+
+### 요약
+
+- 쿼링이란 여러 개의 인수를 가진 함수를 각각이 하나의 인수를 갖는 일련의 함수들로 변환하는 것.
+- 쿼링을 사용할 때 클로저라는 js의 개념으로 자신이 생성될 당시의 환경에 있는 변수들에 접근 가능.
+- 쿼링의 장점으로는 재사용 가능하고 쉽게 구성할 수 있는 작은 코드 모듈 작성 가능, 같은 인수를 가지고 자주 함수를 호출하는 것 회피 가능.
+
+https://blog.bitsrc.io/understanding-currying-in-javascript-ceb2188c339
+
+
+[Everything about Currying in JavaScript](https://blog.bitsrc.io/understanding-currying-in-javascript-ceb2188c339)
+
+# JS의 주석은 //과 /* */뿐만이 아니다 - 곽승주
+
+## **Intro**
+
+JavaScript에서 `//`와 `/* */`로 각각 한 줄 주석과 여러 줄 주석을 만들 수 있다는 것은 다들 알고 있을 것입니다. 하지만 JavaScript 명세에는 `#!`로 시작하는 Hashbang Comments와 HTML 주석 형식인 `<!--`와 `-->` 로 감싸는 HTML-like Comments 등 다른 것도 정의되어 있습니다.  여기에서는 `#!`와 `<!--` `-->`의 간단한 문법과 사용 목적을 소개하려고 합니다.
+
+## 1. Hashbang Comments
+
+### 1.1. 문법
+
+이는 hashbang 혹은 shebang이라고 부르는 `#!`로 시작하는 한 줄 주석입니다. 그리고 `#!` 이전에 공백이 있으면 안됩니다. 한 줄 주석이므로 주석을 끝내는 `LineTerminator`를 제외한 모든 글자를 쓸 수 있습니다. 이 주석은 그 특성상 스크립트 혹은 모듈의 첫 시작 부분에서만 유효합니다. 어떤 특성인지는 다음 섹션에서 알아보겠습니다.
+
+### 1.2. Hashbang Comments의 목적
+
+이는 원래 Unix 계열의 운영체제에서 사용되던 것입니다. `#!`로 시작하는 문자열이 첫 줄에 있는 파일은 해당 파일을 실행할 때 `#!` 이후의 문자열을 인터프리터로 사용합니다.
+
+JavaScript에서도 비슷한 목적으로 해당 주석 형식이 도입되었습니다. 이는 스크립트나 모듈 파일에 처음에 선언되어서 해당 코드를 실행할 때 어떤 JavaScript 인터프리터를 사용할지 명시하는 역할을 합니다.
+
+하지만, 스크립트가 쉘에서 돌아가지 않는 이상 이 주석은 일반적인 한 줄 주석(`//`)과 완전히 같은 의미를 갖게 됩니다.
+
+```jsx
+#! /usr/bin/env node
+
+console.log("Hello, World");
+```
+
+따라서 이는 서버사이드 JavaScript에서 유용합니다. 서버에는 여러 JavaScript 인터프리터가 있을 수 있는데 이 주석을 통해서 어떤 인터프리터를 사용할지 명시할 수 있기 때문입니다.
+
+## 2. HTML-like Comments
+
+### 2.1. 문법
+
+`<!--`은 `SingleLineHTMLOpenComment`로 정의되어 있습니다. 한 줄 주석과 똑같이 작동하여 `LineTerminator`를 제외한 모든 글자를 포함할 수 있습니다.
+
+이런 식으로 쓰일 수 있습니다.
+
+```jsx
+console.log(1); <!-- 한줄주석
+```
+
+`-->`은 `SingleLineHTMLCloseComment`로 정의되어 있습니다. 주석 내용 자체는 한 줄 주석과 똑같이 작동하여 `-->` 다음에 오는 같은 줄의 글자들을 주석 처리합니다. 단, `-->` 이전에는 공백, 줄바꿈 혹은 한 줄로 제한된 주석만 있어야 하고 다른 글자가 있으면 안됩니다.
+
+이런 식으로 쓰일 수 있습니다.
+
+```jsx
+*/ --> 주석내용
+--> 한줄 주석
+console.log(1); --> 한줄주석 // 이건 --> 이전에 주석 외의 다른 글자가 와서 안됩니다.
+```
+
+### 2.2. 목적
+
+JavaScript의 초기에는 JavaScript를 지원하지 않는 구식 브라우저들이 많았습니다. JavaScript를 포함하는 `<script>`태그를 제대로 처리할 수도 없었습니다. 따라서 JavaScript를 HTML 문서의 `<script>`태그에 포함한 경우 구식 브라우저에서의 호환성 문제가 있어 `<script>` 요소의 본문을 웹 페이지에 일반 텍스트로 표시해버리는 문제가 있었습니다.
+
+이 문제는 HTML 주석으로 스크립트 본문을 감싸는 것으로 방지할 수 있었습니다.
+
+```html
+<script>
+  <!-- This is an HTML comment surrounding a script body
+  alert("this is a message from JavaScript"); // not visible to old browsers
+  // the following line ends the HTML comment
+  -->
+</script>
+```
+
+이런 코딩 패턴을 사용하면 구식 브라우저는 전체 스크립트 본문을 HTML 주석으로 인식하고 페이지에 표시하지 않습니다. 하지만, 이런 패턴을 사용 시 HTML의 주석 구분자 `<!--`이 JavaScript 코드에서 문법적으로 유효하지 않았기 때문에 JavaScript를 지원하는 브라우저가 스크립트 본문을 제대로 파싱하고 실행하지 못했습니다.
+
+이 문제를 피하기 위해 `<!--`가 한 줄 주석의 시작으로 인식되도록 하고 `-->`의 앞에 `//`를 두는 것으로 아래와 같이 하여 하위 호환성을 지킬 수 있게 했습니다.
+
+```html
+<script>
+	<!-- This is an HTML comment in old browsers and a JS single line comment
+  alert("this is a message from JavaScript"); // not visible to old browsers
+  // the following line ends the HTML comment and is a JS single line comment
+  // -->
+</script>
+```
+
+이런 방법이 오래도록 많은 웹 개발자들에게 사용된 결과, 표준화된 것이 위의 문법입니다.
+
+## 결론
+
+Hashbang Comments와 HTML-like Comments를 알아보았는데 이들은 특별한 목적을 위해 도입된 것입니다. 따라서 결국은 `//`을 한 줄 주석으로, `/* */`를 여러 줄 주석으로 사용하는 게 가장 좋습니다. 
+
+하지만 이런 주석 형식들이 왜 도입되었는지, 어떤 목적을 위해 도입되었는지 알아보는 것은 많은 토막지식들을 전해 주었습니다. Hashbang Comments와 HTML-like Comments 등은 JavaScript가 걸어온 길들의 단면을 보여 줍니다.
+
+[JS 탐구생활 - JS의 주석은 //과 /* */뿐만이 아니다](https://witch.work/posts/javascript-various-comments)
+
+# 실행 컨텍스트가 무엇인가요? - 이해루 
+
+# 실행 컨텍스트(Excution Context)가 무엇인가요?
+
+JavaScript를 공부하다보면 마주치게 되는 실행 컨텍스트의 개념에 대해 간단하게 알아봅시다.
+
+**실행 컨텍스트(Excution Context)**란 **코드를 실행함에 있어서 실행할 코드에 제공할 환경 정보들을 모아놓은 객체**입니다.
+
+자바스크립트는 코드를 실행할 때, 필요한 환경정보들을 모아 컨텍스트를 구성하고, 이를 콜스택에 쌓아둡니다. 이후 가장 위에 쌓여있는 컨텍스트와 관련된 코드부터 순서대로 실행하면서 순서를 보장합니다.
+
+실행 컨텍스트의 종류는 3가지가 있습니다.
+
+- **전역 실행 컨텍스트(Global Execution Context)**
+    - 자바스크립트가 실행되는 순간 생성되는 가장 기본적인 실행 컨텍스트입니다.
+- **함수 실행 컨텍스트(Functional Execution Context)**
+    - 함수가 실행 되었을 때 생성되는 실행 컨텍스트입니다.
+- **Eval 함수 실행 컨텍스트(Eval Function Execution Context)**
+    - Eval 함수가 실행되었을 때, 내부의 실행 컨텍스트입니다.
+
+실행 컨텍스트는 생성 페이즈(Creation Phase)와 실행 페이즈(Execution Phase) 두 단계를 거칩니다.
+
+### Creation Phase
+
+Creation phase에서는 실행 컨텍스트가 생성됩니다. 실행 컨텍스트는 다음과 같은 구조를 가집니다.
+
+- LexicalEnvironment
+    - environmentRecord
+    - outer-EnvironmentReference
+- VariableEnvironment
+    - environmentRecord(snapshot)
+    - outer-EnvironmentReference(snapshot)
+- This binding
+
+각 부분을 알아봅시다.
+
+LexicalEnvironment(렉시컬 환경)는 컨텍스트 내부의 식별자 정보가 포함되어있는 environmentRecord와 상위 스코프의 environmentRecord를 참조하는 outer-EnvironmentReference로 구성됩니다. 이것은 자바스크립트가 변수에 대한 참조를 찾을 때, 현재 렉시컬 환경에서 찾을 수 없다면, 상위의 컨텍스트로 변수에 대한 정보를 계속해서 찾아 나갈 수 있다는 것을 의미합니다.
+
+VariableEnvironment는 LexicalEnvironment와 같은 정보를 담고 있지만, 생성 시점의 snapshot이기 때문에 값이 변하지 않는다는 특징이 있습니다.
+
+ES6에서 LexicalEnvironment은 함수 선언 및 `let`과 `const`변수의 바인딩에 사용되지만 VariableEnvironment는 `var` 바인딩만 가능하다는 차이점이 있습니다.
+
+ThisBinding은 식별자가 바라보아야 할 this의 값입니다.
+
+### **Execution Phase**
+
+Execution phase에서는 모든 변수에 대한 할당이 수행되고, 최종적으로 코드가 실행됩니다.
+
+간단한 예시를 통해 실행 컨텍스트의 동작을 알아봅시다.
+
+```jsx
+let a = 20;
+const b = 30;
+var c;
+function multiply(e, f) {
+ var g = 20;
+ return e * f * g;
+}
+c = multiply(20, 30);
+```
+
+코드가 실행되면, 자바스크립트 엔진은 전역 실행 컨텍스트(Global execution context)를 생성합니다. 전역 실행 컨텍스트는 아래와 같을 것입니다.
+
+Creation Phase
+
+```jsx
+GlobalExectionContext = {
+  LexicalEnvironment: {
+    EnvironmentRecord: {
+      Type: "Object",
+      a: < uninitialized >,
+      b: < uninitialized >,
+      multiply: < func >
+    }
+    outer: <null>,
+    ThisBinding: <Global Object>
+  },
+  VariableEnvironment: {
+    EnvironmentRecord: {
+      Type: "Object",
+      c: undefined,
+    }
+    outer: <null>,
+    ThisBinding: <Global Object>
+  }
+}
+```
+
+Execution Phase
+
+```jsx
+GlobalExectionContext = {
+LexicalEnvironment: {
+    EnvironmentRecord: {
+      Type: "Object",
+      a: 20,
+      b: 30,
+      multiply: < func >
+    }
+    outer: <null>,
+    ThisBinding: <Global Object>
+  },
+VariableEnvironment: {
+    EnvironmentRecord: {
+      Type: "Object",
+      c: undefined,
+    }
+    outer: <null>,
+    ThisBinding: <Global Object>
+  }
+}
+```
+
+이후, `multiply(20, 30);`  가 실행되면, `multiply`의 함수 실행 컨텍스트가 생성됩니다.
+
+Creation Phase
+
+```jsx
+FunctionExectionContext = {
+LexicalEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      Arguments: {0: 20, 1: 30, length: 2},
+    },
+    outer: <GlobalLexicalEnvironment>,
+    ThisBinding: <Global Object or undefined>,
+  },
+VariableEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      g: undefined
+    },
+    outer: <GlobalLexicalEnvironment>,
+    ThisBinding: <Global Object or undefined>
+  }
+}
+```
+
+Execution Phase
+
+```jsx
+FunctionExectionContext = {
+LexicalEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      Arguments: {0: 20, 1: 30, length: 2},
+    },
+    outer: <GlobalLexicalEnvironment>,
+    ThisBinding: <Global Object or undefined>,
+  },
+VariableEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      g: 20
+    },
+    outer: <GlobalLexicalEnvironment>,
+    ThisBinding: <Global Object or undefined>
+  }
+}
+```
+
+`multiply` 가 실행되고, 반환된 값이 글로벌 컨텍스트의 `c` 에 저장되고, LexicalEnvironment가 업데이트 됩니다. 프로그램이 종료됩니다.
+
+### 추가로
+
+코드를 보면 `let`과 `const`를 사용한 변수는 creation phase에서 아무 값을 가지지 않지만(uninitialized), `var` 의 경우는 `undefined`라는 값을 갖습니다.
+
+이것이 값이 초기화 되기 전에 `var` 로 선언된 변수는 접근할 수 있고, `let`과 `const` 로 선언한 변수는 접근할 수 없는 이유입니다.
+
+실행 컨텍스트라는 개념은 클로저나, 호이스팅을 공부하다 보면 계속해서 마주치게 되는 개념입니다. 개념을 확실하게 알아둔다면 이후에 다른 개념의 이해에 많은 도움이 될 것이라 생각합니다.
+
+[Understanding Execution Context and Execution Stack in Javascript](https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0)
