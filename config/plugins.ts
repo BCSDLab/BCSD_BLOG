@@ -58,9 +58,9 @@ const plugins = [
   [
     "@docusaurus/plugin-content-blog",
     {
-      id: "ui-ux",
-      routeBasePath: "ui-ux",
-      path: "./@uiUx",
+      id: "design",
+      routeBasePath: "design",
+      path: "./@design",
     },
   ],
   [

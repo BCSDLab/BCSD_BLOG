@@ -41,8 +41,8 @@ const navbar = {
       position: "left",
     },
     {
-      to: "ui-ux",
-      label: "UI/UX",
+      to: "design",
+      label: "Design",
       position: "left",
     },
     {
