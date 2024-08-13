@@ -1,5 +1,5 @@
 ---
-date: 2024-04-03
+date: 2024-08-13
 authors: kimeodml
 title: "github에서 업로드하는 방법"
 description: "github에서 바로 이용하는 방법"
@@ -33,10 +33,25 @@ github에서 바로 글을 업로드 하는 방식입니다.
 
 ## BCSDLab 레포로 이동
 
-[bcsd 블로그 repo](https://github.com/BCSDLab/BCSD_BLOG)로 이동합니다. 그럼 아래와 같이 다양한 폴더 경로를 확인할 수 있습니다. 이 중 자신이 속해 있는 트랙 폴더로 이동해 주세요.
+[bcsd 블로그 repo](https://github.com/BCSDLab/BCSD_BLOG)로 이동합니다. 그럼 아래와 같이 다양한 폴더 경로를 확인할 수 있습니다. 
+
+먼저 `main` 버튼을 눌러 자신의 브랜치를 만듭니다. 브랜치명의 경우 `[깃헙 아이디]/[mdx 파일명]`로 지정해 주세요.
+
+<p align="center">
+  <img src="/img/@guideline/guide-1/Untitled 1.png" />
+</p>
 
 
-<img src="/img/@guideline/guide-1/Untitled 1.png" />
+브랜치를 생성하면 자신이 생성한 브랜치로 이동한 후에 글 작성, 이미지 업로드 등의 다양한 작업을 진행하면 됩니다.
+
+아래의 이미지처럼 새롭게 생성한 브랜치명으로 변경되었다면 현재 위치가 자신이 생성한 브랜치라는 것입니다.
+
+<p>
+  <img src="/img/@guideline/guide-1/Untitled 2.png" />
+</p>
+
+
+
 
 
 ## 이미지 및 비디오 파일 업로드
@@ -45,17 +60,19 @@ github에서 바로 글을 업로드 하는 방식입니다.
 
 **이미지**의 경우 `/img/@트랙` 에 **비디오**는 원하는 경로에 저장합니다. 되도록이면 쓰는 글에 가깝게 두거나 각 트랙 폴더에 만들어져 있는 video 폴더를 사용하는 것을 추천합니다. 
 
-아래와 같이 `/img/@guideline`에 이미지를 업로드하면 됩니다.
+아래와 같이 `/img/@guideline`에 이미지를 업로드하면 됩니다. 커밋명의 경우 `docs: [자유롭게]` 지정하면 됩니다.
 
 <p align="center">
-  <img src="/img/@guideline/guide-1/Untitled 2.png" />
+  <img src="/img/@guideline/guide-1/Untitled 3.png" />
 </p>
+
+하단의 `Commit changes` 버튼을 누르면 커밋이 작성됩니다. 이때 커밋이 올바른 브랜치(ex. `kimeodml/guideline`)에 위치해 있는지 확인해 주세요. 
 
 ## 글 작성 및 올리기
 
 이 글은 가이드라인에 작성할 글이기 때문에 `@guideline`으로 이동했습니다. **create new file** 버튼을 눌러 새롭게 파일을 생성합니다.
 
-<img src="/img/@guideline/guide-1/Untitled 3.png" />
+<img src="/img/@guideline/guide-1/Untitled 4.png" />
 
 [템플릿 사용 가이드](https://blog.bcsdlab.com/guideline/template)에 맞게 블로깅 정보를 기입합니다. 이 후 직접 글을 마크다운 형식으로 작성하거나 노션에서 내보내기한 파일을 복사/붙여넣기 합니다.
 
@@ -70,10 +87,33 @@ github에서 바로 글을 업로드 하는 방식입니다.
 <img src="/img/@guideline/Untitled.png" />
 ```
 
-- **파일명**과 **Commit message**(`docs: 파일명`)를 동일하게 작성해 주세요.
+**브랜치명**(ex. `kimeodml/guideline`)과 **파일명**(ex. `guideline.mdx`)을 동일하게 설정해 주세요.
 
-<img src="/img/@guideline/guide-1/Untitled 4.png" />
+<p align="center">
+  <img src="/img/@guideline/guide-1/Untitled 5.png" />
+</p>
 
-`Bypass rules and commit changes`를 누르시면 글 작성이 완료됩니다!
+`Commit changes`를 누르면 작성된 파일이 github에 업로드됩니다!!
+
+
+## Pull Request 날리기
+
+이제 새롭게 생성된 브랜치에서 `main` 브랜치로 병합하기 위해서는 [pull-request](https://docs.github.com/ko/pull-requests)를 날려야 합니다.
+
+메인 페이지로 돌아오면 노란 창이 띄워져 있는 것을 확인할 수 있습니다. 여기서 `Compare & pull-request` 버튼을 누르면 pr 창으로 넘어가집니다.
+
+<p align="center">
+  <img src="/img/@guideline/guide-1/Untitled 6.png" />
+</p>
+
+pr 제목은 `[트랙명]: [자유롭게]`로 작성하고, 선택 사항으로 글을 요약할 수 있게 템플릿을 생성해 놓았습니다. 자유롭게 적거나 생략해도 됩니다.
+
+- 이때 병합되는 방향이 `main` 브랜치인지 확인해 주세요!
+
+<p align="center">
+  <img src="/img/@guideline/guide-1/Untitled 7.png" />
+</p>
+
+이제 `Create pull request` 버튼을 누르면 bcsdlab 슬랙 채널의 **#bcsd_blog_문의**로 알림이 가집니다. 동아리원이 pr을 확인한 후에 병합되면 자동으로 배포됩니다.
 
 하지만 나는 블로그를 내 컴퓨터에 실행하면서 글을 쓰고 싶다! 하시는 분은 [다음 가이드](/guideline/guide-2)를 참고해 주세요.
