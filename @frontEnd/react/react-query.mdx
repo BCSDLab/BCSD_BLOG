@@ -1,0 +1,124 @@
+---
+date: 2024-8-31
+authors: ChoiWonBeen
+title: 'staleTime과 gcTime이 뭔가요?'
+description: '@tanstack/react-query의 swr방식에 대한 설명입니다.'
+keywords: ['react-query']
+tags:
+  - react-query
+---
+
+@tanstack/react-query의 stale-while-revalidate방식에 대한 설명입니다.
+
+{/* truncate */}
+
+## 왜 React Query를?
+
+여러분들은 `@tanstack/react-query`를 왜 선택했나요?<br/>
+기술 스택의 선택에는 언제나 그 이유가 중요합니다. react-query의 사용으로 어떤 이점을 얻고 싶었나요?
+
+과거의 저는 이렇게 생각했어요.
+- 잘은 모르지만, 같은 쿼리키에 대해 서버로 보내는 요청을 캐싱해 주어서
+- 캐싱이 되니깐, 서버로 보내는 요청의 수를 줄일 수 있어서
+- `data, isLoading, isError`와 같이 상태를 편하게 쓸 수 있는 인터페이스를 제공해서
+- suspense를 지원해서
+
+데이터를 항상 다시 가져오는건 비용이 많이 드니깐, 캐싱을 활용해 네트워크 요청의 수를 최소화하고 싶었었죠.
+
+그런데 사용해보니 그렇지 않았어요.
+
+```tsx
+export const useCategoryList = () => {
+  return useQuery(
+    {
+      queryKey: QueryKey.GetCategoryList,
+      queryFn: fetchCategoryList,
+    },
+  );
+};
+
+export function HomePage(){
+    const { data } = useCategoryList();
+
+    return <div>{data.map((category) => <div>{category.name}</div>)}</div>
+}
+
+export function StorePage(){
+    const { data } = useCategoryList();
+
+    return <div>{data.map((category) => <div>{category.name}</div>)}</div>
+}
+
+```
+
+두 페이지를 이동하니, 두 번의 네트워크 요청이 발생했어요. 이게 캐싱이라고요?<br/>
+그래서 저는 어떻게하면 요청을 막을 수 있을까 찾아봤죠.
+
+공식문서에서는, staleTime값을 더 길게 설정하라고 했어요.(초기값이 0이라서, 5분정도로 설정했어요)<br/>
+```tsx
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+    },
+  },
+});
+```
+staleTime을 전체적으로 늘리니 실제로 페이지를 여러번 이동해도, 동일한 쿼리에 대해 요청이 한번만 진행됐어요.
+
+그런데 이상해요. staleTime을 늘리니깐, 캐싱이 더 잘 되는게 맞을까요?<br/>
+그게 맞다면 왜 초기값이 0으로 설정되어 있을까요?
+
+## staleTime이란?
+staleTime은, 받아온 데이터가 stale하다(오래됐다)고 표시될때까지 걸리는 시간을 뜻해요.<br/>
+초기값은 0으로, 기본적으로 react-query는 모든 서버 요청에 대해서 - 이 데이터는 오래됐으니, 다시 받아와야할 필요가 있다고 표시하는거죠
+
+그럼 캐싱이 되는게 아니잖아요!<br/>
+라고 생각한다면, `staleTime`과 함께 지정할 수 있는 `gcTime`(4버전 이하에서는 `cacheTime`)을 함께 이해해야합니다.
+
+gcTime/cacheTime은, 데이터가 캐시에 저장되는 시간을 뜻해요. (초기값은 5분입니다)<br/>
+5분동안은, 동일한 쿼리에 대해서 캐시를 사용한다는 의미이죠.
+
+음? 아까 다시 요청해야한다, 오래됐다 하지 않았던가요?
+네. 그래서 우리는 react-query가 캐시를 활용하는 방식인, SWR(stale-while-revalidate) 방식에 대해 이해해야합니다.
+
+## stale-while-revalidate
+
+문장 그대로 해석하자면 아래와 같아요, 
+- 기존에 있던 데이터를 그대로 보여주면서 (stale), 
+- 동시에 백그라운드에서 새로운 데이터를 가져오는 동안 (while), 
+- 이를 검증하고 갱신하는 것 (revalidate)
+
+react-query에 맞게 이해하면, staleTime이 지난 상태이더라도,<br/>
+그 데이터를 **먼저 보여주면서** 새로운 데이터로 갱신한다는 뜻이죠.
+
+지금까지 staleTime이 0이라서 중복으로 했던 요청은, 사실 UX적으로 아무런 문제가 없었던거예요.<br/>
+캐시에 데이터가 있다면 먼저 캐시된 데이터를 보여주기에, 그동안 데이터를 가져오면서 최신화까지 동시에 진행한거죠.
+
+:::note
+이러한 캐싱하는 방법은 react-query만 사용하는 방식은 아닙니다.<br/>
+원조격인 `swr`이라는 라이브러리가 존재하는데다가, 유명한 웹 캐싱 전략의 명칭일 뿐이예요.
+:::
+
+사실 예전에는 서버 요청 한번한번이 엄청 크리티컬하다, 한번이라도 줄이는게 큰 의미가 있다고 생각했는데,<br/>
+이제와서 돌아보니 그정도 요청의 차이는 서버에 아무런 영향을 주지 않았었어요.<br/>
+오히려 staleTime을 억지로 늘렸더니 새로고침을 하지 않는 이상 페이지 데이터가 갱신되지 않는다거나 하는 식의 문제들이 발생했죠
+
+## 이해하고 나면,,
+
+이를 깨달은 뒤로는, 기본적인 staleTime을 다시 0으로 돌려야겠다 생각했어요.<br/>
+물론 정말 잘 안바뀌는 특정 쿼리에 대해서는 따로 staleTime을 `Infinity`로 지정한다거나 할 수 있게 되었죠.<br/>
+좀 더 상황에 맞게 옵션을 설정할 수 있게 된 거예요.
+
+또한 react-query의 다른 메소드나, 상태들에 대해서도 이해가 늘었어요<br/>
+useQuery는 `isLoading`과 `isFetching` 두가지 상태를 분리해서 전달해줘요.<br/>
+이전까지는 무슨 차인지 잘 몰랐는데, 이제 쉽게 말할 수 있죠.<br/>
+
+- 캐시된 데이터가 없다면 **isLoading과 isFetching이 true**일 것이고,<br/>
+- 캐시된 데이터는 있지만, staleTime을 지났다면 isFetching만 true일 거예요.
+- 연결해서, Suspense를 트리거하는 부분에서도 - 캐시가 존재한다면 상위 맥락의 Suspense를 트리거하지도 않을거구요.
+
+라이브러리 제작팀에서 초기값을 각각 0초와 5분으로 설정한 데에는 다 이유가 있었다는걸 깨닫고,<br/>
+더 나은 사용자 경험을 위해 어떤 옵션을 사용해야 하는지 - 어떤 상황에서 staleTime과 gcTime을 적절하게 변경할 수 있을지 이해하고 바꿔본 경험이 생긴다면, 정말 react-query를 잘 썼구나, 이 기술을 고른 이유를 잘 설명할 수 있게 될 것 같아요!
+
+이 전략을 토대로 간단한 쿼리더라도 소소히 더 많은 고민을 하면서 작업해보아요.
