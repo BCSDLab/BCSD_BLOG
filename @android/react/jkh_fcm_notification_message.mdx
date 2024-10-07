@@ -1,0 +1,162 @@
+---
+date: 2024-10-07
+authors: jokwanhee
+title: "[FCM] Remote Notification Message"
+description: "안드로이드에서 FCM 메시지 Notification 페이로드 관련해서 다룹니다."
+keywords: ["안드로이드", "FCM"]
+tags:
+  - 안드로이드
+  - FCM
+---
+
+안드로이드에서 FCM을 사용했을 때, 메시지를 받습니다.  
+해당 메시지의 필드가 Notification 페이로드인 것에 대해서 다룹니다.
+
+{/* truncate */}
+
+
+이전에 포스팅 [안드로이드 개발자가 바라본 FCM 테스트](https://blog.bcsdlab.com/android/react/jkh_fcm)에서는 notification 페이로드를 사용해서 간단하게 시스템 트레이에서 받아온 알림을 가지고, 알림을 띄우는 것을 해봤습니다.
+
+해당 포스팅에서는 notification & data 필드의 메시지가 올 때, 어떻게 처리할 수 있는지 알아보는 시간을 가지려고 합니다.
+
+## notification & data 페이로드
+
+오늘은 notification & data 페이로드가 같이올 때, 어떻게 푸시 알림을 처리해야하는 지 알아보겠습니다.
+
+notification & data 페이로드가 같이오면, 앱에서는 어떻게 데이터를 받게될까요?  
+우선, notification 에서 받는 페이로드로 알림을 시스템 트레이에서 띄우게 됩니다.
+
+:::info
+시스템 트레이에서 띄운다는 것은 따로 알림을 구현하지 않아도 자체적으로 알림이 Notification 필드의 데이터를 가지고 제목, 본문을 채워 알림을 띄운다는 것입니다.
+:::
+
+### 앱이 실행된 상태일 때는?
+
+앱이 실행되고 있을 때는 어떨까요? 앱이 실행되었을 때는 시스템 트레이에서 알림을 띄우지 않습니다. 하지만 메시지 페이로드를 로깅으로 찍어볼 수 있습니다.   
+해당 메시지 페이로드는 `FirebaseMessagingService`를 상속받는 서비스 클래스에서 데이터를 받아볼 수 있습니다. 그렇다는 것은 앱이 실행되고 있을 때, 자체적으로 알림을 구현해야한다는 것입니다. 코드 짜시면 됩니다.
+
+간단한 예시를 살펴보면, 서버에서 전달해주는 메시지 형식은 다음과 같습니다.
+```kotlin
+"notification" : {
+  "title" : "a",
+  "body" : "b",
+  "click_action" : "shop"
+}
+
+"data" : {
+  "data_title" : "title",
+  "data_type" : "type"
+}
+```
+
+`FirebaseMessagingService` 서비스 구현체 클래스는 아래와 같이 작성합니다. 아래 코드를 보면 어디서 notification과 data 메시지 로깅을 확인해볼 수 있습니다.
+```kotlin
+override fun onMessageReceived(message: RemoteMessage) {
+  super.onMessageReceived(message)
+  message.data.let { data ->
+      if (data.isNotEmpty()) {
+          Log.e("aaa", "message.data : $data")
+      }
+  }
+  
+  message.notification?.let { notification ->
+      Log.e("aaa", "notification.title : ${notification.title}")
+      Log.e("aaa", "notification.body : ${notification.body}")
+      Log.e("aaa", "notification.clickAction : ${notification.clickAction}")
+  }
+}
+```
+```
+>>>
+message.data : {data_type=type, data_title=title}
+notification.title : a
+notification.body : b
+notification.clickAction : shop
+```
+
+그렇다면, 앱이 꺼져있을 때 즉, 백그라운드 상태일 때는 어떨까요?
+
+### 앱이 백그라운드 상태일 때는?
+
+백그라운드에 있을 때는 `FirebaseMessagingService` 에서 데이터를 찍어볼 수 없습니다. 
+시스템 트레이에서 notification 페이로드로 알림을 띄우게 됩니다.
+
+그렇다면 알림을 클릭했을 때의 핸들링을 하여 네비게이션할 수 없을까요?  
+아뇨. 할 수 있습니다. 데이터를 찍어볼 수 없다고 했는데, 알림을 클릭했을 때 어떻게 네비게이셔닝 할 수 있을까요?
+
+알림을 클릭했을 때, 시스템 트레이에서는 click_action 이라는 값을 받아 핸들링하게 됩니다. 그리고 `Manifest.xml` 에서 해당 click_action 에 값을 넣으면 원하는 액티비티로 이동할 수 있습니다.
+
+음? 그렇다면 프래그먼트로 이동하고 싶을 때는 못하게 되는 건가요? 라는 질문을 할 수 있습니다.
+
+해당 대답은 우선 click_action의 값을 여러 값을 주지말고 하나의 값으로 통일해야 합니다.
+```
+"click_action" : "KOIN"
+```
+다음과 같이 모든 알림의 click_action 을 통일합니다.
+
+그리고 하나의 투명 액티비티로 이동하게 `Manifest.xml` 에 설정해주면 됩니다.
+
+:::info
+투명 액티비티는 특정 화면의 UI를 관리하지 않고, 스킴 처리를 하기 위해 아무것도 하지 않고 투명한 하나의 액티비트를 의미합니다.
+:::
+
+`Manifest.xml` 에는 아래 코드처럼 설정할 수 있습니다.
+```kotlin
+<activity
+    android:name=".activity.SchemeActivity"
+    android:exported="false"
+    <intent-filter>
+        <action android:name="KOIN"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+    </intent-filter>
+</activity>
+```
+
+SchemeActivity 라는 투명 액티비티를 만들고, data 페이로드가 notification 이랑 같이온다고 위에서 예시를 보여주었습니다. 여기서 data 페이로드를 사용할 수 있습니다.  
+그렇다는것은 해당 액티비티에서 고깃집 상점 프래그먼트로 상세 이동해야한다면, 상점 액티비티로 이동할 때 intent 로 값을 전달해주고 해당 액티비티에서 고깃집 상점 프래그먼트로 이동하면 됩니다.
+
+data 페이로드는 다음과 같이 온다고 가정하겠습니다.
+```kotlin
+"data" : {
+  "title" : "제목",
+  "url" : "koin://shop?id=1"
+}
+```
+
+액티비티에서 intent 로 확인 가능합니다.
+
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(binding.root)
+
+    Log.e("aaa", "${intent.data}")
+    Log.e("aaa", "${intent.extras}")
+    for (key in intent.extras?.keySet()!!) {
+        val value: Any? = intent.extras?.get(key)
+
+        Log.e("aaa", "key / value : ${key} / ${value}")
+    }
+}
+```
+
+위 로그에 대한 출력은 아래와 같습니다.
+```kotlin
+>>>
+key / value : google.delivered_priority / normal
+key / value : google.sent_time / 1724374925420
+key / value : google.ttl / 2419200
+key / value : google.original_priority / normal
+key / value : data_type / type
+key / value : google.product_id / 111881503
+key / value : from / 340135824028
+key / value : google.message_id / 0:1724374925428874%0988106009881060
+key / value : gcm.n.analytics_data / Bundle[mParcelledData.dataSize=100]
+key / value : data_title / title
+key / value : collapse_key / in.koreatech.koin
+```
+위와 같이 getIntet 로 데이터를 key, value 형식으로 받아볼 수 있습니다.
+
+
+위 코드를 사용한다면? 우리는 notification 페이로드를 전달받은 FCM 방식에서도 상세 화면으로 이동할 수 있게 되었답니다!

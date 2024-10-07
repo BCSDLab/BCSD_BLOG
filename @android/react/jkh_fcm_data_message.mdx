@@ -1,0 +1,85 @@
+---
+date: 2024-10-07
+authors: jokwanhee
+title: "[FCM] Remote Data message"
+description: "안드로이드에서 FCM 메시지 Data 페이로드 관련해서 다룹니다."
+keywords: ["안드로이드", "FCM"]
+tags:
+  - 안드로이드
+  - FCM
+---
+
+안드로이드에서 FCM을 사용했을 때, 메시지를 받습니다.  
+해당 메시지의 필드가 Data 페이로드인 것에 대해서 다룹니다.
+
+{/* truncate */}
+
+FCM 알림을 구현하면서 notficatioin 페이로드를 받지 않고, data 페이로드만 받게 된다면 어떻게 할까요?
+
+이는 백그라운드 푸시 알림으로 구현할 수 있습니다.
+
+:::tip
+백그라운드 푸시 알아보고 넘어가자
+:::
+
+우선 사용하는 방법에 대해서 말하기 전에 TMI 를 하겠습니다.
+
+저는 data 페이로드를 사용해서 백그라운드에서 data 페이로드를 사용하여 알림을 나타내는 것을 사일런트 푸시라는 용어라고 알고 있었습니다.
+
+즉, 일반적으로 사용자에게 시각적 알림을 표시하지 않고 데이터를 처리할 수 있는 푸시 알림입니다.
+
+하지만 사일런트 푸시라는 개념이 안드로이드에서는 사용하지 않고, iOS에서 사용되었기에 저는 똑같다고 판단하여 안드로이드에서도 data 필드를 사용하는 푸시 알림을 사일런트 푸시라고 정의했습니다.
+
+하지만 이 말은 맞으면서 틀립니다.
+
+우선 뜻은 일치합니다.  
+시각적 알림을 표시하지 않고, 데이터를 백그라운드에서 직접 처리할 수 있는 푸시 알림이 사일런트 푸시입니다.  
+하지만 이 용어는 iOS에서 사일런트 푸시라는 용어를 사용하며, Android 에서는 Remote data message 라는 용어를 사용합니다.
+
+해당 용어가 헷갈렸지만 해당 [아티클](https://velog.io/@bang9dev/RN-CheatSheet-push-notification-%EC%99%84%EB%B2%BD-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)를 보면서 이해할 수 있었습니다.
+
+
+## data 페이로드
+
+안드로이드에서는 FCM 메시지 형식을 받을 때, notification 페이로드를 받으면 앱이 백그라운드 상태일 때 시스템 트레이에서 알림을 띄워줍니다.
+
+하지만 notification 페이로드가 없다면, data 페이로드 데이터를 가공해서 직접 커스텀 알림을 제작해주어야 합니다.
+
+어떻게 코드를 구현할지 고민해봅시다.
+
+우선, `FirebaseMessagingService` 서비스를 만든 뒤 해당 클래스에서 메시지를 받아볼 수 있습니다.
+
+data 필드만 존재하는 메시지를 받을 때는 앱이 백그라운드 상태일 때나 포그라운드 상태일 때나 상관없이 해당 서비스 클래스에서 데이터를 받아볼 수 있습니다.
+
+예시로 로컬 서버에서 어떤 메시지형식을 보냈는 지 아래의 코드로 살펴봅니다.
+
+```kotlin
+"data" : {
+  "title" : "제목",
+  "body" : "내용",
+  "url" : "koin://shop?id=1",
+  "image" : "https://afaefwef.jpg"
+}
+```
+
+안드로이드에서는 어떻게 받아볼까요?  
+아래의 로그는 앱이 실행되어있거나 백그라운드 상태일 때 두 가지 모두 로그를 확인해볼 수 있습니다.
+```kotlin
+override fun onMessageReceived(message: RemoteMessage) {
+  super.onMessageReceived(message)
+  
+  message.data.let { data ->
+      if (data.isNotEmpty()) {
+          Log.e("aaa", "message.data : $data")
+      }
+  }
+}
+```
+```
+>>>
+message.data : {title=제목, body=내용, url=koin://shop?id=1, image=https://afaefwef.jpg}
+```
+위와 같이 Map 형식으로 데이터를 받아볼 수 있습니다.
+
+여기서 이제 원하는 알림 구현 코드를 작성하고, PendingIntent를 만들어 클릭했을 때 원하는 액티비티로 이동할 수 있습니다.
+
