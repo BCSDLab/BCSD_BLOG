@@ -75,7 +75,7 @@ const footer = {
       html: `
         Powered by <a href="https://docusaurus.io" target="_blank" rel="noreferrer noopener">Docusaurus 2</a>, Hosted by <a href="https://aws.amazon.com" target="_blank" rel="noreferrer noopener">AWS</a>
         <br />
-        Copyright © 2024 <a href="https://github.com/BCSDLab/BCSD_BLOG" target="_blank" rel="https://github.com/BCSDLab">BCSD Lab</a>. All rights reserved.
+        Copyright © 2025 <a href="https://github.com/BCSDLab/BCSD_BLOG" target="_blank" rel="https://github.com/BCSDLab">BCSD Lab</a>. All rights reserved.
         `,
     },
   ],
