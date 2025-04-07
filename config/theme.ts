@@ -56,6 +56,11 @@ const navbar = {
       position: "left",
     },
     {
+      to: "security",
+      label: "Security",
+      position: "left",
+    },
+    {
       type: "doc",
       docId: "overview",
       position: "left",

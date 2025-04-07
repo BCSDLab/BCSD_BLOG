@@ -79,6 +79,14 @@ const plugins = [
       path: "./@dataAnalytics",
     },
   ],
+  [
+    "@docusaurus/plugin-content-blog",
+    {
+      id: "data-analytics",
+      routeBasePath: "security",
+      path: "./@security",
+    },
+  ],
 ];
 
 export default plugins;
