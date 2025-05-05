@@ -16,6 +16,11 @@ const navbar = {
       position: "left",
     },
     {
+      to: "bcsd",
+      label: "BCSD",
+      position: "left",
+    },
+    {
       to: "front-end",
       label: "FrontEnd",
       position: "left",

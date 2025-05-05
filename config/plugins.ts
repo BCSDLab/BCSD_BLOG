@@ -18,6 +18,14 @@ const plugins = [
   [
     "@docusaurus/plugin-content-blog",
     {
+      id: "bcsd",
+      routeBasePath: "bcsd",
+      path: "./@bcsd",
+    },
+  ],
+  [
+    "@docusaurus/plugin-content-blog",
+    {
       id: "front-end",
       routeBasePath: "front-end",
       path: "./@frontEnd",
@@ -82,7 +90,7 @@ const plugins = [
   [
     "@docusaurus/plugin-content-blog",
     {
-      id: "data-analytics",
+      id: "security",
       routeBasePath: "security",
       path: "./@security",
     },
