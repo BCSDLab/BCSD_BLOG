@@ -74,17 +74,17 @@ const plugins = [
   [
     "@docusaurus/plugin-content-blog",
     {
-      id: "product-management",
-      routeBasePath: "product-management",
-      path: "./@productManagement",
+      id: "product-manager",
+      routeBasePath: "product-manager",
+      path: "./@productManager",
     },
   ],
   [
     "@docusaurus/plugin-content-blog",
     {
-      id: "data-analytics",
-      routeBasePath: "data-analytics",
-      path: "./@dataAnalytics",
+      id: "data-analyst",
+      routeBasePath: "data-analyst",
+      path: "./@dataAnalyst",
     },
   ],
   [

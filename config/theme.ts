@@ -51,12 +51,12 @@ const navbar = {
       position: "left",
     },
     {
-      to: "product-management",
+      to: "product-manager",
       label: "PM",
       position: "left",
     },
     {
-      to: "data-analytics",
+      to: "data-analyst",
       label: "DA",
       position: "left",
     },
