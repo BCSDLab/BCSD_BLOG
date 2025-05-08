@@ -11,16 +11,6 @@ const navbar = {
   },
   items: [
     {
-      to: "guideline",
-      label: "Guideline",
-      position: "left",
-    },
-    {
-      to: "bcsd",
-      label: "BCSD",
-      position: "left",
-    },
-    {
       to: "front-end",
       label: "FrontEnd",
       position: "left",
@@ -66,6 +56,11 @@ const navbar = {
       position: "left",
     },
     {
+      to: "guideline",
+      label: "Guideline",
+      position: "left",
+    },
+    {
       type: "doc",
       docId: "overview",
       position: "left",
@@ -85,7 +80,7 @@ const footer = {
       html: `
         Powered by <a href="https://docusaurus.io" target="_blank" rel="noreferrer noopener">Docusaurus 2</a>, Hosted by <a href="https://aws.amazon.com" target="_blank" rel="noreferrer noopener">AWS</a>
         <br />
-        Copyright © 2025 <a href="https://github.com/BCSDLab/BCSD_BLOG" target="_blank" rel="https://github.com/BCSDLab">BCSD Lab</a>. All rights reserved.
+        Copyright © ${new Date().getFullYear()} <a href="https://github.com/BCSDLab/BCSD_BLOG" target="_blank" rel="https://github.com/BCSDLab">BCSD Lab</a>. All rights reserved.
         `,
     },
   ],

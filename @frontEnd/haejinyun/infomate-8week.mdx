@@ -1,0 +1,504 @@
+---
+date: 2024-05-27
+authors: haejinyun
+title: '인포메이트 8주차 공유(프레임워크 & 라이브러리)'
+description: '인포메이트 8주차 공유(프레임워크 & 라이브러리) 모음입니다.'
+keywords: ['인포메이트', '프레임워크', '라이브러리']
+tags:
+  - 인포메이트
+  - 프레임워크
+  - 라이브러리
+---
+
+인포메이트 8주차 공유(프레임워크 & 라이브러리) 모음입니다.
+
+CSS 전처리기 및 라이브러리 - 윤해진  
+스타일링 시간 단축하려면 Tailwind를 쓰세요 - 김하나  
+한글 초성 검색 구현 어렵지 않아요 - 곽승주  
+style-dictionary로 디자인 토큰 활용하기 - 김민재
+
+{/* truncate */}
+
+## CSS 전처리기 및 라이브러리 - 윤해진
+
+들어가는 말)
+
+개발을 하며 다양한 css 전처리기 및 라이브러리를 사용한 경험이 있습니다. 그러나 각각의 특징에 대해서는 깊게 생각해 본 적이 없었습니다. 이번 글에서는 대표적인 CSS 방식인 Sass, SCSS, 그리고 CSS-in-JS에 대해 설명하고, 각 방식에 해당하는 라이브러리를 소개하겠습니다.
+
+## [ Sass ]
+
+CSS는 규모가 커질수록 코드가 복잡해지고, 유지보수가 불편해집니다. CSS 코드 내에서 동일한 혹은 유사한 코드를 재사용하기 위해서 '복사 & 붙여넣기'가 점점 많아집니다. 이는 무척 귀찮고 또 실수를 유발하는 작업입니다.
+
+Sass는 컴파일 과정을 통해 CSS 파일을 생성해 주는 CSS의 확장 언어이자 전처리기(preprocessor)로써, CSS에는 존재하지 않는 다양한 기능들을 가지고 있습니다. 그리고 이 기능들은 코드 작성에 드는 시간을 줄여주고, 코드를 유지 관리하는 데 도움이 됩니다.
+
+그러나 Sass는 CSS의 대체 언어가 아닙니다! Sass는 CSS의 확장 언어입니다. Sass가 제공하는 문법을 기반으로 코드를 작성한 다음, 이를 컴파일해 CSS 파일을 빌드하는 것이 Sass를 통해 스타일시트를 생산하는 절차입니다.
+
+Sass는 다음과 같은 추가 기능과 유용한 도구들을 제공합니다.
+
+- 변수의 사용: Sass에서 변수는 **`$`** 기호를 사용하여 정의합니다. 변수를 사용하면 색상, 폰트 크기, 간격 등을 중앙에서 관리할 수 있어 일관성을 유지하기 쉽습니다.
+- 조건문과 반복문: Sass에서는 조건문(**`@if`**, **`@else if`**, **`@else`**)과 반복문(**`@for`**, **`@each`**, **`@while`**)을 사용할 수 있어, 복잡한 스타일링 로직을 처리할 수 있습니다.
+- Import: Sass에서는 **`@import`**를 사용하여 여러 파일로 나눠진 스타일을 하나로 결합할 수 있습니다. 이를 통해 코드의 모듈화와 재사용성을 높일 수 있습니다.
+- Nesting: Sass는 중첩을 통해 스타일을 구조화할 수 있습니다.
+- Mixin: Mixin은 재사용 가능한 스타일 블록을 정의하고, 이를 필요할 때마다 호출하여 사용할 수 있습니다. 인자를 받아 동적인 스타일링도 가능합니다.
+- Extend/Inheritance: **`@extend`**를 사용하면 기존의 CSS 클래스의 스타일을 다른 클래스에 상속할 수 있습니다. 이는 중복 스타일을 피하고, 코드를 간결하게 유지하는 데 유용합니다.
+
+CSS와 비교하여 Sass는 아래와 같은 장점이 있습니다.
+
+- CSS보다 심플한 표기법으로 CSS를 구조화하여 표현할 수 있다.
+- 스킬 레벨이 다른 팀원들과의 작업 시 발생할 수 있는 구문의 수준 차이를 평준화할 수 있다.
+- CSS에는 존재하지 않는 Mixin 등의 강력한 기능을 활용하여 CSS 유지보수 편의성을 큰 폭으로 향상시킬 수 있다.
+
+## [ SCSS ]
+
+Sass를 들어보셨다면 Scss 또한 익숙할 이름이라고 생각합니다. 그러나 둘의 차이는 무엇일까요?
+
+여기서 먼저 알아보면 좋은 것은 Sass라는 이름에는 두 가지 의미가 담겨 있습니다. 하나는 코드를 CSS로 해석하는 역할을 하는 전처리기로서의 의미, 또 다른 하나는 문법(구문)으로써의 의미입니다. Sass 문법을 기반으로 코드를 작성하면, Sass 전처리기의 도움을 받아 CSS 파일을 만들어낼 수 있습니다
+
+그렇다면 SCSS는 SCSS 문법을 기반으로 코드를 작성하면, Sass 전처리기의 도움을 받아 컴파일러가 이를 CSS로 빌드 할 수 있습니다.
+
+다시말해 Sass와 SCSS의 차이는 표현하는 문법에 차이만 있을 뿐 기능은 동일합니다. (파일 확장자로 분리)
+
+- Sass는 들여 쓰기+줄 바꿈 형식
+- SCSS는 중괄호+세미콜론 형식
+
+## [ CSS in JS ]
+
+CSS-in-JS는 JavaScript 코드 내에서 CSS를 작성하는 방식을 가집니다.
+
+스타일을 컴포넌트 단위로 관리할 수 있어 유지보수성과 모듈화가 뛰어나다는 특징이 있습니다.
+
+React와 같은 컴포넌트 기반 라이브러리와 함께 사용되는 경우가 많습니다.
+
+- JS 파일 안에서 CSS 코드를 작성하기 때문에 CSS의 변수와 함수를 그대로 사용할 수 있습니다.
+- 클래스 명이 해시 값으로 치환되기 때문에 클래스 이름의 중복 및 작명에 대한 걱정을 덜 수 있습니다.
+- 현대 웹은 컴포넌트를 기반으로 발전하고 있으므로, 컴포넌트와 스타일을 하나의 파일에서 작성하는 CSS-in-JS는 모듈화가 수월해집니다.
+
+css in js의 대표적인 두 가지 라이브러리를 간단하게 살펴보겠습니다.
+
+### Styled components
+
+[https://styled-components.com/](https://styled-components.com/)
+
+자동화된 고유 클래스명, 동적 스타일링 지원, 서버 사이드 렌더링과의 호환성 등이 있습니다.
+
+또한 CSS를 컴포넌트에 직접 적용하기 때문에, 컴포넌트 단위로 스타일을 관리할 수 있습니다.
+
+이렇게 하면 스타일 충돌 문제를 방지하고, 유지 보수 및 확장성을 향상시킬 수 있습니다.
+
+```jsx
+import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const Title = styled.h1`
+  color: white;
+`;
+
+const Wrapper = styled.div`
+    background: black
+`
+
+class App extends Component {
+  render() {
+    return (
+        <Wrapper>
+            <Title>Hello World!</Title>
+        </Wrapper>
+    );
+  }
+}
+
+export default App;
+
+----
+
+// 사용법
+const 컴포넌트이름 = styled.태그이름`
+	// css 작성
+`;
+
+```
+
+### **Emotion**
+
+[https://emotion.sh/docs/introduction](https://emotion.sh/docs/introduction)
+
+styped-components와 비슷한 방식으로 사용 가능합니다.
+
+- **css crop**: Emotion을 사용하여 React 컴포넌트를 스타일링할 때, css prop을 직접 컴포넌트에 전달할 수 있습니다. 이는 동적 스타일링, 여러 스타일의 조합이 필요할 때 큰 장점으로 활용됩니다.
+
+```jsx
+/** @jsxImportSource @emotion/react */
+Emotion을 사용하여 React 컴포넌트를 스타일링할 때, css prop을 직접 컴포넌트에 전달 가능
+
+import { css } from '@emotion/react';
+
+function App() {
+  return (
+    <div
+      css={css`
+        background-color: palevioletred;
+        color: white;
+      `}
+    >
+      안녕하세요, Emotion!
+    </div>
+  )
+}
+```
+
+```jsx
+/** @jsxImportSource @emotion/react */
+css prop은 동적으로 스타일을 적용하는 것에 유용
+
+import { css } from '@emotion/react';
+
+function Button({ primary }) {
+  return (
+    <button
+      css={css`
+        background-color: ${primary ? 'palevioletred' : 'white'};
+        color: ${primary ? 'white' : 'palevioletred'};
+      `}
+    >
+      버튼
+    </button>
+  )
+}
+```
+
+```jsx
+/** @jsxImportSource @emotion/react */
+css prop을 여러 스타일과 결합하기
+
+import { css } from '@emotion/react';
+
+interface ButtonProps {
+  children: React.ReactNode;
+  theme?: 'primary' | 'secondary';
+  onClick?: () => void;
+}
+const Button = ({ children, theme = 'primary', onClick }: ButtonProps) => {
+  return (
+    <button css={[style, themes[theme]]} onClick={onClick}>
+      {children}
+    </button>
+  );
+};
+
+const style = css`
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+`;
+
+const themes = {
+  primary: css`
+    background-color: palevioletred;
+    color: white;
+
+    &:hover {
+      background-color: darkviolet;
+    }
+  `,
+  secondary: css`
+    background-color: white;
+    color: palevioletred;
+    border: 1px solid palevioletred;
+
+    &:hover {
+      background-color: palevioletred;
+      color: white;
+    }
+  `,
+};
+
+export default Button;
+```
+
+참고
+
+[https://poiemaweb.com/sass-basics](https://poiemaweb.com/sass-basics)
+
+[https://inpa.tistory.com/entry/SCSS-💎-SassSCSS-란-설치-및-컴파일#sassscss의\_등장](https://inpa.tistory.com/entry/SCSS-%F0%9F%92%8E-SassSCSS-%EB%9E%80-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%BB%B4%ED%8C%8C%EC%9D%BC#sassscss%EC%9D%98_%EB%93%B1%EC%9E%A5)
+
+[https://velog.io/@lgs03042/Styled-components와-Emotion-CSS-in-JS의-비교-및-장단점#4-emotion](https://velog.io/@lgs03042/Styled-components%EC%99%80-Emotion-CSS-in-JS%EC%9D%98-%EB%B9%84%EA%B5%90-%EB%B0%8F-%EC%9E%A5%EB%8B%A8%EC%A0%90#4-emotion)
+
+## 스타일링 시간 단축하려면 Tailwind를 쓰세요 - 김하나
+
+Tailwind는 최근 웹 분야에서 인기를 끌고있는 CSS 프레임워크입니다.
+
+하지만 개발자들 사이에서도 호불호가 많이 갈리는 편이며, 여러 논쟁이 오가는 핫포테이토로 여겨집니다.
+
+Tailwind가 왜 차세대 css 프레임워크로 떴는지 알아보고, 저의 지극히 주관적인 리뷰도 간단히 적어보려합니다.
+
+## Tailwind?
+
+Tailwind는 많은 유틸리티(utility) 클래스로 이루어진 CSS 프레임워크입니다.
+
+유틸리티 클래스란 한가지 일만 하는 매우 적은 양의 css 코드를 담고 있는 클래스라고 생각하면 되는데, 실제 tailwind 로 코드를 작성하고 크롬 inspector로 선택해보면, 각 스타일에 한 클래스가 할당되어 있는 것을 확인할 수 있습니다.
+
+보통의 css 코드를 작성하려면 css 파일을 분리하거나 인라인 요소로 직접 작성하게 됩니다.
+
+러나 Tailwind를 사용하면 HTML 요소의 **`class`** 속성에 유틸리티 클래스를 추가하는 것만으로 스타일링이 가능합니다. (Tailwind의 PostCSS 플러그인으로 동작한다고 합니다)
+
+따라서 다음과 같이 Tailwind 코드를 작성한다고 가정하면,
+
+```tsx
+<button class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
+  Primary
+</button>
+```
+
+다음과 같은 css 클래스들이 합쳐지게 됩니다.
+
+```tsx
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.bg-blue-500 {
+  background-color: rgb(59 130 246);
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+...
+```
+
+## 다른 CSS 프레임워크와의 비교
+
+대표적인 Bootstrap 이나 Mererial UI 등과는 다르게 Tailwind가 가진 강점은 무엇일까요?
+
+Bootstrap같은 프레임워크는 `<button class="btn btn-primary">` 한줄이면 위의 UI 와 동일하게 구현해낼 수 있습니다. 그러나, 세부적인 CSS 수정이 불가하거나 불편해집니다.
+
+따라서 Tailwind는 더 많은 클래스를 사용하고 배워야 한다는 단점이 있지만, 다른 측면으로 보면 엄청난 유연성과 확장성을 제공한다고 볼 수 있습니다.
+
+다양한 CSS 라이브러리를 써본 저로서는 이 부분이 많이 공감되는 부분입니다.
+
+## Tailwind를 둘러싼 치열한 논쟁
+
+트위터같은곳에서는 Tailwind를 좋아하는 부류와 싫어하는 부류가 끝없는 논쟁을.. 한다고 합니다.
+
+Tailwind를 좋아하는 개발자들은 생산성 측면, 빠르게 디자인을 구현하게 도와준다는 점을 강조합니다. 또한 변경이나 수정이 쉬워서 유지보수가 잘 된다고 말합니다. 한 번 Tailwind를 써보면 다시는 기존으로 돌아가지 못한다는 강력한 찬성의 의견도 보였습니다.
+
+반면, Tailwind를 싫어하는 개발자들은 유틸리티 클래스를 과도하게 사용하는것이 가독성이 떨어지며 오히려 유지 보수성이 낮아진다고 주장합니다. 또한 과도하게 Tailwind를 학습할 경우, css 바보가 될거라는 경고도 존재했습니다. (하지만, Tailwind를 사용해보지 않은 사람들이 이런 말을 한다는 속설도 있습니다.)
+
+## 나의 주관적인 리뷰
+
+최근 진행한 프로젝트에서 Tailwind를 처음부터 도입해 사용해보았는데, 저의 주관적인 장단점을 리뷰해보겠습니다.
+
+### 장점
+
+- 매우 빠른 CSS 작성이 가능하다 (기존 UI 작업 시간의 효율을 약 70% 정도 올렸다고 생각).
+- 다른 CSS 프레임워크보다 자유도가 높고, 수정이 용이하다.
+- 컴포넌트의 CSS 파일을 따로 찾지 않아도 되어 간편하다.
+- 모바일 반응형 적용이 편리하다 (**`sm:flex`**와 같이 작성하면 작은 화면에서 flex가 적용됨).
+
+### 단점
+
+- 적용할 CSS 요소가 많을 경우, 인라인 코드가 엄청 길어진다.
+- 많은 양의 HTML 요소와 CSS를 한꺼번에 보면 가독성이 떨어진다.
+- [\*\*Vendor Prefixes](https://tailwindcss.com/docs/browser-support#vendor-prefixes)\*\* 를 사용하려면 추가적인 라이브러리를 install 해야한다.
+
+## 마치며
+
+사실 어떤 라이브러리를 도입할지 결정할 때에는 많은 고려사항을 따져봐야 합니다. 그럼에도 가장 중요한 것은 외부적인 요인(인지도, 커뮤니티 의견)에 휩쓸리지 말고 자신의 프로젝트에 적합한 도구인지 판단하는 것이라고 생각이 듭니다.
+
+reference
+
+[https://tailwindcss.com/](https://tailwindcss.com/)
+
+[https://tailwindcss.com/docs/browser-support#vendor-prefixes](https://tailwindcss.com/docs/browser-support#vendor-prefixes)
+
+[https://kulkarniankita.com/newsletter/tailwind-vs-css-the-twitter-drama-](https://kulkarniankita.com/newsletter/tailwind-vs-css-the-twitter-drama-)
+
+[https://www.daleseo.com/tailwind/](https://www.daleseo.com/tailwind/)
+
+## 한글 초성 검색 구현 어렵지 않아요 - 곽승주
+
+## Intro
+
+검색 시 한글 초성만으로 원하는 문자열을 탐색할 수 있다면 한글의 중성, 종성까지 입력할 필요없이 정말 빠르게 입력이 가능해집니다. 필자는 노래방에서 노래 검색 시 정말 많이 사용하는데 이를 구현해야 한다면 어떻게 해야 할까요? 영어는 문자열이 한 글자 한 글자 가장 작은 단위로 이루어져 있기 때문에 초성이라 할 게 없는데, 한글은 한 글자가 초성, 중성, (종성)으로 이루어져 있기 때문에 글자 분리가 필요합니다. 그 분리는 어떻게 할까요? 이를 지원하고 한글 초성으로 문자열 검색을 지원하는 라이브러리가 있습니다.
+
+## **KLED: 한글을 지원하는 퍼지 검색 라이브러리**
+
+### 1. 소개
+
+[**kled**](https://github.com/taggon/kled-js)는 리벤슈타인 편집 거리(Levenshtein Edit Distance) 알고리즘을 기반으로 작성되었습니다. 간단히 **리벤슈타인 편집 거리**란 A라는 문자열을 B라는 문자열로 바꾸기 위해 몇 번의 편집이 일어나야 하는지 확인하는 알고리즘입니다.(“abd” -> “abc” : 1)
+
+하지만 리벤슈타인 편집 거리는 다른 알고리즘과 마찬가지로 한국어 검색은 고려되어 있지 않습니다. 단순하게 ‘ㄱ’과 ‘강’을 완전히 다른 문자로 취급하여 마치 a를 b로 바꾸는 것처럼 편집 거리가 계산됩니다. 이 문제를 방지하기 위해 kled는 ‘ㄱ’과 초성이 ‘ㄱ’인 모든 글자는 모두 동일하다고 보고 리벤슈타인 편집 거리를 계산합니다.
+
+이러한 문제를 해결해서 초성 ‘ㄱㄴ’을 입력하면 검색 대상 문자열 중 ‘ㄱ’과 ‘ㄴ’이 순서대로 있는 문자열을 보여줍니다. 예를 들어, ‘경기도 성남시’, ‘경상남도 창원시’ 등이 나타날 수 있습니다.
+
+하지만, 이 라이브러리에는 약간의 불편한 점과 문제점이 있습니다.
+
+### 2. 불편한 점
+
+불편한 점은 **유사도 점수를 반환**하는 함수가 검색 대상 문자열의 길이에 따라 달라지기 때문에 자신이 생각한 문자열을 입력했을 때 유사도가 낮아 밑에서 찾아야 하는 경우가 있을 수 있습니다.
+
+<img
+  src="/img/@frontEnd/infomate-8week/infomate-8week-gwakseungjs1.jpg"
+  style={{ marginBottom: '20px' }}
+/>
+
+위 그림과 같이 자신은 ‘수원시’를 생각하고 ‘ㅅㅇㅅ’라고 입력했지만 문자열 길이가 짧고 ‘ㅅ’, ‘ㅇ’, ‘ㅅ’이 들어간 ‘서울특별시’, ‘부산광역시’ 등이 먼저 나오게 됩니다. 참고로, 도시 이름 옆의 숫자가 유사도이고, 0부터 1 이하의 실수로 나타납니다.
+
+### 3. 문제점
+
+또, 이 라이브러리의 문제점은 검색 결과 글자 수에 제한이 걸릴 수 있다는 점입니다. 이게 무슨 말이냐면, 아래 그림을 봅시다.
+
+<img
+  src="/img/@frontEnd/infomate-8week/infomate-8week-gwakseungjs2.jpg"
+  style={{ marginBottom: '20px' }}
+/>
+
+원래는 검색 결과에 ‘충청남도 천안시’만 나와야 하고 유사도는 1이 되어야 할 텐데, ‘충청남도 천안시’의 유사도가 1이 아닌 것도 그렇고, 다른 지역 이름까지 유사도가 ‘충청남도 천안시’와 같다는 점입니다.
+
+이 이유는 검색 대상의 데이터셋의 가장 짧은 문자열의 길이까지만 계산하기 때문입니다. 위 예시의 데이터셋 중 가장 짧은 길이의 문자열은 ‘서울특별시’, ‘부산광역시’ 등 길이가 5입니다. 따라서 ‘**충청남도** ’까지만 비교하여 계산하는 것입니다.
+
+해결 방법은 아직 찾지 못 했지만, 이러한 문제점을 개선하면 정말 유용하게 쓰일 라이브러리가 될 것입니다.
+
+## Hangul.js
+
+초성 검색 기능을 위해 위 라이브러리 대신 ‘[Hangul.js](https://github.com/e-/Hangul.js#hanguljs)’라는 라이브러리를 사용할 수 있습니다. 이 라이브러리는 자음과 모음을 분리하는 기능을 제공하여 초성 검색에 사용할 수 있습니다. 이 라이브러리는 초성 검색 기능을 제공하는 것이 아닌 자음과 모음으로 분리하고 이 문자가 자음인지, 모음인지, 자음으로 끝나는지 등의 기능을 제공합니다. 이를 적절히 이용하여 초성 검색 기능을 구현할 수 있을 것입니다.
+
+## 결론
+
+위 두 라이브러리는 각자 장단점이 있습니다.
+
+`kled`는 초성으로 검색을 할 수 있는 기능을 제공하여 쉽게 사용이 가능하지만, 위에서 본 몇 가지 문제점이 존재한다는 점입니다.
+
+`Hangul.js`는 `kled`의 문제점을 보완할 수 있고 활용 범위가 넓다는 장점이 있지만, 그를 위해 구현을 직접해야 한다는 단점이 있습니다.
+
+[정규표현식을 이용해 초성 검색을 구현한 방법을 소개하는 글](https://taegon.kim/archives/9919)도 있습니다. 이 방법이 ‘결과’적으로는 가장 좋은 모습을 보이지만, 성능 효율적인 면에서 그렇게 좋지는 않습니다. 다만, 크지 않은 데이터셋을 검색한다고 하면 정규표현식을 이용하는 방법이 가장 좋다고 생각합니다.
+
+## 참고자료
+
+[KLED: 한국어를 지원하는 퍼지 검색 라이브러리](https://taegon.kim/archives/10671)
+
+[NestJS에서 초성 검색 기능 구현하기](https://velog.io/@odahyun/NestJS에서-초성-검색-기능-구현하기)
+
+## style-dictionary로 디자인 토큰 활용하기 - 김민재
+
+ui/ux design을 위해 이제 figma를 정말 많이 이용하는 것 같아요. 지금 다니고 있는 회사에서도 figma를 사용하고 있고 여러분들도 figma는 이미 친숙한 툴일겁니다. figma도 많은 발전을 거쳐 지금에 이르고 있죠!
+
+그래서 갑자기 figma 이야기를 왜 하냐구요? 이번 글에서 소개하려는 주제와 figma가 약간의 연관성이 있거든요.
+
+프론트에서 컴포넌트 단위의 개발이 들어온 것 과 같이 디자인에서도 컴포넌트 개념이 생겨나게 됩니다.
+
+그리고 좀 더 체계적으로 디자인에 관련한 값들을 관리하고자 시스템을 구축하기 위한 디자인 토큰을 활용합니다.
+
+최근 figma에도 디자인 토큰을 좀 더 유동적이고 체계적으로 쓸 수 있게 local variables 라는 기능이 생겨났어요! 마치 객체의 상속처럼 이제 디자인 토큰을 상속한 새로운 토큰을 만들 수 있게 되었죠.
+
+이 디자인 토큰들은 개발자에게도 유용해요. 디자이너가 만든 figma의 토큰들을 코드와 연동시킬 수 있다면 어떨까요? 여러 부분에 디자인의 변화가 생겨도 이제 디자이너가 토큰을 변경하는 것 만으로도 바로 디자인을 실제 웹 페이지에 적용시킬 수 있게 됩니다!
+
+figma의 token studio를 사용하면 variables로 선언한 local token들을 json 형식으로 뽑아볼 수 있습니다.
+
+```jsx
+{
+  "blue": {
+    "0": {
+      "value": "#f5f5ff",
+      "type": "color",
+      "parent": "palette/Mode 1",
+      "description": ""
+    },
+    "5": {
+      "value": "#ebebff",
+      "type": "color",
+      "parent": "palette/Mode 1",
+      "description": ""
+    }
+    ...
+}
+```
+
+이 색을 상속받은 variables 도 잘 뽑아주죠.
+
+```jsx
+{
+  "primary": {
+    "400": {
+      "value": "{dots-blue.400}", // 이렇게
+      "type": "color",
+      "parent": "semantic/Mode 1",
+      "description": ""
+    },
+}
+```
+
+이렇게 선언한 토큰을 개발자에게 익숙한 css variables 로 바꿔주기 위해 style-dictionary가 필요합니다.
+
+```jsx
+npm i style-dictionary
+```
+
+css, scss, css in js, css custom 등 다양한 형태로 토큰을 바꾸어 줄 수 있어요.
+
+간단하게 css 형태로 바꾸어볼까요? 우선 config 파일을 만들어 봅시다!
+
+그리고 `extend` 를 활용해 필요한 정보들을 넣어볼게요.
+
+```jsx
+// style-dictionary.config.cjs
+
+const styleDictionary = require('style-dictionary');
+
+const StyleDictionary = styleDictionary.extend({
+  source: ['./tokens/**.json'], // 토큰을 저장할 위치
+  platforms: {
+    css: {
+      transformGroup: 'css', // 그룹이름
+      buildPath: 'src/', // 만들어진 결과물을 놓을 위치
+      files: [
+        {
+          destination: 'variables.css', // 파일이름
+          format: 'css/variables', // 포맷형태
+        },
+      ],
+    },
+  },
+});
+
+StyleDictionary.cleanAllPlatforms(); // 기존 꺼 삭제
+StyleDictionary.buildAllPlatforms(); // 다시 만들기
+```
+
+지금은 하나의 플랫폼을 다루었지만, ios, android 등 다양한 플랫폼을 따로 다룰 수도 있어요.
+
+노드 명령어로 실행을 시켜주면
+
+```jsx
+node style-dictionary.config.cjs
+```
+
+해당 위치에 css variables 파일이 나온걸 확인 할 수 있어요!
+
+```jsx
+:root {
+	--dots-blue-0: #f5f5ff;
+  --dots-blue-5: #ebebff;
+  --primary-400: #4046fd;
+}
+```
+
+만약 react vite 환경에서 디자인 토큰을 활용해 css variables를 활용하고 싶다면 아래와 같이 빌드를 해주면 됩니다!
+
+```jsx
+"build": "node style-dictionary.config.cjs && vite build",
+```
+
+figma 의 token studio 를 활용해 github와 연동시킨다면 자동으로 PR을 만들어서 token을 바꾸어줄 수 있죠. 그렇다면 빌드될 때 바뀐 토큰이 반영되기 때문에 개발의 손을 거치지 않고 스타일을 빠르게 반영할 수 있게됩니다!
+
+dev mode의 css 에서도 해당 variables 에 맞게 css 코드를 주기 때문에 개발 생산력은 덤이랍니다~!
+
+이외에 좀 더 전문적으로 사용하기 위한 [@tokens-studio/sd-transforms](https://www.npmjs.com/package/@tokens-studio/sd-transforms), [token-transformer](https://npmjs.com/package/token-transformer)와 tailwind 전용 transformer 등.. 토큰을 잘 활용하기 위한 여러 라이브러리들이 존재해요. 이 주제에 흥미가 생겼다면 아래의 키워드를 찾아 익혀보면 좋아요~!
+
+- 디자인 시스템, 디자인 토큰, figma token studio, figma variable

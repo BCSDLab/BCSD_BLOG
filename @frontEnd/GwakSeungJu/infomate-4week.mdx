@@ -1,0 +1,252 @@
+---
+date: 2024-04-1
+authors: GwakSeungJu
+title: "인포메이트 4주차 공유(툴)"
+description: "인포메이트 4주차 공유(툴) 모음입니다."
+keywords: ["인포메이트", "툴"]
+tags:
+  - 인포메이트
+  - 툴
+---
+
+인포메이트 4주차 공유(툴) 모음입니다.    
+
+효율적인 CSS 작성, 어렵지 않아요! - 곽승주    
+컴포넌트를 책으로? StoryBook - 윤해진    
+Mocking tool로 생산성 챙기기 - 김하나    
+
+{/* truncate */}
+
+import videoUrl from "../videos/scale-up.mp4";
+import ReactPlayer from "react-player";
+
+
+## 효율적인 CSS 작성, 어렵지 않아요! - 곽승주
+
+## Intro
+
+`CSS`는 웹 페이지를 개발할 때 빠질 수 없는 요소이며 신경 써야 하는 부분입니다. 하지만, 자신이 생각한 대로 페이지에 적용이 안 되고, 디자인을 어떻게 구현해야 할지 모르겠는 경우가 종종 있을 것입니다. 그럴 때 유용하게 사용할 수 있는 `Tool`들을 소개하려고 합니다.
+
+## Tools
+
+### 개발에 앞서..
+
+- 무턱대고 처음부터 디자인 구현을 시작하면 나중에 큰코다치기 일쑤입니다. 그 이유는 브라우저마다 기본으로 제공하는 CSS 스타일이 있어 브라우저별로 보여지는 화면이 달라질 수 있기 때문입니다. 따라서 브라우저가 가지고 있는 기본 스타일의 차이를 없애기 위해 CSS를 초기화할 필요가 있습니다. 그 방법으로는 CSS Reset을 사용하는 것입니다. 먼저, [다음 페이지](https://piccalil.li/blog/a-more-modern-css-reset/)에 있는 코드 전체를 복사합니다. 그리고`src`폴더 하위 위치에 `reset.css`라는 파일을 생성하고, 복사한 코드를 `reset.css`에 붙여넣습니다. 마지막으로 최상위 `css 파일`에 `import` 해주면 스타일을 초기화할 수 있습니다.
+
+### 애니메이션 구현
+
+- ppt 자료에 흔히 사용하는 애니메이션 효과를 웹 페이지에도 넣을 수 있다면 좀 더 스타일리쉬할 것 같지 않나요? [애니미스타(Animista)](https://animista.net/)는 정말 다양한 애니메이션 효과를 적용할 수 있는 스타일 코드를 바로 생성해 줍니다.
+    
+    예시로, 코인의 주변상점 카테고리 이미지에 애니메이션 효과를 쉽게 넣어줄 수 있습니다.
+    
+    <ReactPlayer
+      controls
+      playing
+      loop
+      url={videoUrl}
+      style={{ marginBottom: "20px" }}
+    />
+    
+
+### 스타일
+
+- 그림자 생성
+    - `box-shadow` 속성으로 간단한 그림자만 구현을 했다면, 이제부터 [smooth shadow](https://shadows.brumm.af/)를 이용하여 부드러운 그림자를 생성할 수 있습니다. 오른쪽 그림자 스타일 도구를 적절히 조절하면 왼쪽 박스에 그 속성값과 속성값이 적용된 그림자를 보여줍니다.
+      <img src="/img/@frontEnd/infomate-4week/image04.png" alt="이미지" style={{ marginBottom: "20px" }} />
+    
+- Gradient
+    - 단색만으로 웹 페이지를 스타일링하는 것이 지겨울 때 그라데이션이 들어간 색을 넣어 다채로운 페이지를 만들고 싶을 때가 있을 것입니다. 또한, 그라데이션이 들어간 디자인을 요구받을 시 정확하게 수행하기 어려운 경우가 종종 있을 것입니다. 이러할 때, [CSS 그라디언트(CSS Gradient)](https://cssgradient.io/)가 도움이 될 것입니다! CSS 그라디언트(CSS Gradient)는 그라데이션 배경색을 만드는 CSS 코드를 생성해줍니다.
+      <img src="/img/@frontEnd/infomate-4week/image05.png" alt="이미지" style={{ marginBottom: "20px" }} />
+        
+
+### Layout 구성
+
+만약 아래와 같이 복잡한 배치 구성을 구현해야 할 경우 어떻게 구성할지 머리가 매우 아플 것입니다.
+<img src="/img/@frontEnd/infomate-4week/image01.png" alt="이미지" style={{ marginBottom: "20px" }} />
+
+하지만, [CSS Grid Generator](https://cssgrid-generator.netlify.app/)를 이용한다면 빠르고 쉽게 이 배치를 구현할 수 있습니다.
+<img src="/img/@frontEnd/infomate-4week/image02.png" alt="이미지" style={{ marginBottom: "20px" }} />
+
+단순 너비 비율 설정과 드래그만으로 배치 구성을 따라할 수 있고, 이를 통해 우측에 `Please may I have some code`를 클릭하면 우측 그림과 같은 코드를 제공해줍니다. 각 선택자에 `margin`이나 `background-color`등 자신이 원하는 속성을 추가하면 됩니다.
+<img src="/img/@frontEnd/infomate-4week/image03.png" alt="이미지" />
+
+## 결론
+
+CSS 개발을 위한 다양한 툴을 소개했습니다. CSS 개발을 위한 툴과 라이브러리는 굉장히 다양하며, 이 글에서 소개한 툴 외에 더 많은 선택지가 있을 것입니다. 이러한 다양한 툴들을 활용하면 CSS 코딩의 생산성을 향상시킬 수 있습니다. 그러나 이러한 도구들을 사용하는 동시에 기본적인 CSS 문법을 잘 이해하고 활용하는 것이 중요합니다. 툴은 개발자의 생산성을 향상시키는데 도움을 주지만, 그 기반에는 항상 기본적인 개념과 이해가 있어야 합니다.
+
+## 참고자료
+
+https://hihiha2.tistory.com/154<br />
+https://kofearticle.substack.com/p/korean-fe-article-css-reset<br />
+https://blog.wishket.com/2023%eb%85%84-%ec%9c%a0%ec%9a%a9%ed%95%9c-css-%ec%83%9d%ec%84%b1-%eb%8f%84%ea%b5%ac-top-10/
+
+
+## 컴포넌트를 책으로? StoryBook - 윤해진
+
+### 들어가며)
+
+컴포넌트 주도 개발을 할 때 보통 결과물을 실시간으로 확인해가며 컴포넌트를 구현합니다. 실시간으로 결과물을 보며 상황에 따른 조건들과 해당 결과를 만들어가는 것은 꽤나 번거롭습니다.
+
+- 초대 코드를 통해 상대를 초대하고 뜨는 모달창
+- 포인트 사용 이력 등
+
+그러나 이런 상황에서 독립적인 환경에서 UI를 그려볼 수 있다면 개발에 있어 고려할 것이 매우 축소될 것입니다.
+
+이런 개발을 도와주는 컴포넌트 단위의 UI개발 도구인 **storybook의 소개글**들 작성해보려고 합니다.
+
+## 1) CDD(컴포넌트 주도 개발)란 무엇인가요?
+
+CDD(Component-Driven Development)는 **컴포넌트 단위 중심으로 개발하는 개발 방법론** 입니다.
+
+화면을 구성할 때, 일일히 다른 UI를 사용하는 것이 아닌, 재사용가능한 UI 컴포넌트를 미리 디자인 하고 개발에 이용하면 훨씬 빠른 진행이 가능합니다.
+
+간단하게 요약하자면, `컴포넌트를 마치 레고의 한 부품`처럼 사용하는 방법론입니다.
+
+## 2) 스토리북이 뭔가요?
+
+스토리북이란 전체 UI를 한눈에 보면서 개발을 할 수 있으며 CDD를 지원하는 도구 중 하나입니다.
+
+'**스토리**'라는 컴포넌트 미리보기를 작성해두어 결과물을 즉시 확인 가능합니다. 
+
+이것은 개발자 뿐만이 아닌 코드 리뷰를 하거나 해당 파트를 수정하는 다른 개발자 나아가 디자이너 또한 쉽게 확인 가능합니다.
+<br />
+[**버튼**]을 가정해봅시다. 
+
+그렇다면 마이페이지 안에서만 쓰이는 버튼을 만드는 것이 아닌 어디서든 쓰일 수 있는 버튼 즉, 버튼이라는 컴포넌트를 만들게 될 것입니다.
+
+재활용성을 확대하기 위해 컴포넌트를 문서화하고, 자동으로 컴포넌트를 시각화하여 시뮬레이션이 가능합니다. 
+
+따라서 다양한 상태확인이 가능합니다.
+
+## 3) 스토리 북을 쓰면 무엇을 얻을 수 있죠?
+
+- UI 컴포넌트들을 카탈로그화
+- 컴포넌트 변화를 Stories로 저장
+- 핫 모듈 재 로딩과 같은 개발 툴 경험 제공
+- 리액트를 포함한 다양한 뷰 레이어 지원
+
+스토리 작성은 결과물을 쉽고 빠르게 확인할 수 있다는 장점 뿐만 아닌, **좀 더 나은 컴포넌트 설계를 고민하게 된다는 점**입니다.
+
+한 컴포넌트를 재사용하려 할 때 초기에 진행했던 설계에서 문제점을 발견해 재사용시 의존성 제거 등을 위해 수정을 거쳤던 기억이 있습니다. 
+
+그러나 스토리북을 활용하며, 스토리를 작성하는 과정에서 설계 및 구조의 결함을 많이 발견 할 수 있습니다.
+
+이는 환경 혹은 주변의 컴포넌트와의 의존성이 낮아야 독립적으로 그리는 것이 가능하기 때문입니다. 
+
+또한 재사용이 쉽게 개발이 진행되어야하기에 스토리 작성이라는 과정에서 계속해서 구조에 대해 고민하는 리팩토링 효과를 부수적으로 얻을 수 있습니다.
+
+## 활용 예시)
+<ul style={{ listStyle: "none", display: "flex", justifyContent: "space-between", padding:"0" }}>
+  <li>
+    <img src="/img/@frontEnd/infomate-4week/Untitled.png" alt="이미지" style={{ height: "404px" }}/>
+  </li>
+  <li>
+    <img src="/img/@frontEnd/infomate-4week/Untitled 1.png" alt="이미지" style={{ height: "250px" }} />
+  </li>
+</ul>
+
+스토리 작성 
+
+<img src="/img/@frontEnd/infomate-4week/Untitled 2.png" alt="이미지" />
+
+직접 확인 가능한 모습
+
+
+## Mocking tool로 생산성 챙기기 - 김하나    
+
+모킹(Mocking)이란 단위 테스트 작성할 때, 해당 코드가 의존하는 부분을 가짜(mock)로 대체하는 기법입니다.
+
+개발을 진행할때 백엔드에서 API가 완성되지 않아 난처했던 적이 있었을 것입니다.<br />
+특정 상황의 개발되지 않은 부분에 의존하여 개발을 진행하게 된다면 다음과 같은 문제를 야기할 수 있습니다.
+
+1. 개발되지 않은 모듈에 의존하면 테스팅이 어려움
+2. 다른 모듈에 의해 테스트 결과가 바뀔수있고, 테스트 실행 속도가 떨어짐
+3. 프로젝트 규모가 커져서 테스트 케이크가 많아질 경우 큰 이슈가 야기될 수 있음
+
+이러한 상황에서 실제 모듈을 모방한 가짜 모듈을 생성하는 mocking 이 필요하게 되며, 실제로 프로젝트를 진행하면서도 mocking 하는 행위가 빠른 개발과 안정성에 도움을 줄 수 있습니다.
+
+프론트엔드에서 백엔드 모킹이 필요한 상황은 다양합니다. <br />
+예를 들어, 백엔드 API가 아직 개발 중이거나, 원하는 형태의 데이터나 응답을 테스트해야 할 때, 또는 서버 에러 상황을 테스트하고 싶을 때 등이 있습니다.
+
+이 상황에서의 솔루션은 대표적으로 세가지로 나눠볼 수 있는데,
+
+1. 백엔드 작업이 완료될때까지 기다린다.
+2. 애플리케이션 내부 로직에 직접 Mocking 한다. ([참고](https://velog.io/@jsw4215/%EB%A6%AC%EC%95%A1%ED%8A%B8-Mock-API) : **public** **folder**와 **.json** 파일 등을 이용하여 mocking )
+3. 페이크 API를 제공하는 라이브러리를 사용한다.
+
+현실적으로 시간이 많다면 1번을 지향하겠지만, 시간이 부족하거나 리소스가 부족할 경우에는 3번을 선택하게 됩니다.
+
+실제로 쩝쩝박사 프로젝트에서는 Google API 할당량 부족으로 인해 개발 환경 테스트를 위해 3번 방법을 채택했습니다.
+
+따라서 이와 관련하여 주로 사용되는 툴들을 소개합니다.
+
+## Json Placeholder
+
+[JSONPlaceholder - Free Fake REST API](https://jsonplaceholder.typicode.com/)
+
+Json Placeholder는 프로토타입 또는 개발 테스트를 위한 페이크 JSON API를 제공합니다.
+
+6개 유형의 리소스를 제공하며, CRUD 테스트를 위한 모든 HTTP 메서드를 지원합니다.
+
+GET, POST, PUT, PATCH, DELETE 메소드를 모두 테스트 할 수 있으며 게시물, 사진 등과 같은 데이터들도 다룰수 있게 되어있습니다.
+
+간략한 사용 예시는 다음과 같습니다.
+
+```jsx
+// 요청 예시
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+```
+
+Json Placeholder를 이용하면 빠른 속도로 테스트할 수 있지만, 응답값을 커스텀하는 것이 어려운 단점이 있습니다.
+
+## **MSW(Mock Service Worker)**
+
+[Mock Service Worker](https://mswjs.io/)
+
+MSW(Mock Service Worker)는 Service Worker를 이용해 서버를 향한 실제 네트워크 요청을 가로채서(intercept) 모의 응답(Mocked response)를 보내주는 API Mocking 라이브러리입니다. 실제 API를 사용하는 것과 유사하게 네트워크 수준에서 Mocking할 수 있습니다.
+
+사용 예시로 POST 메서드의 /login 요청을 만들어보면 다음과 같이 API를 직접 정의할 수 있습니다.
+
+```jsx
+/ src/mocks.js
+import { setupWorker, rest } from 'msw'
+
+const worker = setupWorker(
+  rest.post('/login', (req, res, ctx) => {
+    const isAuthenticated = sessionStorage.getItem('username')
+
+    if (!isAuthenticated) {
+      return res(
+        ctx.status(403),
+        ctx.json({
+          errorMessage: 'Not authenticated',
+        }),
+      )
+    }
+    return res(
+      ctx.json({firstName: 'John'}),
+    )
+  }),
+)
+
+// Register the Service Worker and enable the mocking
+worker.start()
+```
+
+이런식으로 상태 코드와 에러 메시지, 반환 값들을 커스텀 할 수 있으며 여러 옵션들을 세부적으로 적용할 수 있다.
+(실제 API 처럼 정말 다양하게 커스텀 할 수 있다)
+
+하지만 설정 비용이 비교적 많이 들고, 간단한 응답 테스트를 위해서는 다소 번거로울 수 있습니다.
+
+### conclusion
+
+- FE 환경의 빠른 개발을 위한다면 백엔드 모킹이 필요하다.
+- Json Placeholder는 간단한 응답 테스트에 적합하며, MSW는 더욱 복잡한 상황에서 커스터마이징이 가능하다.
+
+reference
+
+https://tech.kakao.com/2021/09/29/mocking-fe/ <br />
+https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API <br />
+https://www.daleseo.com/mock-service-worker/#google_vignette <br />

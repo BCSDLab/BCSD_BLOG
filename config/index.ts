@@ -9,7 +9,7 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "/img/favicon.ico",
-  organizationName: "bcsdlab", // Usually your GitHub org/user name.
+  organizationName: "bcsd", // Usually your GitHub org/user name.
   projectName: "BCSD-Blog", // Usually your repo name.
   presets: [
     [
@@ -19,7 +19,7 @@ const config = {
           showReadingTime: true,
           feedOptions: {
             type: 'rss',
-            copyright: `Copyright © ${new Date().getFullYear()} BCSD Lab. All rights reserved.`,
+            copyright: `Copyright © ${new Date().getFullYear()} BCSD. All rights reserved.`,
             createFeedItems: async (params) => {
               const {blogPosts, defaultCreateFeedItems, ...rest} = params;
               return defaultCreateFeedItems({
@@ -43,9 +43,9 @@ const config = {
   themeConfig: {
     ...themeConfig,
     metadata: [
-      {name: 'keyword', content: 'BCSD Lab, Blog'},
-      {name: 'author', content: 'BCSD Lab'},
-      {name: 'description', content: 'BCSD Lab 전용 블로그입니다.'},
+      {name: 'keyword', content: 'BCSD, Blog'},
+      {name: 'author', content: 'BCSD'},
+      {name: 'description', content: 'BCSD 전용 블로그입니다.'},
     ]
   }
 };

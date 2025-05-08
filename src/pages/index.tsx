@@ -1,5 +1,5 @@
 import { Redirect } from "@docusaurus/router";
 
 export default function Home(): JSX.Element {
-  return <Redirect to="/introduce" />;
+  return <Redirect to="/introduce/what-is-bcsd" />;
 }
