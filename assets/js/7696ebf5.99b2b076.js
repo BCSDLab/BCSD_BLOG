@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[7363],{5569:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"BCSD \uac00\uc774\ub4dc: \ub514\uc790\uc778","permalink":"/design/posts/introduce-Design-2025","unlisted":false}]}')}}]);

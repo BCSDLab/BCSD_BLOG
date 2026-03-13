@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://blog.bcsdlab.com/data-analyst</id>
+    <title>BCSD Blog Blog</title>
+    <updated>2025-05-05T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://blog.bcsdlab.com/data-analyst"/>
+    <subtitle>BCSD Blog Blog</subtitle>
+    <icon>https://blog.bcsdlab.com/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[BCSD 가이드: DA]]></title>
+        <id>https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025</id>
+        <link href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025"/>
+        <updated>2025-05-05T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[DA 트랙을 소개합니다!]]></summary>
+        <content type="html"><![CDATA[<p>DA 트랙을 소개합니다!</p>
+<!-- -->
+<h1><strong>: 데이터 분석가가 되는 여정</strong></h1>
+<p>데이터 분석가(DA) 트랙에 오신 여러분을 환영합니다!</p>
+<p>이 트랙은 데이터 기반 사고를 바탕으로, 다양한 비즈니스 문제를 해결할 수 있는 <strong>실전 역량</strong>을 기르는 과정입니다.</p>
+<p><strong>Python과 SQL 기초부터 A/B 테스트, 리텐션 분석까지</strong> 실제 데이터 분석가의 업무 흐름에 맞춰 커리큘럼이 구성되어 있습니다.</p>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="-데이터-분석이란-무엇인가요"><strong>🤔 데이터 분석이란 무엇인가요?</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94" class="hash-link" aria-label="Direct link to -데이터-분석이란-무엇인가요" title="Direct link to -데이터-분석이란-무엇인가요">​</a></h2>
+<p>데이터 분석이란 <strong>숫자와 기록으로 남아있는 다양한 데이터를 수집·정리하고, 그 속에서 의미를 찾아내어 실제 문제 해결에 활용하는 일</strong>을 말합니다.</p>
+<p>아래와 같은 예시로 이해해볼 수 있습니다.</p>
+<ul>
+<li>
+<p><strong>예시 1: 사용자 행동 분석</strong></p>
+<p>쇼핑몰에서 어떤 상품이 가장 많이 팔리는지, 사람들이 어떤 경로로 들어와서 구매까지 이어지는지 데이터를 분석해</p>
+<p>"어떤 상품을 메인에 배치하면 좋을지" 또는 "어떤 페이지에서 이탈이 많은지"를 파악할 수 있습니다.</p>
+</li>
+<li>
+<p><strong>예시 2: 서비스 개선</strong></p>
+<p>앱에서 특정 기능을 추가했을 때 사용자가 더 오래 머무는지, 이탈률이 줄어드는지</p>
+<p>데이터를 바탕으로 기능 개선의 효과를 객관적으로 측정할 수 있습니다.</p>
+</li>
+<li>
+<p><strong>예시 3: A/B 테스트</strong></p>
+<p>버튼 색상을 바꿨을 때 클릭률이 더 높아지는지, 두 가지 버전을 사용자 집단에 나눠 실험하고</p>
+<p>통계적으로 의미 있는 차이가 있는지 검증합니다.</p>
+</li>
+</ul>
+<p>이처럼 데이터 분석가는 <strong>숫자와 기록 속에서 인사이트를 찾아내고, 비즈니스와 서비스의 방향성을 데이터로 뒷받침하는 역할</strong>을 하게 됩니다.</p>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="-트랙-개요"><strong>📌 트랙 개요</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#-%ED%8A%B8%EB%9E%99-%EA%B0%9C%EC%9A%94" class="hash-link" aria-label="Direct link to -트랙-개요" title="Direct link to -트랙-개요">​</a></h2>
+<ul>
+<li>
+<p><strong>데이터 수집과 전처리 역량 강화</strong></p>
+<p>Python과 SQL을 활용해 데이터 분석에 필요한 기초 능력을 다집니다.</p>
+</li>
+<li>
+<p><strong>A/B 테스트 및 실험 설계 능력 습득</strong></p>
+<p>실무에서 자주 사용하는 실험 설계와 결과 해석 능력을 학습합니다.</p>
+</li>
+<li>
+<p><strong>리텐션 분석 및 사용자 행동 이해</strong></p>
+<p>사용자 이탈/잔존 분석을 통해 서비스 개선의 인사이트를 도출할 수 있습니다.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="-커리큘럼-안내"><strong>📚 커리큘럼 안내</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#-%EC%BB%A4%EB%A6%AC%ED%81%98%EB%9F%BC-%EC%95%88%EB%82%B4" class="hash-link" aria-label="Direct link to -커리큘럼-안내" title="Direct link to -커리큘럼-안내">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="1-python-기초-학습"><strong>1. Python 기초 학습</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#1-python-%EA%B8%B0%EC%B4%88-%ED%95%99%EC%8A%B5" class="hash-link" aria-label="Direct link to 1-python-기초-학습" title="Direct link to 1-python-기초-학습">​</a></h3>
+<ul>
+<li>파이썬 문법의 기초 이해</li>
+<li>변수와 자료형, 조건문/반복문 등 기본 구조 습득</li>
+<li>간단한 데이터 처리 실습</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="2-sql-기본-쿼리-작성"><strong>2. SQL 기본 쿼리 작성</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#2-sql-%EA%B8%B0%EB%B3%B8-%EC%BF%BC%EB%A6%AC-%EC%9E%91%EC%84%B1" class="hash-link" aria-label="Direct link to 2-sql-기본-쿼리-작성" title="Direct link to 2-sql-기본-쿼리-작성">​</a></h3>
+<ul>
+<li>SELECT, FROM, WHERE 구문 이해</li>
+<li>조건 기반 데이터 추출 실습</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-python-문법-심화"><strong>3. Python 문법 심화</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#3-python-%EB%AC%B8%EB%B2%95-%EC%8B%AC%ED%99%94" class="hash-link" aria-label="Direct link to 3-python-문법-심화" title="Direct link to 3-python-문법-심화">​</a></h3>
+<ul>
+<li>함수 정의 및 활용</li>
+<li>리스트, 딕셔너리 등 자료구조 응용</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="4-sql-그룹-연산"><strong>4. SQL 그룹 연산</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#4-sql-%EA%B7%B8%EB%A3%B9-%EC%97%B0%EC%82%B0" class="hash-link" aria-label="Direct link to 4-sql-그룹-연산" title="Direct link to 4-sql-그룹-연산">​</a></h3>
+<ul>
+<li>GROUP BY, HAVING, SUM, COUNT 등 집계 함수 실습</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="57-python-시각화-및-실전-분석"><strong>5~7. Python 시각화 및 실전 분석</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#57-python-%EC%8B%9C%EA%B0%81%ED%99%94-%EB%B0%8F-%EC%8B%A4%EC%A0%84-%EB%B6%84%EC%84%9D" class="hash-link" aria-label="Direct link to 57-python-시각화-및-실전-분석" title="Direct link to 57-python-시각화-및-실전-분석">​</a></h3>
+<ul>
+<li>matplotlib, seaborn 등을 활용한 시각화 실습</li>
+<li>다양한 그래프 구현 및 데이터 인사이트 도출</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="8-python을-활용한-데이터-전처리"><strong>8. Python을 활용한 데이터 전처리</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#8-python%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%B2%98%EB%A6%AC" class="hash-link" aria-label="Direct link to 8-python을-활용한-데이터-전처리" title="Direct link to 8-python을-활용한-데이터-전처리">​</a></h3>
+<ul>
+<li>문자열, 결측치 처리</li>
+<li>데이터 정제 기법 실습</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="9-sql-join--unnest"><strong>9. SQL JOIN &amp; UNNEST</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#9-sql-join--unnest" class="hash-link" aria-label="Direct link to 9-sql-join--unnest" title="Direct link to 9-sql-join--unnest">​</a></h3>
+<ul>
+<li>다양한 JOIN 방식 학습</li>
+<li>배열 및 구조화 데이터 처리</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="10-python-예외-처리"><strong>10. Python 예외 처리</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#10-python-%EC%98%88%EC%99%B8-%EC%B2%98%EB%A6%AC" class="hash-link" aria-label="Direct link to 10-python-예외-처리" title="Direct link to 10-python-예외-처리">​</a></h3>
+<ul>
+<li>에러의 이해 및 디버깅</li>
+<li>실무에서 필요한 안전한 코드 작성</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="11-sql-윈도우-함수"><strong>11. SQL 윈도우 함수</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#11-sql-%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98" class="hash-link" aria-label="Direct link to 11-sql-윈도우-함수" title="Direct link to 11-sql-윈도우-함수">​</a></h3>
+<ul>
+<li>RANK, ROW_NUMBER, LAG 등 윈도우 함수 이해</li>
+<li>고급 데이터 집계와 비교 분석</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="-실전-분석-스킬"><strong>🧪 실전 분석 스킬</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#-%EC%8B%A4%EC%A0%84-%EB%B6%84%EC%84%9D-%EC%8A%A4%ED%82%AC" class="hash-link" aria-label="Direct link to -실전-분석-스킬" title="Direct link to -실전-분석-스킬">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="1213-ab-test-분석-실습"><strong>12~13. A/B Test 분석 실습</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#1213-ab-test-%EB%B6%84%EC%84%9D-%EC%8B%A4%EC%8A%B5" class="hash-link" aria-label="Direct link to 1213-ab-test-분석-실습" title="Direct link to 1213-ab-test-분석-실습">​</a></h3>
+<ul>
+<li>A/B 테스트 구조 이해</li>
+<li>유의성 검정 및 통계적 분석</li>
+<li>테스트 결과 해석 및 시각화</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="14-리텐션-분석"><strong>14. 리텐션 분석</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#14-%EB%A6%AC%ED%85%90%EC%85%98-%EB%B6%84%EC%84%9D" class="hash-link" aria-label="Direct link to 14-리텐션-분석" title="Direct link to 14-리텐션-분석">​</a></h3>
+<ul>
+<li>Cohort 분석 개념 학습</li>
+<li>잔존율 및 이탈률 분석</li>
+<li>SQL 기반 리텐션 분석 실습</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="-트랙-수료-후-여러분이-얻게-될-것"><strong>🚀 트랙 수료 후 여러분이 얻게 될 것</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#-%ED%8A%B8%EB%9E%99-%EC%88%98%EB%A3%8C-%ED%9B%84-%EC%97%AC%EB%9F%AC%EB%B6%84%EC%9D%B4-%EC%96%BB%EA%B2%8C-%EB%90%A0-%EA%B2%83" class="hash-link" aria-label="Direct link to -트랙-수료-후-여러분이-얻게-될-것" title="Direct link to -트랙-수료-후-여러분이-얻게-될-것">​</a></h2>
+<ul>
+<li><strong>실무 수준의 데이터 분석 프로젝트를 직접 수행할 수 있습니다.</strong></li>
+<li><strong>Python과 SQL을 활용해 스스로 데이터 인사이트를 도출할 수 있습니다.</strong></li>
+<li><strong>A/B 테스트와 리텐션 분석 등 서비스 성과 분석 업무에 바로 투입될 수 있습니다.</strong></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="마무리"><strong>마무리</strong><a href="https://blog.bcsdlab.com/data-analyst/posts/introduce-DA-2025#%EB%A7%88%EB%AC%B4%EB%A6%AC" class="hash-link" aria-label="Direct link to 마무리" title="Direct link to 마무리">​</a></h2>
+<p>한 번 들어온 이상 시간을 많이 쓰게 되는 것은 당연한 일입니다.</p>
+<p>하지만 헤맨 만큼 내 땅이고 내 길이 될 겁니다.</p>]]></content>
+        <author>
+            <name>이상화</name>
+            <email>tkdghk4110@gmail.com</email>
+            <uri>https://github.com/LeeSang-hwa</uri>
+        </author>
+        <category label="DA" term="DA"/>
+        <category label="트랙 소개" term="트랙 소개"/>
+    </entry>
+</feed>

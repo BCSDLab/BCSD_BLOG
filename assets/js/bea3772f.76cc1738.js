@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[2234],{8102:e=>{e.exports=JSON.parse('{"permalink":"/front-end/tags/\uc6d4\uac04-\ud68c\uace0","page":1,"postsPerPage":10,"totalPages":1,"totalCount":3,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

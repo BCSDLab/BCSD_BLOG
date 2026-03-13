@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[5150],{8916:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-content-blog","id":"android"}')}}]);

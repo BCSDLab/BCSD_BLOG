@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[8442],{2293:s=>{s.exports=JSON.parse('{"label":"Design","permalink":"/design/tags/design","allTagsPath":"/design/tags","count":1,"unlisted":false}')}}]);

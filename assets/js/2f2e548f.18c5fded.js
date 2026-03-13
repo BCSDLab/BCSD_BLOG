@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[785],{1848:s=>{s.exports=JSON.parse('{"blogBasePath":"/ios","blogTitle":"Blog"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[7855],{8092:e=>{e.exports=JSON.parse('{"blogBasePath":"/game","blogTitle":"Blog"}')}}]);

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://blog.bcsdlab.com/introduce</id>
+    <title>BCSD Blog Blog</title>
+    <updated>2025-05-05T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://blog.bcsdlab.com/introduce"/>
+    <subtitle>BCSD Blog Blog</subtitle>
+    <icon>https://blog.bcsdlab.com/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[BCSD 가이드 1편: BCSD란?]]></title>
+        <id>https://blog.bcsdlab.com/introduce/what-is-bcsd</id>
+        <link href="https://blog.bcsdlab.com/introduce/what-is-bcsd"/>
+        <updated>2025-05-05T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[BCSD란?]]></summary>
+        <content type="html"><![CDATA[
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="bcsd는-즐겁게-일하고-열심히-노는-it-특성화-동아리를-지향합니다">BCSD는 “즐겁게 일하고 열심히 노는 IT 특성화 동아리”를 지향합니다!<a href="https://blog.bcsdlab.com/introduce/what-is-bcsd#bcsd%EB%8A%94-%EC%A6%90%EA%B2%81%EA%B2%8C-%EC%9D%BC%ED%95%98%EA%B3%A0-%EC%97%B4%EC%8B%AC%ED%9E%88-%EB%85%B8%EB%8A%94-it-%ED%8A%B9%EC%84%B1%ED%99%94-%EB%8F%99%EC%95%84%EB%A6%AC%EB%A5%BC-%EC%A7%80%ED%96%A5%ED%95%A9%EB%8B%88%EB%8B%A4" class="hash-link" aria-label="Direct link to BCSD는 “즐겁게 일하고 열심히 노는 IT 특성화 동아리”를 지향합니다!" title="Direct link to BCSD는 “즐겁게 일하고 열심히 노는 IT 특성화 동아리”를 지향합니다!">​</a></h3>
+<p>사실 이 슬로건은 제가 멋대로 붙인 것이구요, 이전 선배들은 좀 더 엄격했다고 합니다. 하지만 최근 1~2년 사이에 분위기가 많이 달라졌고, 저도 동아리에서 재밌는 추억을 많이 만들었기 때문이 이렇게 지었습니다!</p>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="bcsd-이름의-뜻">BCSD 이름의 뜻<a href="https://blog.bcsdlab.com/introduce/what-is-bcsd#bcsd-%EC%9D%B4%EB%A6%84%EC%9D%98-%EB%9C%BB" class="hash-link" aria-label="Direct link to BCSD 이름의 뜻" title="Direct link to BCSD 이름의 뜻">​</a></h2>
+<p><strong>Build Communities, Share Dreams</strong></p>
+<p>이것도 올해(2025년) 바뀌었습니다. 원래는 BCSD Lab, Beyond the Computer Software Developer Laboratory 였는데, 개발 직군이 아닌 트랙들이 점점 늘어나면서 조금 어색한 뜻이 되었습니다. 그리고 BCSD를 컴공 동아리라고 오해하는 분들도 많았죠. 그렇게 여러 논의 끝에 브랜딩을 다시하게 되었고, 위에 나온 BCSD가 됐습니다.</p>
+<p>각기 다른 꿈을 가진 학생들이 모여 공동체를 만들고, 그 안에서 서로의 꿈을 나누며 성장하는 공간이라는 의미를 담고 있습니다.</p>
+<div style="display:flex;flex-direction:column;width:100%"><img src="https://blog.bcsdlab.com/img/@introduce/bcsd-mean.png" alt="이미지" style="display:flex;justify-content:center"></div>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="주요-행사활동">주요 행사/활동<a href="https://blog.bcsdlab.com/introduce/what-is-bcsd#%EC%A3%BC%EC%9A%94-%ED%96%89%EC%82%AC%ED%99%9C%EB%8F%99" class="hash-link" aria-label="Direct link to 주요 행사/활동" title="Direct link to 주요 행사/활동">​</a></h2>
+<ul>
+<li>
+<p><strong>비콘(BCSD Conference) &amp; 워크샵</strong></p>
+<p>비콘은 동아리원 전체가 모여 네트워킹하고, 실무 지식과 경험을 나누는 대형 행사입니다. 직후에 1박 2일로 레크레이션과 바베큐를 즐기는 워크샵이 진행됩니다.</p>
+<p>BCSD가 워낙 프로젝트와 교육 중심의 동아리라서 대표되는 행사가 별로 없습니다. 하지만 가끔 서울소재 기업 세미나실을 빌려서 서로 공부한 내용을 발표해보거나, 서울에서 진행하는 IT 관련 행사에 다같이 참여하기도 합니다. 게임 트랙의 경우 밤을 새면서 각자 게임 하나를 만드는 게임잼을 진행하기도 합니다.</p>
+</li>
+<li>
+<p><strong>프로젝트 개발</strong></p>
+<p>교내 서비스 ‘코인’처럼 실제 사용자가 있는 서비스의 신규 기능/개선 과제를 수행합니다.</p>
+<p>또는 트랙 내에서 자체 프로젝트를 기획하여 개발합니다.</p>
+</li>
+<li>
+<p><strong>트랙별 스터디</strong></p>
+<p>각 트랙 별로 최신 기술 트렌드, 실무 지식의 습득 및 적용을 위한 스터디를 진행합니다.</p>
+</li>
+<li>
+<p><strong>비기너 교육</strong></p>
+<p>신입 회원들을 대상으로 트랙별 기초 지식 습득을 위한 교육을 진행합니다.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="bcsd가-해결하고자-하는-문제">BCSD가 해결하고자 하는 문제<a href="https://blog.bcsdlab.com/introduce/what-is-bcsd#bcsd%EA%B0%80-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B3%A0%EC%9E%90-%ED%95%98%EB%8A%94-%EB%AC%B8%EC%A0%9C" class="hash-link" aria-label="Direct link to BCSD가 해결하고자 하는 문제" title="Direct link to BCSD가 해결하고자 하는 문제">​</a></h2>
+<ul>
+<li>
+<p><strong>지리적 한계</strong></p>
+<p>병천이라는 지리적 한계로 인해 현업 네트워킹, 최신 기술 트렌드 접근이 어려운 문제를</p>
+<p>멘토분들과 재학생을 간접적으로 연결시키는 것으로 공간을 확장시키는 것으로 해결하고자 합니다.</p>
+</li>
+<li>
+<p><strong>실무 교육 인프라 부족</strong></p>
+<p>이론 중심 대학 커리큘럼의 한계를 보완하기 위해,</p>
+<p>트랙별 실무 교육, 실제 프로젝트 경험, 포트폴리오 구축 환경을 제공합니다.</p>
+</li>
+<li>
+<p><strong>지식 전달의 단절</strong></p>
+<p>졸업생-재학생-멘토가 함께하는 선순환 구조를 통해</p>
+<p>지식과 경험, 취업 노하우들을 유기적으로 전수합니다.</p>
+</li>
+</ul>
+<hr>
+<p>다음 편에서는 BCSD에서의 활동과 직급별 역할에 대해 안내합니다!</p>]]></content>
+        <author>
+            <name>Haesung Jung</name>
+            <email>gotjd0230@gmail.com</email>
+            <uri>https://github.com/junghaesung79</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BCSD 가이드 2편: BCSD에서의 활동]]></title>
+        <id>https://blog.bcsdlab.com/introduce/bcsd-activity</id>
+        <link href="https://blog.bcsdlab.com/introduce/bcsd-activity"/>
+        <updated>2025-05-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[BCSD에서의 활동]]></summary>
+        <content type="html"><![CDATA[
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="비기너-레귤러-멘토-활동-한눈에-보기">비기너, 레귤러, 멘토 활동 한눈에 보기<a href="https://blog.bcsdlab.com/introduce/bcsd-activity#%EB%B9%84%EA%B8%B0%EB%84%88-%EB%A0%88%EA%B7%A4%EB%9F%AC-%EB%A9%98%ED%86%A0-%ED%99%9C%EB%8F%99-%ED%95%9C%EB%88%88%EC%97%90-%EB%B3%B4%EA%B8%B0" class="hash-link" aria-label="Direct link to 비기너, 레귤러, 멘토 활동 한눈에 보기" title="Direct link to 비기너, 레귤러, 멘토 활동 한눈에 보기">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="비기너">비기너<a href="https://blog.bcsdlab.com/introduce/bcsd-activity#%EB%B9%84%EA%B8%B0%EB%84%88" class="hash-link" aria-label="Direct link to 비기너" title="Direct link to 비기너">​</a></h3>
+<ul>
+<li><strong>주요 활동</strong>
+<ul>
+<li>트랙별 기초 기술 스택 교육 프로그램 참여</li>
+<li>기초 지식을 활용한 소규모 회고 프로젝트 진행</li>
+</ul>
+</li>
+<li><strong>기간</strong>
+<ul>
+<li>일반적으로 한 학기(5~6개월)</li>
+</ul>
+</li>
+</ul>
+<p>비기너는 BCSD를 처음 접하고 입문하는 단계로, 약 6개월 동안 각자 선택한 트랙의 커리큘럼에 따라 체계적으로 교육을 받으며 성장하는 시간을 갖습니다.</p>
+<p>이 과정에서는 생각보다 많은 시간과 노력이 필요하지만, 질문을 많이 하고 적극적으로 참여할수록 더 많은 것을 얻을 수 있습니다.</p>
+<p>비기너 때의 팁을 하나 말씀드리자면, 레귤러 한 명과 친해져서 궁금한 점을 자주 질문해보거나, 같은 트랙에 있는 친구를 라이벌 삼아 서로 자극을 주며 함께 성장해보는 것도 좋은 방법입니다.</p>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="레귤러">레귤러<a href="https://blog.bcsdlab.com/introduce/bcsd-activity#%EB%A0%88%EA%B7%A4%EB%9F%AC" class="hash-link" aria-label="Direct link to 레귤러" title="Direct link to 레귤러">​</a></h3>
+<ul>
+<li><strong>주요 활동</strong>
+<ul>
+<li>실제 서비스 개발 등 실전 프로젝트 참여</li>
+<li>다른 트랙과의 협업 프로젝트 및 네트워킹 활동</li>
+<li>비기너를 위한 교육 세션 주도 및 보조</li>
+<li>최신 기술 트렌드 연구, 심화 스터디 그룹 운영</li>
+<li>취업 준비(현업 멘토 연계 등)</li>
+</ul>
+</li>
+</ul>
+<p>실제 서비스 개발 프로젝트에 참여하거나, 비기너를 위한 교육 세션을 주도하고 운영하는 등 BCSD의 주축이 되어 동아리의 다양한 프로그램을 이끌어갑니다.</p>
+<p>이 과정을 통해 실무 능력과 더불어 리더십 또한 키울 수 있습니다.</p>
+<p>본인 트랙 뿐만 아니라 다른 트랙과도 접점이 많이 생기는데, 새로운 인간관계를 형성하기 좋습니다.</p>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="멘토">멘토<a href="https://blog.bcsdlab.com/introduce/bcsd-activity#%EB%A9%98%ED%86%A0" class="hash-link" aria-label="Direct link to 멘토" title="Direct link to 멘토">​</a></h3>
+<ul>
+<li><strong>주요 활동</strong>
+<ul>
+<li>레귤러, 비기너 멤버들의 기술적 성장 지원</li>
+<li>자소서 첨삭, 취업 멘토링 등 실질적 진로 지원</li>
+</ul>
+</li>
+</ul>
+<p>멘토분들은 각자 본인의 직장에 다니면서 간접적으로 레귤러들을 지원합니다.</p>
+<p>정말 대단한 분들이 많아서, 가끔 학교에 오거나 비콘 워크샵에서 만나 이야기를 나누는 것만으로도 인사이트를 얻을 수 있습니다.</p>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="단계별-성장-과정">단계별 성장 과정<a href="https://blog.bcsdlab.com/introduce/bcsd-activity#%EB%8B%A8%EA%B3%84%EB%B3%84-%EC%84%B1%EC%9E%A5-%EA%B3%BC%EC%A0%95" class="hash-link" aria-label="Direct link to 단계별 성장 과정" title="Direct link to 단계별 성장 과정">​</a></h2>
+<ol>
+<li><strong>입문(비기너)</strong>
+<ul>
+<li>동아리 활동에 처음 참여</li>
+<li>트랙별 기초 교육 및 소규모 프로젝트를 통해 기본기 다지기</li>
+</ul>
+</li>
+<li><strong>실전(레귤러)</strong>
+<ul>
+<li>실전 프로젝트 참여와 교육 주도, 협업 경험을 통해 실무 역량 강화</li>
+<li>외부 행사, 네트워킹, 스터디 등 다양한 활동을 통해 성장</li>
+</ul>
+</li>
+<li><strong>멘토</strong>
+<ul>
+<li>취업 등 일정 기준 충족 시 멘토로 승격</li>
+<li>후배 교육, 진로 멘토링 등 선순환 구조의 핵심 역할 수행</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="레귤러-전환-기준">레귤러 전환 기준<a href="https://blog.bcsdlab.com/introduce/bcsd-activity#%EB%A0%88%EA%B7%A4%EB%9F%AC-%EC%A0%84%ED%99%98-%EA%B8%B0%EC%A4%80" class="hash-link" aria-label="Direct link to 레귤러 전환 기준" title="Direct link to 레귤러 전환 기준">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="비기너--레귤러">비기너 → 레귤러<a href="https://blog.bcsdlab.com/introduce/bcsd-activity#%EB%B9%84%EA%B8%B0%EB%84%88--%EB%A0%88%EA%B7%A4%EB%9F%AC" class="hash-link" aria-label="Direct link to 비기너 → 레귤러" title="Direct link to 비기너 → 레귤러">​</a></h3>
+<ul>
+<li>트랙별 교육 이수 완료</li>
+<li>회고 프로젝트 완료</li>
+<li>본인의 전환 희망</li>
+<li>회고 면접 통과</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="즉시-전환"><em>즉시 전환</em><a href="https://blog.bcsdlab.com/introduce/bcsd-activity#%EC%A6%89%EC%8B%9C-%EC%A0%84%ED%99%98" class="hash-link" aria-label="Direct link to 즉시-전환" title="Direct link to 즉시-전환">​</a></h3>
+<ul>
+<li>비기너 교육 내용을 이미 충분히 알고 있어 추가 교육이 필요하지 않다고 판단하는 경우</li>
+<li>트랙장 및 임원진과 회고 면접 진행</li>
+</ul>
+<hr>
+<p>다음 편에서는 BCSD에 존재하는 트랙들에 대해 안내합니다!</p>]]></content>
+        <author>
+            <name>Haesung Jung</name>
+            <email>gotjd0230@gmail.com</email>
+            <uri>https://github.com/junghaesung79</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BCSD 가이드 3편: 트랙 소개]]></title>
+        <id>https://blog.bcsdlab.com/introduce/introduce-tracks</id>
+        <link href="https://blog.bcsdlab.com/introduce/introduce-tracks"/>
+        <updated>2025-05-03T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[트랙 소개]]></summary>
+        <content type="html"><![CDATA[
+<hr>
+<p>BCSD에는 2025년 기준 총 9개의 트랙이 있습니다.</p>
+<p>초창기에는 안드로이드, 백엔드, 게임</p>
+<p>그 다음으로 프론트엔드, UI/UX 그리고 iOS</p>
+<p>24년도에 PM, DA 트랙이 추가되면서 비슷한 시기에 UI/UX 트랙의 이름이 Design으로 바뀌었고</p>
+<p>25년도에 보안 트랙이 시험 운영되면서 지금의 형태가 되었습니다. (틀린 내용이 있으면 말씀해주세요!)</p>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="프론트엔드frontend-fe">프론트엔드(FrontEnd, FE)<a href="https://blog.bcsdlab.com/introduce/introduce-tracks#%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9Cfrontend-fe" class="hash-link" aria-label="Direct link to 프론트엔드(FrontEnd, FE)" title="Direct link to 프론트엔드(FrontEnd, FE)">​</a></h3>
+<ul>
+<li><strong>트랙 특징</strong>
+<ul>
+<li>웹사이트와 앱의 사용자 화면을 구현하는 분야로, 최신 프론트엔드 기술을 익히고 실무형 웹 개발 경험을 쌓을 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>주요 기술</strong>
+<ul>
+<li>React, TypeScript, TanStack Query</li>
+</ul>
+</li>
+<li><a href="https://blog.bcsdlab.com/front-end/react/introduce-FE-2025" target="_blank" rel="noopener noreferrer">자세히 보기</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="백엔드backend-be">백엔드(BackEnd, BE)<a href="https://blog.bcsdlab.com/introduce/introduce-tracks#%EB%B0%B1%EC%97%94%EB%93%9Cbackend-be" class="hash-link" aria-label="Direct link to 백엔드(BackEnd, BE)" title="Direct link to 백엔드(BackEnd, BE)">​</a></h3>
+<ul>
+<li><strong>트랙 특징</strong>
+<ul>
+<li>데이터 처리, 저장, 관리와 API 설계 및 구현을 담당하며, 실무에서 널리 쓰이는 서버 및 데이터베이스 기술을 배웁니다.</li>
+</ul>
+</li>
+<li><strong>주요 기술</strong>
+<ul>
+<li>Java, Spring Boot, MySQL, Docker</li>
+</ul>
+</li>
+<li><a href="https://blog.bcsdlab.com/back-end/react/introduce-BE-2025" target="_blank" rel="noopener noreferrer">자세히 보기</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="안드로이드android">안드로이드(Android)<a href="https://blog.bcsdlab.com/introduce/introduce-tracks#%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9Candroid" class="hash-link" aria-label="Direct link to 안드로이드(Android)" title="Direct link to 안드로이드(Android)">​</a></h3>
+<ul>
+<li><strong>트랙 특징</strong>
+<ul>
+<li>Kotlin 기반으로 안드로이드 앱을 개발하고, 실제 배포까지 경험할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>주요 기술</strong>
+<ul>
+<li>Kotlin, Android Jetpack</li>
+</ul>
+</li>
+<li><a href="https://blog.bcsdlab.com/android/react/introduce-Android-2025" target="_blank" rel="noopener noreferrer">자세히 보기</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="ios">iOS<a href="https://blog.bcsdlab.com/introduce/introduce-tracks#ios" class="hash-link" aria-label="Direct link to iOS" title="Direct link to iOS">​</a></h3>
+<ul>
+<li><strong>트랙 특징</strong>
+<ul>
+<li>Swift를 활용해 Apple 생태계의 네이티브 앱을 개발하며, 실사용자에게 제공하는 앱 제작 경험을 쌓을 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>주요 기술</strong>
+<ul>
+<li>Swift, UIKit</li>
+</ul>
+</li>
+<li><a href="https://blog.bcsdlab.com/ios/react/introduce-iOS-2025" target="_blank" rel="noopener noreferrer">자세히 보기</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="디자인design">디자인(Design)<a href="https://blog.bcsdlab.com/introduce/introduce-tracks#%EB%94%94%EC%9E%90%EC%9D%B8design" class="hash-link" aria-label="Direct link to 디자인(Design)" title="Direct link to 디자인(Design)">​</a></h3>
+<ul>
+<li><strong>트랙 특징</strong>
+<ul>
+<li>UI/UX 디자인 기초부터 실무 프로젝트까지, 사용자 중심의 서비스 설계와 디자인 툴 활용 역량을 키울 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>주요 기술/도구</strong>
+<ul>
+<li>Figma, Photoshop, Illustrator</li>
+</ul>
+</li>
+<li><a href="https://blog.bcsdlab.com/design/react/introduce-Design-2025" target="_blank" rel="noopener noreferrer">자세히 보기</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="pmproductmanager">PM(ProductManager)<a href="https://blog.bcsdlab.com/introduce/introduce-tracks#pmproductmanager" class="hash-link" aria-label="Direct link to PM(ProductManager)" title="Direct link to PM(ProductManager)">​</a></h3>
+<ul>
+<li><strong>트랙 특징</strong>
+<ul>
+<li>서비스 기획, 일정 관리, 팀원 조율 등 IT 프로젝트의 전반적인 운영과 실무 경험을 할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>주요 도구</strong>
+<ul>
+<li>Notion, Figma</li>
+</ul>
+</li>
+<li><a href="https://blog.bcsdlab.com/product-manager/react/introduce-PM-2025" target="_blank" rel="noopener noreferrer">자세히 보기</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="dadataanalyst">DA(DataAnalyst)<a href="https://blog.bcsdlab.com/introduce/introduce-tracks#dadataanalyst" class="hash-link" aria-label="Direct link to DA(DataAnalyst)" title="Direct link to DA(DataAnalyst)">​</a></h3>
+<ul>
+<li><strong>트랙 특징</strong>
+<ul>
+<li>데이터 수집, 분석, 시각화 등 실전 데이터 분석가의 업무를 단계별로 경험할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>주요 기술/도구</strong>
+<ul>
+<li>Python, SQL, Tableau, Looker Studio</li>
+</ul>
+</li>
+<li><a href="https://blog.bcsdlab.com/data-analyst/react/introduce-DA-2025" target="_blank" rel="noopener noreferrer">자세히 보기</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="게임game">게임(Game)<a href="https://blog.bcsdlab.com/introduce/introduce-tracks#%EA%B2%8C%EC%9E%84game" class="hash-link" aria-label="Direct link to 게임(Game)" title="Direct link to 게임(Game)">​</a></h3>
+<ul>
+<li><strong>트랙 특징</strong>
+<ul>
+<li>Unity, Unreal Engine을 활용한 2D/3D 게임 개발과 팀 프로젝트 경험을 할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>주요 기술/도구</strong>
+<ul>
+<li>Unity, C#</li>
+</ul>
+</li>
+<li><a href="https://blog.bcsdlab.com/game/react/introduce-Game-2025" target="_blank" rel="noopener noreferrer">자세히 보기</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="보안security">보안(Security)<a href="https://blog.bcsdlab.com/introduce/introduce-tracks#%EB%B3%B4%EC%95%88security" class="hash-link" aria-label="Direct link to 보안(Security)" title="Direct link to 보안(Security)">​</a></h3>
+<ul>
+<li><strong>트랙 특징</strong>
+<ul>
+<li>웹 해킹, 시스템 해킹 등 다양한 보안 분야의 기초부터 실전 프로젝트까지 경험할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>주요 기술/도구</strong>
+<ul>
+<li>Python, 취약점 분석 툴, 네트워크 분석 툴</li>
+</ul>
+</li>
+<li><a href="https://blog.bcsdlab.com/security/react/introduce-Security-2025" target="_blank" rel="noopener noreferrer">자세히 보기</a></li>
+</ul>]]></content>
+        <author>
+            <name>Haesung Jung</name>
+            <email>gotjd0230@gmail.com</email>
+            <uri>https://github.com/junghaesung79</uri>
+        </author>
+    </entry>
+</feed>

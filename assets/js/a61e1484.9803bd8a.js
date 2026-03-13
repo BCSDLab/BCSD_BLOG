@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[531],{9111:s=>{s.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"BCSD \uac00\uc774\ub4dc: DA","permalink":"/data-analyst/posts/introduce-DA-2025","unlisted":false}]}')}}]);

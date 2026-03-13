@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[3507],{5046:e=>{e.exports=JSON.parse('{"permalink":"/android/tags/\uc548\ub4dc\ub85c\uc774\ub4dc","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

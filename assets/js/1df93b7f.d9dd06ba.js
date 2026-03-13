@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[4583],{6866:(s,c,e)=>{e.r(c),e.d(c,{default:()=>b});var t=e(6347),u=e(4848);function b(){return(0,u.jsx)(t.rd,{to:"/introduce/what-is-bcsd"})}}}]);

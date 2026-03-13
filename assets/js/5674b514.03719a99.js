@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[5635],{3972:a=>{a.exports=JSON.parse('[{"label":"DA","permalink":"/data-analyst/tags/da","count":1},{"label":"\ud2b8\ub799 \uc18c\uac1c","permalink":"/data-analyst/tags/\ud2b8\ub799-\uc18c\uac1c","count":1}]')}}]);

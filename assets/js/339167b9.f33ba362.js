@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[7265],{4762:e=>{e.exports=JSON.parse('{"permalink":"/guideline/tags/\uc5c5\ub85c\ub4dc-\ubc29\ubc95","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

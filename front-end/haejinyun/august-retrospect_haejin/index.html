@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-front-end" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.2.0">
+<title data-rh="true">QA를 보다 효과적으로? | BCSD Blog</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://blog.bcsdlab.com/front-end/haejinyun/august-retrospect_haejin"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" name="keyword" content="BCSD, Blog"><meta data-rh="true" name="author" content="BCSD"><meta data-rh="true" property="og:title" content="QA를 보다 효과적으로? | BCSD Blog"><meta data-rh="true" name="description" content="8월 월간 회고 - QA의 다양한 방식을 살펴보고 적절한 방식을 고민해봅시다."><meta data-rh="true" property="og:description" content="8월 월간 회고 - QA의 다양한 방식을 살펴보고 적절한 방식을 고민해봅시다."><meta data-rh="true" name="keywords" content="QA"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2024-09-03T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/haejinyun"><meta data-rh="true" property="article:tag" content="월간 회고,QA"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://blog.bcsdlab.com/front-end/haejinyun/august-retrospect_haejin"><link data-rh="true" rel="alternate" href="https://blog.bcsdlab.com/front-end/haejinyun/august-retrospect_haejin" hreflang="en"><link data-rh="true" rel="alternate" href="https://blog.bcsdlab.com/front-end/haejinyun/august-retrospect_haejin" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://blog.bcsdlab.com/front-end/haejinyun/august-retrospect_haejin","mainEntityOfPage":"https://blog.bcsdlab.com/front-end/haejinyun/august-retrospect_haejin","url":"https://blog.bcsdlab.com/front-end/haejinyun/august-retrospect_haejin","headline":"QA를 보다 효과적으로?","name":"QA를 보다 효과적으로?","description":"8월 월간 회고 - QA의 다양한 방식을 살펴보고 적절한 방식을 고민해봅시다.","datePublished":"2024-09-03T00:00:00.000Z","author":{"@type":"Person","name":"haejinyun","url":"https://github.com/haejinyun","email":"dbshaejin@gmail.com","image":"https://avatars.githubusercontent.com/u/86779590?v=4"},"keywords":["QA"],"isPartOf":{"@type":"Blog","@id":"https://blog.bcsdlab.com/front-end","name":"Blog"}}</script><link rel="alternate" type="application/rss+xml" href="/introduce/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/introduce/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/guideline/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/guideline/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/front-end/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/front-end/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/back-end/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/back-end/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/android/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/android/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/ios/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/ios/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/game/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/game/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/design/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/design/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/product-manager/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/product-manager/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/data-analyst/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/data-analyst/atom.xml" title="BCSD Blog Atom Feed">
+<link rel="alternate" type="application/rss+xml" href="/security/rss.xml" title="BCSD Blog RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/security/atom.xml" title="BCSD Blog Atom Feed"><link rel="stylesheet" href="/assets/css/styles.9b7218ec.css">
+<script src="/assets/js/runtime~main.7085da76.js" defer="defer"></script>
+<script src="/assets/js/main.0197bc70.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top navbarHideable_m1mJ"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" target="_self" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/front-end">FrontEnd</a><a class="navbar__item navbar__link" href="/back-end">BackEnd</a><a class="navbar__item navbar__link" href="/android">Android</a><a class="navbar__item navbar__link" href="/ios">iOS</a><a class="navbar__item navbar__link" href="/game">Game</a><a class="navbar__item navbar__link" href="/design">Design</a><a class="navbar__item navbar__link" href="/product-manager">PM</a><a class="navbar__item navbar__link" href="/data-analyst">DA</a><a class="navbar__item navbar__link" href="/security">Security</a><a class="navbar__item navbar__link" href="/guideline">Guideline</a><a class="navbar__item navbar__link" href="/docs/overview">Documents</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/BCSDLab/BCSD_BLOG" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="container margin-vert--lg"><div class="row"><aside class="col col--3"><nav class="sidebar_re4s thin-scrollbar" aria-label="Blog recent posts navigation"><div class="sidebarItemTitle_pO2u margin-bottom--md">Recent posts</div><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/front-end/posts/introduce-FE-2025">BCSD 가이드: 프론트엔드</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/front-end/posts/abTest-guide">AB 테스트 어떻게 생성해요?</a></li><li class="sidebarItem__DBe"><a aria-current="page" class="sidebarItemLink_mo7H sidebarItemLinkActive_I1ZP" href="/front-end/haejinyun/august-retrospect_haejin">QA를 보다 효과적으로?</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/front-end/posts/react-query">staleTime과 gcTime이 뭔가요?</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/front-end/posts/july-retrospect_daepan">BCSDLab은 뭐하는 동아리일까?</a></li></ul></nav></aside><main class="col col--7"><article><header><h1 class="title_f1Hy">QA를 보다 효과적으로?</h1><div class="container_mt6G margin-vert--md"><time datetime="2024-09-03T00:00:00.000Z">September 3, 2024</time> · <!-- -->18 min read</div><div class="margin-top--md margin-bottom--sm row"><div class="col col--6 authorCol_Hf19"><div class="avatar margin-bottom--sm"><a href="https://github.com/haejinyun" target="_blank" rel="noopener noreferrer" class="avatar__photo-link"><img class="avatar__photo" src="https://avatars.githubusercontent.com/u/86779590?v=4" alt="haejinyun"></a><div class="avatar__intro"><div class="avatar__name"><a href="https://github.com/haejinyun" target="_blank" rel="noopener noreferrer"><span>haejinyun</span></a></div></div></div></div></div></header><div id="__blog-post-container" class="markdown"><p>QA를 보다 효율적으로?</p>
+<!-- -->
+<!-- -->
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="들어가는-말">들어가는 말<a href="#들어가는-말" class="hash-link" aria-label="Direct link to 들어가는 말" title="Direct link to 들어가는 말">​</a></h2>
+<br>
+<p>QA란 서비스가 배포되기 전 사용자가 느낄 수 있는 불편함 혹은 서비스 자체에 기능적 결함등을 확인 할 수 있는 마지막 관문과 같은 역할을 합니다. 이는 서비스의 품질을 보장하고, 사용자가 안정적이고 만족스러운 경험을 할 수 있도록 하는 중요한 단계입니다. 만약 QA가 온전히 진행되지 않고 사용자가 서비스를 마주하게 된다면, 서비스에 대한 신뢰가 무너지는 최악을 맞이할지도 모릅니다. 그렇기 때문에 QA는 꼼꼼하게, 그리고 체계적으로 진행되어야 합니다. 이에 대한 고민의 결과로, QA 프로세스를 개선하기 위한 몇 가지 방안을 생각하게 되었습니다.</p>
+<br>
+<div style="display:flex;justify-content:center"><img src="/assets/images/1-6034dbcedd7c91735625e5a6a9f45685.gif"></div>
+<br>
+<br>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="현재-bcsd의-qa-방식은">현재 BCSD의 QA 방식은?<a href="#현재-bcsd의-qa-방식은" class="hash-link" aria-label="Direct link to 현재 BCSD의 QA 방식은?" title="Direct link to 현재 BCSD의 QA 방식은?">​</a></h2>
+<br>
+<p>각 팀(User, Campus, Business)별 QA 방식이 조금씩은 모두 다르지만 그 결은 같다고 느껴졌습니다.</p>
+<p>각 팀원들이 특정 혹은 여러 기능에 대한 모든 경우의 수를 체크하고 실행시켜 보는 방식으로 진행하고 있습니다. 이렇게 발견한 이슈들은 모두 문서화를 통해 공유하고 핫픽스로 즉각적으로 해결하거나, 필요에 따라 후속 작업으로 처리하게 됩니다.</p>
+<br>
+<div style="display:flex;justify-content:center"><img src="/assets/images/2-85c89baaed3e63b5aaae494e98b909df.gif"></div>
+<br>
+<br>
+<p>이러한 방식은 개별 기능에 대한 집중적인 테스트를 가능하게 한다는 점에서 이점이 있을 수 있습니다. 그러나 동시에 아쉬운 점도 존재합니다.</p>
+<ul>
+<li>의도와 실수의 경계가 모호해 질 수 있다.</li>
+<li>불필요한 리소스 소모</li>
+<li>경우의 수 파악 및 문서화 과정의 실수 발생</li>
+</ul>
+<p>위 문장을 조금 풀어서 예시와 함께 이야기해보려고 합니다.</p>
+<ol>
+<li>
+<p>의도된 기능인지 개발 과정에서의 실수인지 파악하기 어렵습니다.</p>
+<p>기능의 동작이 상상 혹은 기획(기능 명세)과 다른 경우, 이것이 추후에 수정이 된 부분인지 오류인지를 파악하기 위해 불필요한 시간이 들어갈 것입니다. QA에 개발에 참여한 모든 인원과 함께 진행해야하지만 그러지 못할 때를 생각한다면, 해당 기능의 Issue, PR, 관련 소통 기록 등을 보며 실수인지 수정된 기획인지를 파악해야 할 것입니다.</p>
+</li>
+<li>
+<p>불필요한 리소스 소모</p>
+<p>1번에서 말한 문제점이 발생했을 경우 이를 해결하기 위해 담당자를 찾고 커뮤니케이션하는 비용이 발생할 것입니다. 이는 전체적인 서비스의 배포 기간을 딜레이 시킬수도 있으며, 불필요한 수정등을 야기할 수 있습니다.</p>
+</li>
+<li>
+<p>경우의 수 파악 및 문서화 과정의 실수 발생</p>
+<p>모든 경우의 수를 파악한다는 것은 생각보다 매우 어려운 일일 것입니다. 빼먹는 경우도 있을 것이며, 문서화 과정에서 누락되는 부분도 있을 것입니다. 여러명에서 모든 사항을 문서화 한다 하더라도 이것을 검토하고 관리하는 어떤 추가적인 리소스가 필요할 것입니다.</p>
+</li>
+</ol>
+<p>위와 같은 문제점을 살펴보면, 현재의 QA 방식이 완전히 효과적이지만은 않다는 것을 느낄 수 있습니다. 들어가는 말에서 이야기 했던 것 처럼 QA는 서비스가 배포 되기 전 마지막 단계로 작은 빈틈이 서비스의 신뢰도와 직결되어 있습니다. 그렇기에 모두가 더 신경을 곤두세우고 진행될 것입니다. 이런 스트레스 강도가 높은 작업을 다른 방향으로 접근하여 위와 같은 문제점을 해결할 수 있는 방식을 모색할 필요가 있다고 느꼈습니다.</p>
+<br>
+<div style="display:flex;justify-content:center"><img src="/assets/images/3-e9386961ce2f50268cc8fc4b4c143f9d.gif"></div>
+<br>
+<br>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="인수-테스트란">인수 테스트란?<a href="#인수-테스트란" class="hash-link" aria-label="Direct link to 인수 테스트란?" title="Direct link to 인수 테스트란?">​</a></h2>
+<br>
+<p>앞선 문제를 개선하기 위해 저는 “인수 테스트”라는 접근 방식을 생각해보았습니다.</p>
+<p>인수 테스트</p>
+<p>: 사용자가 실제 서비스를 사용하는 것 처럼 실제 사용 시나리오를 기반으로 기능을 테스트하는 방법</p>
+<p>단순히 개별 기능의 동작을 확인하는 것을 넘어, 서비스가 전체적으로 예상대로 동작 하는지 검증하는데 중점을 둡니다. 인수테스트는 나아가 서비스 유저 저니맵을 그릴 수 있는 기회도로 작용합니다. 이를 통해 사용자의 흐름을 예측하고 그 흐름에 이상이 없는지 확인할 수 있습니다.</p>
+<p>예를 들어</p>
+<ol>
+<li>
+<p>유저가 회원가입을 합니다.</p>
+<ol>
+<li>
+<p>아이디 입력</p>
+</li>
+<li>
+<p>비밀번호입력</p>
+</li>
+<li>
+<p>비밀번호 재 입력</p>
+<p>…</p>
+</li>
+</ol>
+</li>
+<li>
+<p>유저가 로그인을 합니다.</p>
+</li>
+<li>
+<p>메인 페이지에 도착합니다.</p>
+</li>
+<li>
+<p>복더방에 들어갑니다.</p>
+<p>…</p>
+</li>
+</ol>
+<p>이렇게 시나리오를 기반으로 하면, 1차적인 기능 테스트가 보다 체계적이고 순조롭게 진행 될 것입니다.</p>
+<p>(마치 참교 교재처럼 보고 따라갈 요소가 생긴다!)</p>
+<br>
+<div style="display:flex;justify-content:center"><img src="/assets/images/4-198e4fce9a12c6219bdfe63a2b5f4c7e.gif"></div>
+<br>
+<br>
+<p>단순히 코드의 오류를 찾는 것에서 나아가, 시스템이 실제 사용자에게 제공되는 순간들을 점검할 수 있는 것이 인수 테스트의 강점입니다. 또한, 여기서 약간의 바리에이션을 준다면, 사용자가 갑작스럽게 행하는 개발자가 예상하지 못한 동작을 시나리오 초기 단계에서 큰 부담 없이 예측하고 테스트할 수 있습니다. 이로써 다양한 상황에 대한 대비도 가능해지며, 보다 안정적인 서비스 제공이 가능해질 것입니다.</p>
+<br>
+<br>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="인수-테스트를-bcsd에-녹인다면">인수 테스트를 BCSD에 녹인다면?<a href="#인수-테스트를-bcsd에-녹인다면" class="hash-link" aria-label="Direct link to 인수 테스트를 BCSD에 녹인다면?" title="Direct link to 인수 테스트를 BCSD에 녹인다면?">​</a></h2>
+<br>
+<p>한편으로는 &quot;이미 기획이 짜여 있는데 시나리오가 왜 필요하지? 시나리오가 현재 기획과 무엇이 다른 거지?&quot;라는 생각이 들 수도 있습니다.</p>
+<br>
+<div style="display:flex;justify-content:center"><img src="/assets/images/5-2f99f6dffd8e15d4d821302277690417.gif"></div>
+<br>
+<br>
+<p>그러나 시나리오란 초기 기획이 수정되거나, 개발을 진행하면서 &quot;이건 다음 PR에서 해야지~&quot;하면서 놓치는 부분들을 보완할 수 있는 중요한 도구입니다. 이러한 요소들을 따로 아카이빙하고, 기획 문서에 즉시 반영할 수 있다면, 그 기획 문서 차제가 시나리오로서 완성될 수 있을 것입니다. 그러나 우리의 개발 상황 속에서 이를 체계적으로 관리하는 것은 쉽지 않을 것입니다.</p>
+<p>그렇다면, 계속 언급하고 있는 시나리오는 “누가 어느 시점에 써야하는 것이냐!”라고 생각이 들 것입니다.</p>
+<p>제가 생각하는 최적의 시점을 PR을 작성할 때라고 생각합니다. 실제로 개발한 내용을 가장 생생하게 기억하는 시점이기 때문입니다.(문서화에서 가장 중요한 것은 미루지 않기…)</p>
+<p>기획된 부분에서 어디를 어떻게 개발했는지, 특이사항이 있다면 그것을 시나리오 문서에 바로 기록합니다. 이렇게 다양한 기능들의 개발 과정이 시나리오 문서에 추가되면, 실제 작업 내용을 반영한 실질적인 문서가 완성됩니다. 이 문서에는 바뀐 기획 및 특이사항이 모두 녹아들어 있을 것입니다. 결과적으로, 이 문서는 실제적인 유저 저니맵이 될 것이고, 이는 기획과 개발의 무결성을 유지시킬 수 있는 요소일 것입니다.</p>
+<p>(이후 마케팅 용 혹은 다양한 로깅을 찍을 때나 DA 파트에서도 활용 가능 예상)</p>
+<p>QA를 진행할 때는 이 시나리오 문서를 활용하여 스토리라인을 따라가며, 사용자가 의도된 흐름대로 서비스를 이용하는 데 문제가 없는지 확인할 수 있을 것입니다. 이후에는 다양한 사용자의 행동을 통해 엣지 케이스를 확인하고, 서비스의 견고함을 확보하는 작업을 진행할 수 있을 것입니다.</p>
+<br>
+<div style="display:flex;justify-content:center"><img src="/assets/images/6-affd7cb0fc5751497432dbbeb6276910.gif"></div>
+<br>
+<br>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="성공적인-테스트를-위해서-노력해야-하는-점">성공적인 테스트를 위해서 노력해야 하는 점?<a href="#성공적인-테스트를-위해서-노력해야-하는-점" class="hash-link" aria-label="Direct link to 성공적인 테스트를 위해서 노력해야 하는 점?" title="Direct link to 성공적인 테스트를 위해서 노력해야 하는 점?">​</a></h2>
+<br>
+<p>경우의 수를 파악하고 시나리오를 작성하는 과정이 개발 기간을 지연시킨다면, 이는 오히려 테스트를 하지 않는 것만 못할 수 있습니다. 또한, 개발자가 고려하는 경우의 수가 너무 단조로워서 테스트가 충분히 효과적이지 않을 수도 있습니다.</p>
+<p>그러나 조금 더 깊이 생각해보면, PR에 변경 사항을 걸어 코드 리뷰 시 내가 중점적으로 확인해야 할 것들을 적는 것이 중요합니다. 개발자는 기능 명세를 기반으로 작업을 진행하므로, 이 명세를 바탕으로 실제로 개발한 내용과 개발 중 발생한 변경 사항을 기록하면 됩니다. 이를 통해 시나리오에 대한 부담을 줄이며 실제 개발 내용만을 정제해 나갈 수 있을 것입니다.</p>
+<p>하지만 모든 프로젝트에서 이러한 접근 방식이 적합하지는 않을 수 있습니다.</p>
+<p>예를 들어:</p>
+<ul>
+<li><strong>수정이 잦지 않은 어드민</strong>: 어드민 페이지는 일반적으로 안정된 기능을 제공하며, 사용자 인터페이스와 상호작용이 복잡하지 않습니다. 이러한 경우, <strong>E2E(End-to-End) 테스트</strong>가 적합합니다. E2E 테스트는 사용자가 실제로 시스템을 사용하는 것처럼 전체 흐름을 시뮬레이션하여, 시스템이 처음부터 끝까지 예상대로 동작하는지 확인합니다. 어드민 페이지와 같이 큰 변화가 자주 일어나지 않는 경우, E2E 테스트를 통해 주요 기능들이 예상대로 작동하는지 검증하면 효율적입니다.</li>
+<li><strong>수정이 많은 공용 패키지나 유틸</strong>: 공용 패키지나 유틸리티는 자주 수정되며, 여러 프로젝트에서 재사용되기 때문에 안정성이 매우 중요합니다. 이러한 경우, <strong>인수 테스트</strong>를 통해 각 기능이 명세대로 동작하는지 꼼꼼히 확인해야 합니다. 인수 테스트는 기능의 세부적인 동작을 검증하는 데 중점을 두므로, 자주 변경되면서도 신뢰성이 필요한 코드에 적합합니다.</li>
+<li><strong>유저의 흐름과 서비스의 동작 과정이 중요한 경우</strong>: 사용자가 서비스를 이용하는 전체적인 흐름이 중요한 애플리케이션에서는, E2E 테스트와 인수 테스트를 적절히 병행하여 사용합니다. E2E 테스트로 큰 그림을 검증하면서, 인수 테스트로 세부적인 기능을 확인하여 서비스의 견고함을 확보할 수 있습니다.</li>
+</ul>
+<p>각 프로젝트마다 특성이 조금씩은 다릅니다. 따라서 적절한 QA및 테스트 방법을 고민하고 도입해보는 것이 보다 안정적인 서비스를 제공하기 위해서 중요할 것입니다.</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="마무리-말">마무리 말<a href="#마무리-말" class="hash-link" aria-label="Direct link to 마무리 말" title="Direct link to 마무리 말">​</a></h2>
+<p>현재 부트캠프에서 프로젝트를 진행하며, QA를 진행해야하는 순간이 있었습니다. 그러나 BCSD 개발보다 훨씬 빠르게 진행되는 일정 속에서 프로젝트 멘토님께 적절한 QA 기간에 대해 질문한 적이 있었습니다. 그때 멘토님은 QA를 특정 기간에 몰아서 하는 것이 아니라, 기능마다 QA를 진행한다고 진행해야 한다고 조언하셨습니다. 그리고 이와 관련하여 &quot;인수 테스트&quot;라는 개념을 언급 하셨습니다.</p>
+<p>기능마다 시나리오를 작성해 아카이빙해두고, 마지막 QA 때에는 해당 시나리오를 활용하여 미리 준비된대로 테스트를 진행하는 방향을 추천하셨습니다. 처음에는 “시나리오가 기획이랑 무엇이 다르지?“라는 생각이었지만, 해당 문장을 곱씹으며 실제 개발 상황이랑 비교해 보니 시나리오의 필요성을 느끼게 되었습니다.</p>
+<p>기획대로 이루어지는 개발은 존재하지 않을 것입니다. (다양한 원인으로 기획이 다이어트를 하기도 살이 찌기도 하죠..^^)</p>
+<br>
+<div style="display:flex;justify-content:center"><img src="/assets/images/7-c54427ff89149e7930ff4cdb3ca42d89.png"></div>
+<br>
+<br>
+<p>다양한 개발 환경에서 적절한 문서화와 특성에 알맞는 테스트 방법이 이후 QA의 부담을 줄여줄 수 있는 한줄기의 빛일 수도 있겠다!라는 생각이 되어 글을 작성해보았습니다.</p>
+<p>이번 기회로 지금 하고 있는 프로젝트에는 어떤 방식이 더 어울리고 효율적일지 고민해보면 좋겠습니다!</p></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/front-end/tags/월간-회고">월간 회고</a></li><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/front-end/tags/qa">QA</a></li></ul></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/front-end/posts/abTest-guide"><div class="pagination-nav__sublabel">Newer Post</div><div class="pagination-nav__label">AB 테스트 어떻게 생성해요?</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/front-end/posts/react-query"><div class="pagination-nav__sublabel">Older Post</div><div class="pagination-nav__label">staleTime과 gcTime이 뭔가요?</div></a></nav><div></div></main><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#들어가는-말" class="table-of-contents__link toc-highlight">들어가는 말</a></li><li><a href="#현재-bcsd의-qa-방식은" class="table-of-contents__link toc-highlight">현재 BCSD의 QA 방식은?</a></li><li><a href="#인수-테스트란" class="table-of-contents__link toc-highlight">인수 테스트란?</a></li><li><a href="#인수-테스트를-bcsd에-녹인다면" class="table-of-contents__link toc-highlight">인수 테스트를 BCSD에 녹인다면?</a></li><li><a href="#성공적인-테스트를-위해서-노력해야-하는-점" class="table-of-contents__link toc-highlight">성공적인 테스트를 위해서 노력해야 하는 점?</a></li><li><a href="#마무리-말" class="table-of-contents__link toc-highlight">마무리 말</a></li></ul></div></div></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><span class="footer__link-item">
+        Powered by <a href="https://docusaurus.io" target="_blank" rel="noreferrer noopener">Docusaurus 2</a>, Hosted by <a href="https://aws.amazon.com" target="_blank" rel="noreferrer noopener">AWS</a>
+        <br>
+        Copyright © 2026 <a href="https://github.com/BCSDLab/BCSD_BLOG" target="_blank" rel="https://github.com/BCSDLab">BCSD Lab</a>. All rights reserved.
+        </span></div></div></div></footer></div>
+</body>
+</html>

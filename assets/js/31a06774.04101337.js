@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[9124],{3210:e=>{e.exports=JSON.parse('{"label":"FE","permalink":"/front-end/tags/fe","allTagsPath":"/front-end/tags","count":2,"unlisted":false}')}}]);

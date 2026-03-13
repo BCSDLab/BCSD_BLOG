@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[4377],{736:e=>{e.exports=JSON.parse('{"blogBasePath":"/product-manager","blogTitle":"Blog"}')}}]);

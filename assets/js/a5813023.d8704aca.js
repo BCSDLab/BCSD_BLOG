@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[5184],{9653:a=>{a.exports=JSON.parse('{"label":"DA","permalink":"/data-analyst/tags/da","allTagsPath":"/data-analyst/tags","count":1,"unlisted":false}')}}]);

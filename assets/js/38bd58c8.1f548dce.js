@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[9546],{8789:a=>{a.exports=JSON.parse('{"label":"Gradle","permalink":"/android/tags/gradle","allTagsPath":"/android/tags","count":1,"unlisted":false}')}}]);

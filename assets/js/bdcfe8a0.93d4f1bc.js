@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[1490],{7840:s=>{s.exports=JSON.parse('{"label":"Security","permalink":"/security/tags/security","allTagsPath":"/security/tags","count":1,"unlisted":false}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[5993],{2646:s=>{s.exports=JSON.parse('{"label":"\ucf54\ud2c0\ub9b0 \uc2a4\ud504\ub9c1","permalink":"/android/tags/\ucf54\ud2c0\ub9b0-\uc2a4\ud504\ub9c1","allTagsPath":"/android/tags","count":1,"unlisted":false}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[5329],{6761:a=>{a.exports=JSON.parse('{"label":"PM","permalink":"/product-manager/tags/pm","allTagsPath":"/product-manager/tags","count":2,"unlisted":false}')}}]);

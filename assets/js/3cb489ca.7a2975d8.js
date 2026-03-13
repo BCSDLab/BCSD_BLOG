@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[7594],{93:s=>{s.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"BCSD \uac00\uc774\ub4dc: iOS","permalink":"/ios/posts/introduce-iOS-2025","unlisted":false}]}')}}]);

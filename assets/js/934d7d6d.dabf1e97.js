@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[8740],{4761:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"BCSD \uac00\uc774\ub4dc: \uac8c\uc784","permalink":"/game/posts/introduce-Game-2025","unlisted":false}]}')}}]);

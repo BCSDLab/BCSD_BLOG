@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[2562],{9123:e=>{e.exports=JSON.parse('{"label":"react-query","permalink":"/front-end/tags/react-query","allTagsPath":"/front-end/tags","count":1,"unlisted":false}')}}]);

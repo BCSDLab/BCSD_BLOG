@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[73],{3120:s=>{s.exports=JSON.parse('[{"label":"iOS","permalink":"/ios/tags/i-os","count":1},{"label":"\ud2b8\ub799 \uc18c\uac1c","permalink":"/ios/tags/\ud2b8\ub799-\uc18c\uac1c","count":1}]')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[560],{1625:a=>{a.exports=JSON.parse('{"label":"Game","permalink":"/game/tags/game","allTagsPath":"/game/tags","count":1,"unlisted":false}')}}]);

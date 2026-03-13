@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbcsd_blog=self.webpackChunkbcsd_blog||[]).push([[7351],{578:e=>{e.exports=JSON.parse('[{"label":"Game","permalink":"/game/tags/game","count":1},{"label":"\ud2b8\ub799 \uc18c\uac1c","permalink":"/game/tags/\ud2b8\ub799-\uc18c\uac1c","count":1}]')}}]);
