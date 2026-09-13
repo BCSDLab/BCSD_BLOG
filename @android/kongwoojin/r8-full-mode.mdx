@@ -1,0 +1,177 @@
+---
+date: 2026-09-13
+authors: kongwoojin
+title: "난독화와 R8 Full mode 적용하기"
+description: "코인 프로젝트에서 난독화와 R8 Full mode를 적용한 과정을 다룹니다."
+keywords: ["Android", "Kotlin", "R8", "Proguard", "AGP", "Retrofit"]
+tags:
+  - Android
+  - R8
+  - Proguard
+  - 난독화
+---
+
+코인 프로젝트에 난독화와 R8 Full mode를 적용한 과정을 다룹니다.
+
+{/* truncate */}
+
+AGP 8.0부터는 R8의 Full mode가 기본적으로 활성화되었습니다.
+
+코인 프로젝트는 이미 AGP 8.0 이상을 사용하고 있었지만, R8 Full mode를 적용하지는 않고 있었습니다.
+
+본 글에서는 난독화 및 R8 Full mode를 적용하기 위한 선행 작업과, 적용 전 후를 비교합니다.
+
+# R8 Full mode
+R8은 크게 Compatilibility mode와 Full mode로 나뉩니다.
+
+Full mode는 Compability mode보다 더 공격적으로 최적화를 수행하며, 추가적인 Proguard rules가 필요할 수 있습니다.
+
+:::note[Full mode의 자세한 차이점에 대해 궁금하다면?]
+
+[R8 공식 문서](https://r8.googlesource.com/r8/+/refs/heads/master/compatibility-faq.md#r8-full-mode)에서 자세한 차이점을 확인할 수 있습니다.
+
+:::
+
+# R8 Full mode, 왜 써요?
+[공식 문서](https://developer.android.com/topic/performance/app-optimization/full-mode)에서는 다음과 같은 언급이 있습니다.
+
+> Full mode gives you powerful optimizations that improve your app performance.
+
+R8 Full mode는 Compatability mode보다 더 공격적인 최적화를 수행하며, 앱 성능을 향상시킬 수 있습니다.
+
+또한, AGP 8.0부터 기본이 된 이상, 언젠가는 적용해야 할 것이라고 생각했습니다.
+
+# R8 Full mode 적용하기
+코인 프로젝트에는 아래와 같은 옵션으로 R8 Full mode가 비활성화 되어 있었습니다.
+
+```
+android.enableR8.fullMode = false
+```
+
+이미 AGP 8.0 이상을 사용하고 있었기 때문에, 위 옵션을 제거하면 즉시 R8 Full mode를 활성화 시킬 수 있었습니다.
+
+# 끝...?
+끝이면 좋겠지만, 코인 프로젝트에는 크나큰 문제가 있었습니다.
+
+```
+# 최적화 X
+-dontoptimize
+
+# 사용하지 않는 변수 남김
+-dontshrink
+
+#public 클래스 난독 시 메서드 호출 문제 발생 가능
+-keep public class *
+```
+
+코인 프로젝트는 위와 같이, 모든 최적화와 난독화를 비활성화하고 있었습니다.
+
+이로 인해, R8 Full mode 활성화와 상관 없이, 모든 최적화와 난독화가 작동하지 않았습니다.
+
+따라서 저희는 난독화를 올바르게 설정하는 과정을 함께 진행했습니다.
+
+# 라이브러리 업데이트
+AGP 8.0에서 R8 Full mode가 기본이 되면서, 대부분의 라이브러리들은 특정 버전 이후로 R8 Full mode 지원을 위한 Proguard rules를 내장하고 있습니다.
+
+저희가 주로 사용하고 있는 Retrofit은 `2.10.0`, Gson은 `2.11.0` 이후 버전부터 R8 Full mode를 지원하고 있습니다.
+
+이 라이브러리들을 먼저 업데이트하여 난독화 규칙 제거로 인해 발생할 수 있는 문제를 방지했습니다.
+
+# Gson, Gson, Gson
+Gson 라이브러리를 사용해보신 분들은 아시겠지만, Gson은 리플렉션을 사용해서 JSON을 객체로 변환합니다.
+
+난독화 과정에는 이게 굉장히 큰 문제가 됩니다.
+
+R8은 난독화 과정에서 Tree shaking 기법을 사용합니다. 이 과정에서 런타임에 리플렉션으로 접근하는 클래스들은 제거가 되고, Gson을 사용하는 클래스들이 제거가 될 수 있습니다.
+
+이로 인해, [공식 문서](https://developer.android.com/topic/performance/app-optimization/choose-libraries-wisely#check-optimization) 에서는 Gson 대신 kotlinx.serialization 혹은 Moshi를 권장합니다.
+
+하지만, 코인 프로젝트에서 Gson을 즉시 교체하는 것은 어려웠습니다.
+
+이로 인해, Gson을 사용하는 클래스를 난독화 과정에서 제거하지 않도록 Proguard rules를 작성해야 했습니다.
+
+불행 중 다행이도, 코인 프로젝트에서 Retrofit 이외에 Gson을 사용하는 곳은 단 하나였습니다.
+
+따라서, 아래와 같이 Gson을 사용하는 클래스에 대한 난독화 방지 규칙을 작성했습니다.
+
+```
+-keep class in.koreatech.koin.domain.model.timetable.response.** { *; }
+```
+
+# Typesafe Navigation
+Typesafe Navigation은 sealed class를 사용하여 Route를 처리합니다.
+그리고, 저희의 버스 화면은 이 Typesafe Navigation을 사용하고 있습니다.
+
+Typesafe Navigation 자체는 문제가 되지 않습니다.
+
+다만, 버스의 Typesafe Navigation에서는 아래와 같은 enum을 parameter로 사용하고 있었습니다.
+
+```kotlin
+@Serializable
+enum class PlaceType(
+    @StringRes val titleRes: Int
+) {
+    KOREATECH(R.string.koreatech),
+    STATION(R.string.cheonan_station),
+    TERMINAL(R.string.cheonan_terminal)
+}
+```
+
+난독화를 활성화하자, 아래와 같은 오류가 발생하였습니다.
+
+```
+java.lang.IllegalArgumentException: Cannot find class with name "in.koreatech.bus.type.PlaceType". Ensure that the serialName for this argument is the default fully qualified name.
+If the build is minified, try annotating the Enum class with "androidx.annotation.Keep" to ensure the Enum is not removed.
+at androidx.navigation.serialization.NavTypeConverter_androidKt.getClass(NavTypeConverter_android.kt:66)
+at androidx.navigation.serialization.NavTypeConverter_androidKt.parseEnum(NavTypeConverter_android.kt:28)
+at androidx.navigation.serialization.NavTypeConverterKt.getNavType(NavTypeConverter.kt:109)
+at androidx.navigation.serialization.RouteSerializerKt.computeNavType(RouteSerializer.kt:167)
+at androidx.navigation.serialization.RouteSerializerKt.forEachIndexedKType(RouteSerializer.kt:189)
+at androidx.navigation.serialization.RouteSerializerKt.generateRoutePattern(RouteSerializer.kt:64)
+at androidx.navigation.serialization.RouteSerializerKt.generateRoutePattern$default(RouteSerializer.kt:47)
+at androidx.navigation.NavDestinationBuilder.<init>(NavDestinationBuilder.java:67)
+at androidx.navigation.compose.ComposeNavigatorDestinationBuilder.<init>(ComposeNavigatorDestinationBuilder.kt:96)
+at androidx.navigation.compose.NavGraphBuilderKt.composable(NavGraphBuilder.kt:264)
+at in.koreatech.bus.navigation.BusSearchNavigationKt.BusSearchNavigation$lambda$4$0(BusSearchNavigation.kt:177)
+at androidx.navigation.compose.NavHostKt.NavHost(NavHost.kt:879)
+at in.koreatech.bus.navigation.BusSearchNavigationKt.BusSearchNavigation(BusSearchNavigation.kt:31)
+...
+```
+
+이는 위에서 언급한 `PlaceType` enum이 난독화 과정에서 제거되었기 때문입니다.
+
+이를 방지하기 위해, `PlaceType`에 대한 난독화 예외 처리가 필요했습니다.
+
+물론, Proguard rules에 추가하여 처리하는 것도 가능합니다.
+
+하지만, 유사한 케이스가 늘어날때마다 Proguard rules에 추가하는 것은 유지보수에 좋지 않다고 생각하였습니다.
+
+따라서 로그 상에서 표시된 것과 같이, `@Keep` annotation을 사용하여 난독화 방지를 처리했습니다.
+
+:::note[@Keep annotation이란?]
+
+`@Keep` annotation은 androidx.annotation 패키지에 포함된 annotation으로, 난독화 과정에서 클래스가 제거되지 않도록 합니다.
+
+:::
+
+# Resource shrinking
+마지막으로, R8 Full mode와 직접적인 관련은 없지만, Resource shrinking을 활성화했습니다.
+
+:::note[Resource shrinking이란?]
+
+Resource shrinking은 컴파일 타임에 사용하지 않는 리소스를 정리하는 기능입니다.
+
+:::
+
+# 결과
+| 비교 항목 | 적용 전 | 적용 후 | 감소량 |
+|---|---:|---:|---:|
+| Release APK 크기 | 164.55 MB | 113.20 MB | **51.35 MB (31.21%) 감소** |
+| DEX 크기 | 59.82 MB | 10.97 MB | **48.85 MB (81.66%) 감소** |
+| 리소스 수 | 2,453개 | 1,772개 | **681개 (27.76%) 감소** |
+| 리소스 크기 | 10.36 MB | 7.99 MB | **2.37 MB (22.84%) 감소** |
+
+결과적으로, 난독화 및 R8 Full mode 적용으로 인해, 코인 프로젝트 애플리케이션의 크기가 크게 감소했습니다.
+
+# 참고
+[PR #1536](https://github.com/BCSDLab/KOIN_ANDROID/pull/1536)
