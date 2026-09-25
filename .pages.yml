@@ -44,7 +44,7 @@ content:
       - name: authors
         label: 작성자
         type: string
-        description: "본인의 GitHub username을 입력하세요 (예: d0dam). 처음 쓰는 경우에도 등록된 걸 확인할 필요 없이 그대로 저장하면, 저장 직후 자동으로 작성자 목록에 등록됩니다(수 분 소요될 수 있음)."
+        description: "본인의 GitHub username을 입력하세요 (예: d0dam)."
         required: true
       - name: keywords
         label: 키워드
