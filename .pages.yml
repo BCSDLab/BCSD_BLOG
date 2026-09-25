@@ -1,0 +1,188 @@
+# Pages CMS configuration
+#
+# 트랙별 폴더(@frontEnd, @backEnd, ...)는 config/plugins.ts에 정의된
+# Docusaurus plugin-content-blog 인스턴스와 1:1로 매핑된다.
+#
+# 주의: 아래 글들은 `ReactPlayer`(react-player) 등 커스텀 MDX 컴포넌트를 사용한다.
+# Pages CMS의 rich-text 에디터로 열었다 저장하면 JSX 문법이 깨질 수 있으므로,
+# 이 글들은 CMS에서 편집하지 말고 개발자가 직접 커밋할 것.
+#   - @guideline/template.mdx
+#   - @frontEnd/GwakSeungJu/infomate-4week.mdx
+#   - @frontEnd/d0dam/infomate-2week.mdx
+#   - @frontEnd/hanagertrudeKim/infomate-1week.mdx
+#   - @frontEnd/hanagertrudeKim/infomate-5week.mdx
+
+media:
+  input: static/img
+  output: /img
+
+content:
+  - name: introduce
+    label: Introduce
+    type: collection
+    path: ./@introduce
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: &post-fields
+      - name: title
+        label: 제목
+        type: string
+        required: true
+      - name: description
+        label: 설명
+        type: string
+      - name: date
+        label: 작성일
+        type: date
+        required: true
+      - name: authors
+        label: 작성자
+        type: string
+        description: "이 트랙 폴더의 authors.yml에 등록된 key를 입력하세요 (예: d0dam)"
+        required: true
+      - name: keywords
+        label: 키워드
+        type: string
+        list: true
+      - name: tags
+        label: 태그
+        type: string
+        list: true
+      - name: body
+        label: 본문
+        type: rich-text
+
+  - name: guideline
+    label: Guideline
+    type: collection
+    path: ./@guideline
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
+
+  - name: front-end
+    label: Frontend
+    type: collection
+    path: ./@frontEnd
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
+
+  - name: back-end
+    label: Backend
+    type: collection
+    path: ./@backEnd
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
+
+  - name: android
+    label: Android
+    type: collection
+    path: ./@android
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
+
+  - name: ios
+    label: iOS
+    type: collection
+    path: ./@ios
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
+
+  - name: game
+    label: Game
+    type: collection
+    path: ./@game
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
+
+  - name: design
+    label: Design
+    type: collection
+    path: ./@design
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
+
+  - name: product-manager
+    label: PM
+    type: collection
+    path: ./@productManager
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
+
+  - name: data-analyst
+    label: DA
+    type: collection
+    path: ./@dataAnalyst
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
+
+  - name: security
+    label: Security
+    type: collection
+    path: ./@security
+    subfolders: true
+    view:
+      fields: [title, date, authors]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields: *post-fields
