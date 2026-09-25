@@ -2,6 +2,7 @@
 #
 # 트랙별 폴더(@frontEnd, @backEnd, ...)는 config/plugins.ts에 정의된
 # Docusaurus plugin-content-blog 인스턴스와 1:1로 매핑된다.
+# 사이드바에서는 트랙별로 "글"과 "작성자 목록"을 하나의 group으로 묶어서 보여준다.
 #
 # 주의: 아래 글들은 `ReactPlayer`(react-player) 등 커스텀 MDX 컴포넌트를 사용한다.
 # Pages CMS의 rich-text 에디터로 열었다 저장하면 JSX 문법이 깨질 수 있으므로,
@@ -19,247 +20,280 @@ media:
 content:
   - name: introduce
     label: Introduce
-    type: collection
-    path: "@introduce"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: &post-fields
-      - name: title
-        label: 제목
-        type: string
-        required: true
-      - name: description
-        label: 설명
-        type: string
-      - name: date
-        label: 작성일
-        type: date
-        required: true
-      - name: authors
-        label: 작성자
-        type: string
-        description: "본인의 GitHub username을 입력하세요 (예: d0dam)."
-        required: true
-      - name: keywords
-        label: 키워드
-        type: string
-        list: true
-      - name: tags
-        label: 태그
-        type: string
-        list: true
-      - name: body
-        label: 본문
-        type: rich-text
-
-  - name: introduce-authors
-    label: "Introduce 작성자 목록"
-    type: file
-    path: "@introduce/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: introduce-posts
+        label: 글
+        type: collection
+        path: "@introduce"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: &post-fields
+          - name: title
+            label: 제목
+            type: string
+            required: true
+          - name: description
+            label: 설명
+            type: string
+          - name: date
+            label: 작성일
+            type: date
+            required: true
+          - name: authors
+            label: 작성자
+            type: string
+            description: "본인의 GitHub username을 입력하세요 (예: d0dam)."
+            required: true
+          - name: keywords
+            label: 키워드
+            type: string
+            list: true
+          - name: tags
+            label: 태그
+            type: string
+            list: true
+          - name: body
+            label: 본문
+            type: rich-text
+      - name: introduce-authors
+        label: 작성자 목록
+        type: file
+        path: "@introduce/authors.yml"
+        format: yaml
 
   - name: guideline
     label: Guideline
-    type: collection
-    path: "@guideline"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: guideline-authors
-    label: "Guideline 작성자 목록"
-    type: file
-    path: "@guideline/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: guideline-posts
+        label: 글
+        type: collection
+        path: "@guideline"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: guideline-authors
+        label: 작성자 목록
+        type: file
+        path: "@guideline/authors.yml"
+        format: yaml
 
   - name: front-end
     label: Frontend
-    type: collection
-    path: "@frontEnd"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: front-end-authors
-    label: "Frontend 작성자 목록"
-    type: file
-    path: "@frontEnd/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: front-end-posts
+        label: 글
+        type: collection
+        path: "@frontEnd"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: front-end-authors
+        label: 작성자 목록
+        type: file
+        path: "@frontEnd/authors.yml"
+        format: yaml
 
   - name: back-end
     label: Backend
-    type: collection
-    path: "@backEnd"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: back-end-authors
-    label: "Backend 작성자 목록"
-    type: file
-    path: "@backEnd/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: back-end-posts
+        label: 글
+        type: collection
+        path: "@backEnd"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: back-end-authors
+        label: 작성자 목록
+        type: file
+        path: "@backEnd/authors.yml"
+        format: yaml
 
   - name: android
     label: Android
-    type: collection
-    path: "@android"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: android-authors
-    label: "Android 작성자 목록"
-    type: file
-    path: "@android/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: android-posts
+        label: 글
+        type: collection
+        path: "@android"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: android-authors
+        label: 작성자 목록
+        type: file
+        path: "@android/authors.yml"
+        format: yaml
 
   - name: ios
     label: iOS
-    type: collection
-    path: "@ios"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: ios-authors
-    label: "iOS 작성자 목록"
-    type: file
-    path: "@ios/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: ios-posts
+        label: 글
+        type: collection
+        path: "@ios"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: ios-authors
+        label: 작성자 목록
+        type: file
+        path: "@ios/authors.yml"
+        format: yaml
 
   - name: game
     label: Game
-    type: collection
-    path: "@game"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: game-authors
-    label: "Game 작성자 목록"
-    type: file
-    path: "@game/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: game-posts
+        label: 글
+        type: collection
+        path: "@game"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: game-authors
+        label: 작성자 목록
+        type: file
+        path: "@game/authors.yml"
+        format: yaml
 
   - name: design
     label: Design
-    type: collection
-    path: "@design"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: design-authors
-    label: "Design 작성자 목록"
-    type: file
-    path: "@design/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: design-posts
+        label: 글
+        type: collection
+        path: "@design"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: design-authors
+        label: 작성자 목록
+        type: file
+        path: "@design/authors.yml"
+        format: yaml
 
   - name: product-manager
     label: PM
-    type: collection
-    path: "@productManager"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: product-manager-authors
-    label: "PM 작성자 목록"
-    type: file
-    path: "@productManager/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: product-manager-posts
+        label: 글
+        type: collection
+        path: "@productManager"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: product-manager-authors
+        label: 작성자 목록
+        type: file
+        path: "@productManager/authors.yml"
+        format: yaml
 
   - name: data-analyst
     label: DA
-    type: collection
-    path: "@dataAnalyst"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: data-analyst-authors
-    label: "DA 작성자 목록"
-    type: file
-    path: "@dataAnalyst/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: data-analyst-posts
+        label: 글
+        type: collection
+        path: "@dataAnalyst"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: data-analyst-authors
+        label: 작성자 목록
+        type: file
+        path: "@dataAnalyst/authors.yml"
+        format: yaml
 
   - name: security
     label: Security
-    type: collection
-    path: "@security"
-    filename: "{primary}.mdx"
-    subfolders: true
-    view:
-      fields: [title, date, authors]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
-    fields: *post-fields
-
-  - name: security-authors
-    label: "Security 작성자 목록"
-    type: file
-    path: "@security/authors.yml"
-    format: yaml
+    type: group
+    items:
+      - name: security-posts
+        label: 글
+        type: collection
+        path: "@security"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: security-authors
+        label: 작성자 목록
+        type: file
+        path: "@security/authors.yml"
+        format: yaml
