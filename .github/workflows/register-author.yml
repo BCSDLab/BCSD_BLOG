@@ -1,0 +1,49 @@
+name: Auto-register blog author
+
+# Pages CMS(또는 개발자)가 새 글을 커밋하면, frontmatter의 authors: 값이
+# 해당 트랙 authors.yml에 없는 경우 GitHub 공개 프로필로 자동 등록한다.
+# authors.yml만 커밋하므로 *.mdx 트리거 조건에 다시 걸리지 않아 무한루프가 없다.
+
+on:
+  push:
+    branches:
+      - main
+      - main-2
+    paths:
+      - "@*/**/*.mdx"
+
+permissions:
+  contents: write
+
+jobs:
+  register-author:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install script dependency
+        run: npm install --no-save js-yaml
+
+      - name: Register missing authors
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+        run: node scripts/register-authors.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name "bcsd-blog-bot"
+          git config user.email "bot@bcsdlab.com"
+          git add '@*/authors.yml'
+          if git diff --cached --quiet; then
+            echo "변경 없음"
+          else
+            git commit -m "chore: 신규 작성자 자동 등록"
+            git push
+          fi
