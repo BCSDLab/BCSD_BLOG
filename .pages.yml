@@ -13,6 +13,12 @@
 #   - @frontEnd/hanagertrudeKim/infomate-1week.mdx
 #   - @frontEnd/hanagertrudeKim/infomate-5week.mdx
 
+# 커밋을 실제 로그인한 사람의 GitHub 신원으로 남겨서, register-authors.mjs가
+# 커밋의 실제 작성자를 식별해 authors 필드를 자동으로 채울 수 있게 한다.
+settings:
+  commit:
+    identity: user
+
 media:
   input: static/img
   output: /img
@@ -49,8 +55,7 @@ content:
           - name: authors
             label: 작성자
             type: string
-            description: "본인의 GitHub username을 입력하세요 (예: d0dam)."
-            required: true
+            description: "비워두면 저장한 사람의 GitHub 계정으로 자동 입력됩니다. 다른 사람 이름으로 남기고 싶을 때만 GitHub username을 직접 입력하세요."
           - name: keywords
             label: 키워드
             type: string
