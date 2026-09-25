@@ -44,7 +44,7 @@ content:
       - name: authors
         label: 작성자
         type: string
-        description: "이 트랙 폴더의 authors.yml에 등록된 key를 입력하세요 (예: d0dam)"
+        description: "이 트랙의 '작성자 목록' 파일에 등록된 key를 입력하세요 (예: d0dam). 처음 글을 쓴다면 먼저 사이드바의 '{트랙} 작성자 목록'에서 본인 항목을 추가하세요."
         required: true
       - name: keywords
         label: 키워드
@@ -57,6 +57,12 @@ content:
       - name: body
         label: 본문
         type: rich-text
+
+  - name: introduce-authors
+    label: "Introduce 작성자 목록"
+    type: file
+    path: "@introduce/authors.yml"
+    format: yaml
 
   - name: guideline
     label: Guideline
@@ -72,6 +78,12 @@ content:
         order: desc
     fields: *post-fields
 
+  - name: guideline-authors
+    label: "Guideline 작성자 목록"
+    type: file
+    path: "@guideline/authors.yml"
+    format: yaml
+
   - name: front-end
     label: Frontend
     type: collection
@@ -85,6 +97,12 @@ content:
         sort: date
         order: desc
     fields: *post-fields
+
+  - name: front-end-authors
+    label: "Frontend 작성자 목록"
+    type: file
+    path: "@frontEnd/authors.yml"
+    format: yaml
 
   - name: back-end
     label: Backend
@@ -100,6 +118,12 @@ content:
         order: desc
     fields: *post-fields
 
+  - name: back-end-authors
+    label: "Backend 작성자 목록"
+    type: file
+    path: "@backEnd/authors.yml"
+    format: yaml
+
   - name: android
     label: Android
     type: collection
@@ -113,6 +137,12 @@ content:
         sort: date
         order: desc
     fields: *post-fields
+
+  - name: android-authors
+    label: "Android 작성자 목록"
+    type: file
+    path: "@android/authors.yml"
+    format: yaml
 
   - name: ios
     label: iOS
@@ -128,6 +158,12 @@ content:
         order: desc
     fields: *post-fields
 
+  - name: ios-authors
+    label: "iOS 작성자 목록"
+    type: file
+    path: "@ios/authors.yml"
+    format: yaml
+
   - name: game
     label: Game
     type: collection
@@ -141,6 +177,12 @@ content:
         sort: date
         order: desc
     fields: *post-fields
+
+  - name: game-authors
+    label: "Game 작성자 목록"
+    type: file
+    path: "@game/authors.yml"
+    format: yaml
 
   - name: design
     label: Design
@@ -156,6 +198,12 @@ content:
         order: desc
     fields: *post-fields
 
+  - name: design-authors
+    label: "Design 작성자 목록"
+    type: file
+    path: "@design/authors.yml"
+    format: yaml
+
   - name: product-manager
     label: PM
     type: collection
@@ -169,6 +217,12 @@ content:
         sort: date
         order: desc
     fields: *post-fields
+
+  - name: product-manager-authors
+    label: "PM 작성자 목록"
+    type: file
+    path: "@productManager/authors.yml"
+    format: yaml
 
   - name: data-analyst
     label: DA
@@ -184,6 +238,12 @@ content:
         order: desc
     fields: *post-fields
 
+  - name: data-analyst-authors
+    label: "DA 작성자 목록"
+    type: file
+    path: "@dataAnalyst/authors.yml"
+    format: yaml
+
   - name: security
     label: Security
     type: collection
@@ -197,3 +257,9 @@ content:
         sort: date
         order: desc
     fields: *post-fields
+
+  - name: security-authors
+    label: "Security 작성자 목록"
+    type: file
+    path: "@security/authors.yml"
+    format: yaml
