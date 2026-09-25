@@ -21,6 +21,7 @@ content:
     label: Introduce
     type: collection
     path: "@introduce"
+    filename: "{primary}.mdx"
     subfolders: true
     view:
       fields: [title, date, authors]
