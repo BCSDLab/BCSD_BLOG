@@ -20,7 +20,7 @@ content:
   - name: introduce
     label: Introduce
     type: collection
-    path: ./@introduce
+    path: "@introduce"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -60,7 +60,7 @@ content:
   - name: guideline
     label: Guideline
     type: collection
-    path: ./@guideline
+    path: "@guideline"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -73,7 +73,7 @@ content:
   - name: front-end
     label: Frontend
     type: collection
-    path: ./@frontEnd
+    path: "@frontEnd"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -86,7 +86,7 @@ content:
   - name: back-end
     label: Backend
     type: collection
-    path: ./@backEnd
+    path: "@backEnd"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -99,7 +99,7 @@ content:
   - name: android
     label: Android
     type: collection
-    path: ./@android
+    path: "@android"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -112,7 +112,7 @@ content:
   - name: ios
     label: iOS
     type: collection
-    path: ./@ios
+    path: "@ios"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -125,7 +125,7 @@ content:
   - name: game
     label: Game
     type: collection
-    path: ./@game
+    path: "@game"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -138,7 +138,7 @@ content:
   - name: design
     label: Design
     type: collection
-    path: ./@design
+    path: "@design"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -151,7 +151,7 @@ content:
   - name: product-manager
     label: PM
     type: collection
-    path: ./@productManager
+    path: "@productManager"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -164,7 +164,7 @@ content:
   - name: data-analyst
     label: DA
     type: collection
-    path: ./@dataAnalyst
+    path: "@dataAnalyst"
     subfolders: true
     view:
       fields: [title, date, authors]
@@ -177,7 +177,7 @@ content:
   - name: security
     label: Security
     type: collection
-    path: ./@security
+    path: "@security"
     subfolders: true
     view:
       fields: [title, date, authors]
