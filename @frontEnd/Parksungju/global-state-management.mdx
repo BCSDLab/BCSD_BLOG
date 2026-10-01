@@ -1,7 +1,7 @@
 ---
 date: 2026-10-01
-title: "같은 Todo, 세 가지 방법: Context vs Redux Toolkit vs Zustand"
-description: "같은 Todo 앱을 Context + useReducer, Redux Toolkit, Zustand로 만들어 보고 코드와 리렌더링 차이를 비교한다."
+title: "전역 상태 관리의 필요성과 상태 관리 도구들"
+description: "같은 Todo 앱을 Context + useReducer, Redux Toolkit, Zustand로 만들어 보고 코드와 리렌더링 차이를 비교해 봤습니다."
 keywords: ["전역 상태 관리", "React", "Context", "Redux Toolkit", "Zustand", "리렌더링"]
 tags:
   - React
@@ -10,15 +10,20 @@ tags:
   - Zustand
 ---
 
-> 같은 Todo 앱을 `useContext + useReducer`, `Redux Toolkit`, `Zustand`로 각각 만들어 보고, 코드가 어떻게 다른지와 **리렌더링이 실제로 얼마나 다르게 일어나는지** 비교해 본다.
+import ReactPlayer from "react-player";
+import addTodoVideo from "../videos/add-todo.mov";
+import checkTodoVideo from "../videos/check-todo.mov";
+
+> 같은 Todo 앱을 `useContext + useReducer`, `Redux Toolkit`, `Zustand`로 각각 만들어 보고, 코드가 어떻게 다른지와 **리렌더링이 실제로 얼마나 다르게 일어나는지** 비교해 보겠습니다.
 
 사용 버전: React 19 · Redux Toolkit 2 · react-redux 9 · Zustand 5
 
 ---
+이번 React+ts 스터디를 시작해보면서 첫 공부 주제로 전역 상태관리에 대해 알아보겠습니다.
 
 ## 1. 전역 상태 관리가 왜 필요할까?
 
-Todo 앱을 예시로 필요한 컴포넌트를 나눠 보자.
+Todo 앱을 예시로 필요한 컴포넌트를 나눠 보겠습니다.
 
 ```
 App
@@ -27,7 +32,7 @@ App
 └── TodoCount   ← 남은 개수 표시 (todos를 "읽는" 쪽)
 ```
 
-세 컴포넌트가 모두 `todos`라는 **같은 데이터**를 보게 된다.
+세 컴포넌트가 모두 `todos`라는 **같은 데이터**를 보게 됩니다.
 
 ```tsx
 function App() {
@@ -42,13 +47,13 @@ function App() {
 }
 ```
 
-React만 쓰면 보통 이렇게 상태를 공통 부모로 올리고 props로 내려준다. 컴포넌트가 세 개일 때는 괜찮지만, 앱이 커지면 문제가 생긴다.
+React만 쓰면 보통 이렇게 상태를 공통 부모로 올리고 props로 내려줍니다. 컴포넌트가 세 개일 때는 괜찮지만, 앱이 커지면 문제가 생깁니다.
 
-- **Props drilling**: `todos`를 쓰지도 않는 중간 컴포넌트들이 아래로 넘겨주려고 props를 받아야 한다.
-- **불필요한 리렌더링**: 상태가 최상단에 있으니 `todos`가 바뀔 때마다 그 아래 트리 전체가 다시 렌더링된다.
-- **상태 변경 로직이 흩어짐**: `setTodos(...)`를 호출하는 곳이 여기저기 생겨서 "상태가 어디서, 어떻게 바뀌는지" 추적하기 어렵다.
+- **Props drilling**: `todos`를 쓰지도 않는 중간 컴포넌트들이 아래로 넘겨주려고 props를 받아야 합니다.
+- **불필요한 리렌더링**: 상태가 최상단에 있으니 `todos`가 바뀔 때마다 그 아래 트리 전체가 다시 렌더링됩니다.
+- **상태 변경 로직이 흩어짐**: `setTodos(...)`를 호출하는 곳이 여기저기 생겨서 "상태가 어디서, 어떻게 바뀌는지" 추적하기 어렵습니다.
 
-**전역 상태 관리**는 상태를 컴포넌트 트리 바깥(또는 최상단의 한 곳)에 두고, **필요한 컴포넌트가 직접 꺼내 쓰게** 하는 방식이다. 다만 "직접 꺼내 쓰는" 방식이 도구마다 다르고, 그 차이가 리렌더링 성능 차이로 이어진다.
+**전역 상태 관리**는 상태를 컴포넌트 트리 바깥(또는 최상단의 한 곳)에 두고, **필요한 컴포넌트가 직접 꺼내 쓰게** 하는 방식입니다. 다만 "직접 꺼내 쓰는" 방식이 도구마다 다르고, 그 차이가 리렌더링 성능 차이로 이어집니다.
 
 ---
 
@@ -56,24 +61,23 @@ React만 쓰면 보통 이렇게 상태를 공통 부모로 올리고 props로 �
 
 ### useContext + useReducer
 
-- React에 **내장**되어 있어서 추가 설치가 필요 없다.
-- `useReducer`로 상태와 변경 로직(reducer)을 정의하고, `Context`로 트리 아래에 전달한다.
-- Context는 원래 **값을 전달하는 도구**이지 상태 관리 도구가 아니다. 그래서 **Provider의 value가 바뀌면 그 Context를 쓰는 컴포넌트가 전부 리렌더링된다.** 일부 값만 골라서 구독할 수 없다.
+- React에 **내장**되어 있어서 추가 설치가 필요 없습니다.
+- `useReducer`로 상태와 변경 로직(reducer)을 정의하고, `Context`로 트리 아래에 전달합니다.
+- Context는 원래 **값을 전달하는 도구**이지 상태 관리 도구가 아닙니다. 그래서 **Provider의 value가 바뀌면 그 Context를 쓰는 컴포넌트가 전부 리렌더링됩니다.** 일부 값만 골라서 구독할 수 없습니다.
 
 ### Redux Toolkit
 
-- Redux 공식 도구 모음이다. 옛날 Redux의 보일러플레이트(액션 타입 상수, 액션 생성 함수, switch문 등)를 크게 줄여 준다.
-- 앱 전체 상태를 **하나의 store**에 두고, 상태는 **action을 dispatch**해야만 바뀐다. 그래서 흐름이 예측 가능하다.
-- `createSlice` 하나로 reducer와 action creator를 함께 만들 수 있다. 내부에서 **Immer**를 써서 `state.push(...)`처럼 직접 수정하는 것처럼 코드를 써도 불변성이 지켜진다.
-- `useSelector`로 **필요한 값만 골라서 구독**한다.
-- Redux DevTools로 액션 기록을 보거나 시간 여행 디버깅을 할 수 있다.
+- Redux 공식 도구 모음입니다. 옛날 Redux의 보일러플레이트(액션 타입 상수, 액션 생성 함수, switch문 등)를 크게 줄여 줍니다.
+- 앱 전체 상태를 **하나의 store**에 두고, 상태는 **action을 dispatch**해야만 바뀝니다. 그래서 흐름이 예측 가능합니다.
+- `createSlice` 하나로 reducer와 action creator를 함께 만들 수 있습니다. 내부에서 **Immer**를 써서 `state.push(...)`처럼 직접 수정하는 것처럼 코드를 써도 불변성이 지켜집니다.
+- `useSelector`로 **필요한 값만 골라서 구독**합니다.
 
 ### Zustand
 
-- 아주 가벼운 상태 관리 라이브러리다.
-- `create` 하나로 **상태와 액션을 한 번에** 정의하고, 그 결과가 바로 **훅**이 된다.
-- **Provider가 필요 없다.** store가 React 트리 바깥에 있다.
-- Redux처럼 **selector로 필요한 값만 구독**한다.
+- 아주 가벼운 상태 관리 라이브러리입니다.
+- `create` 하나로 **상태와 액션을 한 번에** 정의하고, 그 결과가 바로 **훅**이 됩니다.
+- **Provider가 필요 없습니다.** store가 React 트리 바깥에 있습니다.
+- Redux처럼 **selector로 필요한 값만 구독**합니다.
 
 ### 비교 표
 
@@ -83,15 +87,13 @@ React만 쓰면 보통 이렇게 상태를 공통 부모로 올리고 props로 �
 | Provider | 필요 | 필요 | **불필요** |
 | 상태 변경 | `dispatch({ type, ... })` | `dispatch(actionCreator(payload))` | 액션 함수 직접 호출 |
 | 불변성 처리 | 직접 (`...spread`) | Immer 내장 (직접 수정 가능) | 직접 (`...spread`) |
-| 부분 구독 (selector) | ❌ 불가능 | ✅ `useSelector` | ✅ `useStore(selector)` |
-| 개발 도구 | React DevTools | Redux DevTools (강력) | 미들웨어로 Redux DevTools 연결 가능 |
-| 코드 양 | 중간 | 많음 | 적음 |
+| 부분 구독 (selector) | ❌ | ✅ `useSelector` | ✅ `useStore(selector)` |
 
 ---
 
 ## 3. Todo 구현, 어떻게 다를까?
 
-세 방식 모두 **같은 컴포넌트 구조**(`TodoInput`, `TodoList`, `TodoCount`)와 같은 `Todo` 타입을 쓴다.
+세 방식 모두 **같은 컴포넌트 구조**(`TodoInput`, `TodoList`, `TodoCount`)와 같은 `Todo` 타입을 씁니다.
 
 ```ts
 // src/shared/types.ts
@@ -104,7 +106,7 @@ export interface Todo {
 
 ### 3-1. 상태와 로직 정의하기
 
-**Context + useReducer**: reducer 함수와 Context, Provider를 직접 만든다.
+1. **Context + useReducer**: reducer 함수와 Context, Provider를 직접 만듭니다.
 
 ```tsx
 // src/context/TodoContext.tsx
@@ -132,9 +134,9 @@ export function TodoProvider({ children }: { children: ReactNode }) {
 }
 ```
 
-액션 타입을 직접 정의하고, 불변성을 지키기 위해 `...spread`와 `map`/`filter`로 항상 새 배열을 만들어야 한다.
+액션 타입을 직접 정의하고, 불변성을 지키기 위해 `...spread`와 `map`/`filter`로 항상 새 배열을 만들어야 합니다.
 
-**Redux Toolkit**: `createSlice`로 reducer와 action creator를 한 번에 만든다.
+2. **Redux Toolkit**: `createSlice`로 reducer와 action creator를 한 번에 만듭니다.
 
 ```ts
 // src/redux/todoSlice.ts
@@ -166,11 +168,11 @@ export const store = configureStore({
 ```
 
 살펴볼 점:
-- `PayloadAction<string>`은 "이 액션의 `payload`는 string"이라는 타입이다. 덕분에 `addTodo(123)`처럼 잘못 호출하면 타입 에러가 난다.
-- `state.push(...)`, `todo.done = !todo.done`처럼 **직접 수정하는 것처럼** 써도 Immer가 새 상태를 만들어 준다.
-- `removeTodo`처럼 **새 값을 `return`하는 것도 가능**하다. 단, 한 reducer 안에서 수정과 return을 동시에 하면 안 된다.
+- `PayloadAction<string>`은 "이 액션의 `payload`는 string"이라는 타입입니다. 덕분에 `addTodo(123)`처럼 잘못 호출하면 타입 에러가 납니다.
+- `state.push(...)`, `todo.done = !todo.done`처럼 **직접 수정하는 것처럼** 써도 Immer가 새 상태를 만들어 줍니다.
+- `removeTodo`처럼 **새 값을 `return`하는 것도 가능**합니다. 단, 한 reducer 안에서 수정과 return을 동시에 하면 안 됩니다.
 
-**Zustand**: `create` 하나에 상태와 액션을 모두 넣는다.
+3. **Zustand**: `create` 하나에 상태와 액션을 모두 넣습니다.
 
 ```ts
 // src/zustand/useTodoStore.ts
@@ -186,7 +188,10 @@ export const useTodoStore = create<TodoState>((set) => ({
 }))
 ```
 
-action type도, reducer의 switch문도, Provider도 없다. **상태를 바꾸는 함수 자체가 store 안에 들어 있는 구조**다.
+살펴볼 점:
+- action type도, reducer의 switch문도, Provider도 없습니다
+- **상태를 바꾸는 함수 자체가 store 안에 들어 있는 구조**입니다.
+- 훅을 만들때와 동일하게 use~로 시작해야하는 네이밍 규칙이 있습니다.
 
 ### 3-2. 앱에 연결하기
 
@@ -207,7 +212,7 @@ action type도, reducer의 switch문도, Provider도 없다. **상태를 바꾸�
 </>
 ```
 
-### 3-3. 컴포넌트에서 꺼내 쓰기: 여기서 차이가 생긴다
+### 3-3. 컴포넌트에서 꺼내 쓰기: 여기서 차이가 생깁니다
 
 **TodoInput** (상태를 바꾸기만 하는 컴포넌트)
 
@@ -222,7 +227,7 @@ const dispatch = useAppDispatch()
 const addTodo = useTodoStore((state) => state.addTodo)
 ```
 
-Context에서는 구조 분해로 `dispatch`만 꺼내도 **`useContext`가 value 객체 전체를 구독**한다. 그래서 `todos`가 바뀌면 TodoInput도 같이 리렌더링된다.
+Context에서는 구조 분해로 `dispatch`만 꺼내도 **`useContext`가 value 객체 전체를 구독**합니다. 그래서 `todos`가 바뀌면 TodoInput도 같이 리렌더링됩니다.
 
 **TodoCount** (파생된 값만 필요한 컴포넌트)
 
@@ -238,15 +243,13 @@ const left = useAppSelector((state) => state.todos.filter((t) => !t.done).length
 const left = useTodoStore((state) => state.todos.filter((t) => !t.done).length)
 ```
 
-Redux와 Zustand는 **selector가 반환한 값이 이전과 같으면(`===`) 리렌더링을 건너뛴다.** 여기서는 숫자를 반환하니까, `todos`가 바뀌어도 남은 개수가 그대로면 TodoCount는 리렌더링되지 않는다.
-
-> ⚠️ selector 안에서 **매번 새 배열이나 객체**(`filter` 결과 자체, `{ a, b }` 등)를 반환하면 항상 "바뀌었다"고 판단한다. Redux에서는 매 액션마다 리렌더링되고, Zustand v5에서는 무한 루프가 생길 수도 있다. 이럴 때는 숫자처럼 원시값을 반환하거나, `shallowEqual`(Redux) / `useShallow`(Zustand)를 쓰자.
+Redux와 Zustand는 **selector가 반환한 값이 이전과 같으면(`===`) 리렌더링을 건너뜁니다.** 여기서는 숫자를 반환하니까, `todos`가 바뀌어도 남은 개수가 그대로면 TodoCount는 리렌더링되지 않습니다.
 
 ---
 
 ## 4. 직접 확인해 보기: 리렌더링 실험
 
-말로만 들으면 와닿지 않으니, 리렌더링 횟수를 화면에 띄워 봤다.
+말로만 들으면 와닿지 않으니, 리렌더링 횟수를 화면에 띄워 봤습니다.
 
 ```tsx
 // src/shared/RenderBadge.tsx
@@ -257,15 +260,15 @@ export function RenderBadge() {
 }
 ```
 
-- `useRef` 값은 리렌더링돼도 유지되고, 값을 바꿔도 리렌더링을 일으키지 않는다. (`useState`로 만들면 무한 루프가 생긴다.)
-- props도 없고 `memo`도 안 했기 때문에 **부모가 렌더링될 때마다 같이 렌더링**된다. 그래서 배지 숫자는 곧 **부모 컴포넌트의 렌더링 횟수**다.
-- 이 배지를 세 구현의 `TodoInput`, `TodoList`, `TodoCount`에 각각 하나씩 넣었다.
+- `useRef` 값은 리렌더링돼도 유지되고, 값을 바꿔도 리렌더링을 일으키지 않습니다.
+- props도 없고 `memo`도 안 했기 때문에 **부모가 렌더링될 때마다 같이 렌더링**됩니다. 그래서 배지 숫자는 곧 **부모 컴포넌트의 렌더링 횟수**입니다.
+- 이 배지를 세 구현의 `TodoInput`, `TodoList`, `TodoCount`에 각각 하나씩 넣었습니다.
 
-> 참고: `StrictMode`를 켜면 개발 모드에서 렌더링이 두 번씩 실행돼서 숫자가 2씩 올라간다. 이 실험에서는 `StrictMode`를 쓰지 않았다.
+> 참고: `StrictMode`를 켜면 개발 모드에서 렌더링이 두 번씩 실행돼서 숫자가 2씩 올라갑니다. 이 실험에서는 `StrictMode`를 쓰지 않았습니다.
 
 ### 실험 결과
 
-각 방식에 할 일을 2~3개 넣은 뒤 같은 동작을 해 봤다. 표의 숫자는 **각 컴포넌트 배지가 몇 번 늘었는지**다.
+각 방식에 할 일을 2~3개 넣은 뒤 같은 동작을 해 봤습니다. 표의 숫자는 **각 컴포넌트 배지가 몇 번 늘었는지**입니다.
 
 **① 할 일 추가**
 
@@ -275,7 +278,9 @@ export function RenderBadge() {
 | TodoList | +1 | +1 | +1 |
 | TodoCount | +1 | +1 | +1 |
 
-셋 다 똑같다! TodoInput은 제출할 때 `setText('')`로 **자기 로컬 state를 비우니까** 어느 방식이든 리렌더링된다. TodoList와 TodoCount는 목록과 개수가 실제로 바뀌었으니 리렌더링되는 게 맞다. **추가 동작만 보면 차이를 알 수 없다.**
+<ReactPlayer controls url={addTodoVideo} width="100%" height="auto" style={{ marginBottom: "20px" }} />
+
+셋 다 똑같습니다. TodoInput은 제출할 때 `setText('')`로 **자기 로컬 state를 비우니까** 어느 방식이든 리렌더링됩니다. TodoList와 TodoCount는 목록과 개수가 실제로 바뀌었으니 리렌더링되는 게 맞습니다. **추가 동작만 보면 차이를 알 수 없습니다.**
 
 **② 체크박스 토글**
 
@@ -285,19 +290,11 @@ export function RenderBadge() {
 | TodoList | +1 | +1 | +1 |
 | TodoCount | +1 | +1 | +1 |
 
-여기서 처음 차이가 난다. TodoInput은 `todos`와 아무 관련이 없는데 **Context에서만** 리렌더링된다.
+<ReactPlayer controls url={checkTodoVideo} width="100%" height="auto" style={{ marginBottom: "20px" }} />
 
-**③ 완료된 할 일 삭제**
+여기서 처음 차이가 납니다. TodoInput은 `todos`와 아무 관련이 없는데 **Context에서만** 리렌더링됩니다.
 
-| | Context | Redux | Zustand |
-|---|---|---|---|
-| TodoInput | **+1** | 0 | 0 |
-| TodoList | +1 | +1 | +1 |
-| TodoCount | **+1** | 0 | 0 |
-
-차이가 가장 크게 나는 경우다. 이미 완료된 할 일을 지우면 "남은 할 일" 개수는 그대로다. Redux와 Zustand의 TodoCount는 selector 결과(숫자)가 같으니 리렌더링을 건너뛰지만, **Context는 value가 바뀌면 무조건 전부** 리렌더링한다.
-
-**④ input에 타이핑 (대조군)**
+**③ input에 타이핑**
 
 | | Context | Redux | Zustand |
 |---|---|---|---|
@@ -305,34 +302,16 @@ export function RenderBadge() {
 | TodoList | 0 | 0 | 0 |
 | TodoCount | 0 | 0 | 0 |
 
-타이핑은 TodoInput의 **로컬 state**만 바꾸니까 전역 상태와 관계없이 모두 똑같다.
+타이핑은 TodoInput의 **로컬 state**만 바꾸니까 전역 상태와 관계없이 모두 똑같습니다.
 
 ### 정리하면
 
-- **Context**: "이 Context를 쓰는 컴포넌트 전부"가 리렌더링 단위다.
-- **Redux / Zustand**: "selector 결과가 바뀐 컴포넌트"만 리렌더링된다.
+- **Context**: "이 Context를 쓰는 컴포넌트 전부"가 리렌더링 단위입니다.
+- **Redux / Zustand**: "selector 결과가 바뀐 컴포넌트"만 리렌더링됩니다.
 
-Context에서도 state Context와 dispatch Context를 나누거나 `memo`를 적절히 써서 줄일 수는 있다. 하지만 그건 개발자가 직접 신경 써야 하는 부분이고, Redux와 Zustand는 selector로 이걸 기본으로 해결해 준다.
-
----
-
-## 5. 그래서 뭘 써야 할까?
-
-| 상황 | 추천 |
-|---|---|
-| 테마, 로그인 사용자, 언어 설정처럼 **자주 안 바뀌는 값** | **Context** : 설치 없이 충분하다 |
-| 팀 규모가 크고, 상태 흐름을 **엄격하게 추적·디버깅**해야 함 | **Redux Toolkit** : 규칙이 명확하고 DevTools가 강력하다 |
-| 적은 코드로 **가볍고 빠르게** 전역 상태를 쓰고 싶음 | **Zustand** : Provider 없이 훅 하나로 끝난다 |
-
-정답은 없다. 다만 **"자주 바뀌는 상태를 여러 컴포넌트가 나눠 쓴다면 Context만으로는 리렌더링 비용이 커질 수 있다"**는 점은 이번 실험으로 확인할 수 있었다.
+Context에서도 state Context와 dispatch Context를 나누거나 `memo`를 적절히 써서 줄일 수는 있습니다. 하지만 그건 개발자가 직접 신경 써야 하는 부분이고, Redux와 Zustand는 selector로 이걸 기본으로 해결해 줍니다.
 
 ---
 
-## 직접 돌려 보기
 
-```bash
-npm install
-npm run dev
-```
 
-세 구현이 한 화면에 나란히 나온다. 각 방식에 같은 할 일을 넣고 **토글**과 **완료된 항목 삭제**를 해 보면서 배지 숫자를 비교해 보자.
