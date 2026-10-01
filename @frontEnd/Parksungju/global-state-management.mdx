@@ -1,6 +1,6 @@
 ---
 date: 2026-10-01
-title: "전역 상태 관리의 필요성과 상태 관리 도구들"
+title: "전역 상태 관리의 필요성과 상태 관리 라이브러리"
 authors: Parksungju
 description: "같은 Todo 앱을 Context + useReducer, Redux Toolkit, Zustand로 만들어 보고 코드와 리렌더링 차이를 비교해 봤습니다."
 keywords: ["전역 상태 관리", "React", "Context", "Redux Toolkit", "Zustand", "리렌더링"]
@@ -15,9 +15,8 @@ import ReactPlayer from "react-player";
 import addTodoVideo from "../videos/add-todo.mov";
 import checkTodoVideo from "../videos/check-todo.mov";
 
-> 같은 Todo 앱을 `useContext + useReducer`, `Redux Toolkit`, `Zustand`로 각각 만들어 보고, 코드가 어떻게 다른지와 **리렌더링이 실제로 얼마나 다르게 일어나는지** 비교해 보았습니다.
+전역 상태 관리의 필요성과 라이브러리들
 
----
 {/* truncate */}
 
 이번 React+ts 스터디를 시작해보면서 첫 공부 주제로 전역 상태관리에 대해 알아보겠습니다.
