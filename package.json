@@ -11,7 +11,7 @@
     "typecheck": "astro check",
     "verify": "npm test && npm run typecheck && npm run build && node scripts/verify-build.mjs",
     "format": "prettier --write src scripts astro.config.mjs tsconfig.json README.md .github/workflows/deploy.yml",
-    "test": "node scripts/test-external-posts.mjs && node scripts/test-register-authors.mjs"
+    "test": "node scripts/test-external-posts.mjs && node scripts/test-register-authors.mjs && node scripts/test-responsive-header.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.0",

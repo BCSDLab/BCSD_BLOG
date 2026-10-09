@@ -190,6 +190,24 @@ const socialDescription = description.trim() || site.description;
       </div>
     </footer>
     <script>
+      import { setupResponsiveHeader } from '@lib/responsive-header';
+
+      let cleanupHeader = () => {};
+      let currentHeader: Element | null = null;
+      const updateHeader = () => {
+        const header = document.querySelector('.header-inner');
+        if (header === currentHeader) return;
+        cleanupHeader();
+        currentHeader = header;
+        cleanupHeader = setupResponsiveHeader();
+      };
+      document.addEventListener('astro:after-swap', updateHeader);
+      document.addEventListener('astro:page-load', updateHeader);
+      document.addEventListener('astro:before-swap', () => {
+        cleanupHeader();
+        currentHeader = null;
+      });
+
       const updateThemeLabel = () => {
         document
           .querySelector('.theme-toggle')

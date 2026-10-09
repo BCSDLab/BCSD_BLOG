@@ -76,7 +76,7 @@
   display: grid;
   align-items: center;
   gap: 20px;
-  grid-template-columns: 170px minmax(0, 1fr) 170px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
 }
 .main-nav {
   display: flex;
@@ -95,29 +95,22 @@
   justify-content: flex-end;
   gap: 8px;
 }
-@media (max-width: 1240px) {
-  .main-nav {
-    gap: 14px;
-  }
+/* Content measurements set this state; viewport width does not choose rows. */
+.header-inner[data-wrapped] {
+  row-gap: 4px;
+  padding-top: 20px;
 }
-@media (max-width: 1100px) {
-  .brand {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  .header-inner {
-    row-gap: 4px;
-    padding-top: 20px;
-  }
-  .main-nav {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    width: 100%;
-  }
-  .header-actions {
-    grid-column: 3;
-    grid-row: 1;
-  }
+.header-inner[data-wrapped] .brand {
+  grid-column: 1;
+  grid-row: 1;
+}
+.header-inner[data-wrapped] .main-nav {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+.header-inner[data-wrapped] .header-actions {
+  grid-column: 3;
+  grid-row: 1;
 }
 @media (max-width: 600px) {
   .header-actions .github-link {
@@ -141,13 +134,9 @@
     width: calc(100% - 40px);
     min-height: 75px;
     column-gap: 10px;
-    height: auto;
     padding-block: 18px 0;
-    grid-template-columns: 150px minmax(0, 1fr) 72px;
   }
   .main-nav {
     gap: 20px;
-    order: 3;
-    flex-basis: auto;
   }
 }
