@@ -10,6 +10,7 @@ tags:
   - 라이브러리
 ---
 
+
 인포메이트 8주차 공유(프레임워크 & 라이브러리) 모음입니다.
 
 CSS 전처리기 및 라이브러리 - 윤해진  
@@ -343,10 +344,7 @@ reference
 
 불편한 점은 **유사도 점수를 반환**하는 함수가 검색 대상 문자열의 길이에 따라 달라지기 때문에 자신이 생각한 문자열을 입력했을 때 유사도가 낮아 밑에서 찾아야 하는 경우가 있을 수 있습니다.
 
-<img
-  src="/img/@frontEnd/infomate-8week/infomate-8week-gwakseungjs1.jpg"
-  style={{ marginBottom: '20px' }}
-/>
+![](<@images/@frontEnd/infomate-8week/infomate-8week-gwakseungjs1.jpg>)
 
 위 그림과 같이 자신은 ‘수원시’를 생각하고 ‘ㅅㅇㅅ’라고 입력했지만 문자열 길이가 짧고 ‘ㅅ’, ‘ㅇ’, ‘ㅅ’이 들어간 ‘서울특별시’, ‘부산광역시’ 등이 먼저 나오게 됩니다. 참고로, 도시 이름 옆의 숫자가 유사도이고, 0부터 1 이하의 실수로 나타납니다.
 
@@ -354,10 +352,7 @@ reference
 
 또, 이 라이브러리의 문제점은 검색 결과 글자 수에 제한이 걸릴 수 있다는 점입니다. 이게 무슨 말이냐면, 아래 그림을 봅시다.
 
-<img
-  src="/img/@frontEnd/infomate-8week/infomate-8week-gwakseungjs2.jpg"
-  style={{ marginBottom: '20px' }}
-/>
+![](<@images/@frontEnd/infomate-8week/infomate-8week-gwakseungjs2.jpg>)
 
 원래는 검색 결과에 ‘충청남도 천안시’만 나와야 하고 유사도는 1이 되어야 할 텐데, ‘충청남도 천안시’의 유사도가 1이 아닌 것도 그렇고, 다른 지역 이름까지 유사도가 ‘충청남도 천안시’와 같다는 점입니다.
 

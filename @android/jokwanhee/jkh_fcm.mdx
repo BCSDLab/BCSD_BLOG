@@ -10,6 +10,7 @@ tags:
   - FCM
 ---
 
+
 Android 개발자가 간단한 로컬 서버로 FCM 테스트해보기에 대해서 다룹니다.
 
 {/* truncate */}
@@ -53,7 +54,7 @@ FCM 메시지를 보내기 위한 API의 URL를 생성하는데, 여기서 주�
 ```kotlin title="FirebaseCloudMessagingService.kt"
 const val API_URL  = "https://fcm.googleapis.com/v1/projects/kap-chat/messages:send"
 ```
-<img src="/img/@android/jkh_fcm/firebase_project_name.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/firebase_project_name.png>)
 
 
 그 다음으로는 Google Cloud 의 인증 시스템을 위한 액세스 토큰을 얻어야 합니다.
@@ -69,7 +70,7 @@ private fun getAccessToken(): String {
     return credentials.accessToken.tokenValue
 }
 ```
-<img src="/img/@android/jkh_fcm/spring_boot_file.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/spring_boot_file.png>)
 
 서비스 키 파일은 프로젝트 설정 / 서비스 계정에서 새 비공개 키 설정을 누르면 얻을 수 있습니다.
 
@@ -219,17 +220,17 @@ class KoinFirebaseMessagingService : FirebaseMessagingService() {
 }
 ```
 
-:::note 궁금한 부분, Firebase 에서 직접 테스트해볼 수 있는 데, 굳이 서버를 구축하고 테스트를 해야하는 이유가 있나요?
+:::note[궁금한 부분, Firebase 에서 직접 테스트해볼 수 있는 데, 굳이 서버를 구축하고 테스트를 해야하는 이유가 있나요?]
 
 : Firebase 에서 제공하는 테스트는 Notification 페이로드만 가지고 제목, 내용, 이미지에 대한 알림만 받아볼 수 있습니다.
 알림 창을 클릭해서 다른 페이지로 이동하고 싶거나, Firebase 기존 알림을 사용하지않고 커스텀하게 제작하려면 서버 개발자 분들에게 요청해야하니 이를 클라이언트 개발자가 쉽게 테스트해볼 수 있습니다.
 :::
 
 FCM 메시지를 수신하는 방법은 공식문서에서는 다음과 같이 설명합니다.
-<img src="/img/@android/jkh_fcm/firebase_aos_message_kor.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/firebase_aos_message_kor.png>)
 
 음.. 한국어 보다는 영어로 확인해보겠습니다. 
-<img src="/img/@android/jkh_fcm/firebase_aos_message_eng.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/firebase_aos_message_eng.png>)
 
 살펴보면, 포그라운드 서비스 일 때는 앱이 실행되고 있을 때 Notification 과 Data 에 대한 페이로드를 수신합니다.
 하지만 백그라운드 서비스 일 때는 Notification 에 대한 페이로는 System tray 로 빠지고 Data에 대한 페이로드만 수신합니다.
@@ -392,8 +393,7 @@ message.notification?.let { notification ->
 Postman 에서 서버에 요청할 Reuqest를 만듭니다.
 - 디바이스 토큰은 Android getToken 으로부터 받습니다.
 - 제목과 내용은 원하는 대로 작성해주면 됩니다.
-<img src="/img/@android/jkh_fcm/postman_request.png" alt="이미지" style={{ marginBottom: "20px" }} />
-
+![이미지](<@images/@android/jkh_fcm/postman_request.png>)
 
 
 ## 본격적인 테스트
@@ -401,7 +401,7 @@ Postman 에서 서버에 요청할 Reuqest를 만듭니다.
 
 
 1. 처음에 진행되었던, 로컬 서버를 실행합니다. 
-<img src="/img/@android/jkh_fcm/spring_boot_start.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/spring_boot_start.png>)
 
 
 2. 안드로이드 디바이스 토큰을 발행합니다.
@@ -415,7 +415,7 @@ FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
 
 3. Postman 을 사용해서 HTTP POST 요청을 보냅니다.
 
-<img src="/img/@android/jkh_fcm/postman_request.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/postman_request.png>)
 
 
 4. 안드로이드에서 FCM 메시지를 수신합니다.
@@ -470,12 +470,11 @@ class KoinFirebaseMessagingService : FirebaseMessagingService() {
     ```
 
 - 앱이 포그라운드 상태일 때 메시지 수신
-<img src="/img/@android/jkh_fcm/test1_1.png" alt="이미지" style={{ marginBottom: "0px" }} />
-
+![이미지](<@images/@android/jkh_fcm/test1_1.png>)
 
 
 - 앱이 백그라운드 상태일 때 메시지 미수신
-<img src="/img/@android/jkh_fcm/test1_2.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/test1_2.png>)
 
 
 위에서 사진으로 보면 포그라운드 상태에서는 메시지를 수신합니다. 하지만 백그라운드 상태에서는 알림창만 뜨고 메시지를 수신할 수 없습니다.
@@ -493,7 +492,7 @@ class KoinFirebaseMessagingService : FirebaseMessagingService() {
     </intent-filter>
 </activity>
 ```
-<img src="/img/@android/jkh_fcm/test1_3.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/test1_3.png>)
 
 ### 알림 클릭 액션 테스트
 
@@ -549,7 +548,7 @@ class KoinFirebaseMessagingService : FirebaseMessagingService() {
     ```
 
 - 앱이 포그라운드 상태일 때 메시지 수신
-<img src="/img/@android/jkh_fcm/test2_1.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/test2_1.png>)
 
 위에서 사진으로 보면 포그라운드 상태에서는 메시지를 수신한다. 하지만 백그라운드 상태에서는 알림창만 뜨고 메시지를 수신할 수 없습니다.
 첫 번째 테스트와 같은 매커니즘입니다. 하지만 알림을 클릭했을 때는 다릅니다.
@@ -565,7 +564,7 @@ class KoinFirebaseMessagingService : FirebaseMessagingService() {
 </activity>
 ```
 
-<img src="/img/@android/jkh_fcm/test2_3.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/test2_3.png>)
 
 ### 백그라운드 메시지 수신 테스트
 - message format
@@ -595,15 +594,14 @@ class KoinFirebaseMessagingService : FirebaseMessagingService() {
     ```
 
 - 앱이 백그라운드 상태일 때 메시시 수신
-<img src="/img/@android/jkh_fcm/test3.png" alt="이미지" style={{ marginBottom: "0px" }} />
+![이미지](<@images/@android/jkh_fcm/test3.png>)
 
 사진처럼 앱이 백그라운드 상태일 때, data 페이로드가 잘 수신되는 것을 알 수 있습니다.
 하지만 알림창은 뜨지 않습니다. 즉, 원하는 알림창을 커스텀하게 제작할 수 있습니다.
 
 ## 알림 기능 명세
 "코인"에서는 알림 기능 명세를 다음과 같이 표로 나타내어 진행할 예정입니다!
-<img src="/img/@android/jkh_fcm/excel.png" alt="이미지" style={{ marginBottom: "20px" }} />
-
+![이미지](<@images/@android/jkh_fcm/excel.png>)
 
 
 # 참조

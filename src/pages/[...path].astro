@@ -1,0 +1,263 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Listing from '../layouts/Listing.astro';
+import Comments from '../components/Comments.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { socialImagePath } from '@lib/og';
+import {
+  allPosts,
+  listPosts,
+  dateLabel,
+  isArticle,
+  postAuthors,
+  postTags,
+  postUrl,
+  readingTime,
+  sectionOf,
+  type Post,
+  type ListPost,
+} from '../lib/posts';
+import { sections } from '../data/site';
+
+export async function getStaticPaths() {
+  const posts = await allPosts();
+  const listingPosts = await listPosts();
+  const paths: { params: { path: string }; props: Record<string, unknown> }[] =
+    [];
+  const add = (url: string, props: Record<string, unknown>) =>
+    paths.push({ params: { path: url.replace(/^\/|\/$/g, '') }, props });
+  for (const post of posts)
+    add(postUrl(post), {
+      post,
+      siblings: posts.filter((p) => sectionOf(p).slug === sectionOf(post).slug),
+    });
+  for (const section of sections) {
+    const entries = [
+      ...posts.filter((p) => !isArticle(p)),
+      ...listingPosts,
+    ].filter((p) => sectionOf(p).slug === section.slug);
+    const tags = [
+      ...new Map(
+        entries.flatMap(postTags).map((tag) => [tag.url, tag]),
+      ).values(),
+    ];
+    add(`/${section.slug}`, {
+      title: section.label,
+      description: section.description,
+      entries: entries.slice(0, 10),
+      active: section.slug,
+      pages: Math.ceil(entries.length / 10),
+      page: 1,
+      tags,
+    });
+    for (let page = 2; page <= Math.ceil(entries.length / 10); page++)
+      add(`/${section.slug}/page/${page}`, {
+        title: section.label,
+        description: section.description,
+        entries: entries.slice((page - 1) * 10, page * 10),
+        active: section.slug,
+        pages: Math.ceil(entries.length / 10),
+        page,
+        tags,
+      });
+    add(`/${section.slug}/archive`, {
+      title: `${section.label} 아카이브`,
+      description: '지금까지 쌓아온 기록을 시간순으로 만나보세요.',
+      entries,
+      active: section.slug,
+    });
+    add(`/${section.slug}/tags`, {
+      title: `${section.label} 태그`,
+      description: '관심 있는 주제로 이야기를 찾아보세요.',
+      entries: [],
+      active: section.slug,
+      tags,
+      tagIndex: true,
+    });
+    for (const tag of tags) {
+      const tagged = entries.filter((p) =>
+        postTags(p).some((t) => t.url === tag.url),
+      );
+      add(tag.url, {
+        title: `#${tag.label}`,
+        description: `${section.label}의 ${tag.label} 관련 이야기`,
+        entries: tagged.slice(0, 10),
+        active: section.slug,
+        pages: Math.ceil(tagged.length / 10),
+        page: 1,
+        basePath: tag.url,
+      });
+      for (let page = 2; page <= Math.ceil(tagged.length / 10); page++)
+        add(`${tag.url}/page/${page}`, {
+          title: `#${tag.label}`,
+          description: `${section.label}의 ${tag.label} 관련 이야기`,
+          entries: tagged.slice((page - 1) * 10, page * 10),
+          active: section.slug,
+          pages: Math.ceil(tagged.length / 10),
+          page,
+          basePath: tag.url,
+        });
+    }
+  }
+  // The previous default blog had no posts, but these public entry points existed.
+  for (const route of ['blog/archive', 'blog/tags'])
+    add(route, {
+      title: route.endsWith('tags') ? '태그별 이야기' : '전체 아카이브',
+      description: 'BCSD의 모든 분야에서 나눈 이야기',
+      entries: listingPosts,
+    });
+  return paths;
+}
+interface Props {
+  post?: Post;
+  siblings?: Post[];
+  title?: string;
+  description?: string;
+  entries?: ListPost[];
+  active?: string;
+  pages?: number;
+  page?: number;
+  basePath?: string;
+  tags?: { label: string; url: string }[];
+  tagIndex?: boolean;
+}
+const {
+  post,
+  siblings = [],
+  title = '',
+  description = '',
+  entries = [],
+  active,
+  pages = 0,
+  page = 1,
+  tags = [],
+  tagIndex,
+  basePath,
+} = Astro.props;
+const rendered = post ? await render(post) : undefined;
+const Content = rendered?.Content;
+const headings =
+  rendered?.headings.filter((heading) => heading.depth <= 3) ?? [];
+const section = post ? sectionOf(post) : undefined;
+const authors = post ? postAuthors(post) : [];
+const index = post ? siblings.findIndex((p) => p.id === post.id) : -1;
+const previous = siblings[index - 1];
+const next = siblings[index + 1];
+---
+
+{post && Content && section ? (
+  <Base
+    title={post.data.title}
+    description={post.data.description}
+    article
+    date={post.data.date}
+    keywords={post.data.keywords}
+    image={socialImagePath(post)}
+    imageAlt={`${post.data.title} · BCSD Blog`}
+  >
+    <div class="page-width article-page">
+      <header class="article-header">
+        <a class="category" href={`/${section.slug}`}>
+          {section.label}
+        </a>
+        <h1>{post.data.title}</h1>
+        {post.data.description && (
+          <p class="article-description">{post.data.description}</p>
+        )}
+        <div class="article-meta">
+          <span>
+            {authors.map((author, i) => (
+              <>
+                {i > 0 && ', '}
+                {author.url ? (
+                  <a href={author.url} rel="noreferrer">
+                    {author.name}
+                  </a>
+                ) : (
+                  author.name
+                )}
+              </>
+            ))}
+          </span>
+          {post.data.date && (
+            <time datetime={post.data.date.toISOString()}>
+              {dateLabel(post.data.date)}
+            </time>
+          )}
+          <span>예상 읽기 시간 {readingTime(post)}분</span>
+        </div>
+      </header>
+      <div class="article-layout">
+        {headings.length > 0 && <TableOfContents headings={headings} />}
+        <div class="article-content">
+          <article class="prose">
+            <Content />
+          </article>
+          <div class="tag-list">
+            {postTags(post).map((tag) => (
+              <a href={tag.url}>#{tag.label}</a>
+            ))}
+          </div>
+          <nav class="post-pagination" aria-label="다른 글">
+            {previous ? (
+              <a href={postUrl(previous)}>
+                <small>더 새로운 글</small>
+                <span>{previous.data.title}</span>
+              </a>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <a href={postUrl(next)}>
+                <small>이전 이야기</small>
+                <span>{next.data.title}</span>
+              </a>
+            )}
+          </nav>
+          <Comments />
+        </div>
+      </div>
+    </div>
+  </Base>
+) : tagIndex ? (
+  <Base title={title} description={description}>
+    <section class="page-width listing-page">
+      <div class="page-heading">
+        <span class="eyebrow">EXPLORE TOPICS</span>
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </div>
+      <div class="tag-list">
+        {tags.map((tag) => (
+          <a href={tag.url}>#{tag.label}</a>
+        ))}
+      </div>
+      {tags.length === 0 && <p>아직 등록된 태그가 없습니다.</p>}
+    </section>
+  </Base>
+) : (
+  <Listing
+    title={title}
+    description={description}
+    posts={entries}
+    active={active}
+  >
+    {pages > 1 && (
+      <nav class="pagination" aria-label="페이지">
+        {Array.from({ length: pages }, (_, i) => (
+          <a
+            href={
+              i === 0
+                ? (basePath ?? `/${active}`)
+                : `${basePath ?? `/${active}`}/page/${i + 1}`
+            }
+            aria-current={page === i + 1 ? 'page' : undefined}
+          >
+            {i + 1}
+          </a>
+        ))}
+      </nav>
+    )}
+  </Listing>
+)}

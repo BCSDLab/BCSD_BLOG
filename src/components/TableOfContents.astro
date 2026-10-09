@@ -1,0 +1,85 @@
+---
+interface Props {
+  headings: { depth: number; slug: string; text: string }[];
+}
+const { headings } = Astro.props;
+---
+
+<aside class="toc" aria-label="글 목차">
+  <details class="toc-details" open>
+    <summary>
+      목차<span class="toc-current"></span>
+    </summary>
+    <nav aria-label="본문 목차">
+      {headings.map((heading) => (
+        <a
+          class:list={{ subheading: heading.depth === 3 }}
+          href={`#${heading.slug}`}
+          data-heading-id={heading.slug}
+        >
+          {heading.text}
+        </a>
+      ))}
+    </nav>
+  </details>
+</aside>
+<script>
+  let controller: AbortController | undefined;
+  let frame = 0;
+  function setupToc() {
+    controller?.abort();
+    cancelAnimationFrame(frame);
+    controller = new AbortController();
+    const { signal } = controller;
+    const details = document.querySelector<HTMLDetailsElement>('.toc-details');
+    const links = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>('[data-heading-id]'),
+    );
+    const entries = links.flatMap((link) => {
+      const heading = document.getElementById(link.dataset.headingId!);
+      return heading ? [{ link, heading }] : [];
+    });
+    if (details && entries.length) {
+      const desktop = matchMedia('(min-width: 1360px)');
+      const resize = () => {
+        details.open = desktop.matches;
+      };
+      resize();
+      desktop.addEventListener('change', resize, { signal });
+      let pending = false;
+      let activeId = '';
+      const update = () => {
+        pending = false;
+        let active = entries[0];
+        for (const entry of entries) {
+          if (entry.heading.getBoundingClientRect().top <= 120) active = entry;
+          else break;
+        }
+        if (active.heading.id === activeId) return;
+        activeId = active.heading.id;
+        for (const entry of entries) {
+          if (entry === active)
+            entry.link.setAttribute('aria-current', 'location');
+          else entry.link.removeAttribute('aria-current');
+        }
+        const label = details.querySelector('.toc-current');
+        if (label) label.textContent = active.link.textContent?.trim() ?? '';
+      };
+      const schedule = () => {
+        if (!pending) {
+          pending = true;
+          frame = requestAnimationFrame(update);
+        }
+      };
+      addEventListener('scroll', schedule, { passive: true, signal });
+      addEventListener('resize', schedule, { signal });
+      document.addEventListener('load', schedule, { capture: true, signal });
+      update();
+    }
+  }
+  document.addEventListener('astro:page-load', setupToc);
+  document.addEventListener('astro:before-swap', () => {
+    controller?.abort();
+    cancelAnimationFrame(frame);
+  });
+</script>

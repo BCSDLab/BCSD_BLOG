@@ -1,0 +1,144 @@
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+.post-item {
+  padding-block: 31px 32px;
+  border-bottom: 1px solid var(--line);
+}
+.post-category {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+}
+.post-item h3 {
+  margin-top: 10px;
+  font-size: 24px;
+  line-height: 1.55;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+}
+.post-summary {
+  margin-top: 11px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.post-byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  margin-top: 19px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.post-byline img {
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.meta-separator {
+  opacity: 0.6;
+}
+.listing-page {
+  padding-block: 55px 85px;
+}
+.page-heading h1 {
+  font-size: 34px;
+  line-height: 1.4;
+}
+.page-heading > p {
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.count {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 12px;
+  vertical-align: middle;
+  letter-spacing: 0;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 36px;
+}
+.pagination > a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font-size: 13px;
+}
+.pagination > a[aria-current='page'] {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 13px;
+  list-style: none;
+  margin-block: 13px 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.post-tags a:hover {
+  color: var(--primary);
+}
+.listing-page .page-heading {
+  max-width: var(--list-width);
+  margin-inline: auto;
+}
+.listing-page .post-list {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  max-width: var(--list-width);
+  margin-inline: auto;
+}
+.external-label {
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .post-item {
+    padding-block: 25px 26px;
+  }
+  .post-item h3 {
+    font-size: 21px;
+  }
+  .post-summary {
+    font-size: 14px;
+  }
+  .post-byline {
+    gap: 7px;
+    margin-top: 16px;
+    font-size: 11px;
+  }
+  .listing-page {
+    padding-block: 35px 55px;
+  }
+  .page-heading h1 {
+    font-size: 29px;
+  }
+}

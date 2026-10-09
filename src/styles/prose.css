@@ -1,0 +1,123 @@
+.prose {
+  font-size: 16px;
+  line-height: 1.95;
+  overflow-wrap: anywhere;
+}
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote,
+.prose pre,
+.prose table,
+.prose .callout {
+  margin-block: 22px;
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin-block: 38px 17px;
+  line-height: 1.5;
+  scroll-margin-top: 32px;
+}
+.prose h1 {
+  font-size: 30px;
+}
+.prose h2 {
+  font-size: 25px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.prose h3 {
+  font-size: 21px;
+}
+.prose a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose img {
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin-block: 20px;
+  margin-inline: auto;
+}
+.prose pre {
+  padding-block: 20px;
+  padding-inline: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.prose :not(pre) > code {
+  background: var(--accent-soft);
+  color: var(--primary-strong);
+  border-radius: 4px;
+  padding-block: 2px;
+  padding-inline: 5px;
+  font-size: 0.85em;
+}
+.prose blockquote {
+  border-left: 3px solid var(--primary);
+  padding-block: 1px;
+  padding-inline: 20px;
+  color: var(--muted);
+  background: var(--surface);
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin-block: 32px;
+  margin-inline: 0;
+}
+.prose table {
+  display: block;
+  overflow: auto;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.prose th,
+.prose td {
+  border: 1px solid var(--line);
+  padding-block: 10px;
+  padding-inline: 15px;
+}
+.prose th {
+  background: var(--surface);
+}
+.prose li {
+  margin-block: 5px;
+}
+.prose .callout {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--primary);
+  padding-block: 16px;
+  padding-inline: 22px;
+  border-radius: 5px;
+}
+.prose .callout > p:last-child {
+  margin-bottom: 0;
+}
+.prose .callout > strong {
+  font-size: 14px;
+}
+html[data-theme='dark'] .astro-code,
+html[data-theme='dark'] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+@media (max-width: 600px) {
+  .prose {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+  .prose h2 {
+    font-size: 22px;
+  }
+  .prose h3 {
+    font-size: 19px;
+  }
+}

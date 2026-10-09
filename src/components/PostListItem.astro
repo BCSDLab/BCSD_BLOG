@@ -1,0 +1,68 @@
+---
+import {
+  dateLabel,
+  postAuthors,
+  postUrl,
+  postTags,
+  sectionOf,
+  isExternal,
+  type ListPost,
+} from '../lib/posts';
+interface Props {
+  post: ListPost;
+}
+const { post } = Astro.props;
+const section = sectionOf(post);
+const authors = postAuthors(post);
+const description = /^설명글?\s*입니다\.?$/.test(post.data.description)
+  ? ''
+  : post.data.description;
+---
+
+<article class="post-item">
+  <a class="post-category" href={`/${section.slug}`}>
+    {section.label}
+  </a>
+  <h3>
+    <a
+      href={postUrl(post)}
+      target={isExternal(post) ? '_blank' : undefined}
+      rel={isExternal(post) ? 'noreferrer' : undefined}
+    >
+      {post.data.title}
+      {isExternal(post) && <span class="external-label">외부 글 ↗</span>}
+    </a>
+  </h3>
+  {description && <p class="post-summary">{description}</p>}
+  {postTags(post).length > 0 && (
+    <ul class="post-tags" aria-label="글 태그">
+      {postTags(post).map((tag) => (
+        <li>
+          <a href={tag.url}>#{tag.label}</a>
+        </li>
+      ))}
+    </ul>
+  )}
+  <div class="post-byline">
+    {authors[0]?.image_url && (
+      <img
+        src={authors[0].image_url}
+        alt=""
+        width="22"
+        height="22"
+        loading="lazy"
+      />
+    )}
+    <span>{authors.map((author) => author.name).join(', ') || 'BCSD'}</span>
+    {post.data.date && (
+      <>
+        <span class="meta-separator" aria-hidden="true">
+          ·
+        </span>
+        <time datetime={post.data.date.toISOString()}>
+          {dateLabel(post.data.date)}
+        </time>
+      </>
+    )}
+  </div>
+</article>

@@ -1,0 +1,11 @@
+---
+import Listing from '../layouts/Listing.astro';
+import { listPosts } from '../lib/posts';
+const posts = await listPosts();
+---
+
+<Listing
+  title="전체 글"
+  description="BCSD 구성원들의 개발, 디자인, 기획 기록입니다."
+  posts={posts}
+/>

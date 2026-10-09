@@ -1,0 +1,46 @@
+<section class="comments" aria-label="댓글">
+  <h2>댓글</h2>
+  <p>
+    질문과 경험을 댓글로 나눠주세요. 댓글은 GitHub 계정으로 작성할 수 있습니다.
+  </p>
+  <div id="utterances"></div>
+</section>
+<script>
+  let controller: AbortController | undefined;
+  function setupComments() {
+    controller?.abort();
+    controller = new AbortController();
+    const { signal } = controller;
+    const container = document.querySelector('#utterances');
+    if (!container) return;
+    const theme = () =>
+      document.documentElement.dataset.theme === 'dark'
+        ? 'github-dark'
+        : 'github-light';
+    if (!container.querySelector('script, iframe')) {
+      const script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.setAttribute('repo', 'BCSDLab/BCSD_BLOG');
+      script.setAttribute('issue-term', 'pathname');
+      script.setAttribute('label', 'comment');
+      script.setAttribute('theme', theme());
+      script.crossOrigin = 'anonymous';
+      script.async = true;
+      container.append(script);
+    }
+    window.addEventListener(
+      'theme-change',
+      () => {
+        container
+          .querySelector<HTMLIFrameElement>('iframe')
+          ?.contentWindow?.postMessage(
+            { type: 'set-theme', theme: theme() },
+            'https://utteranc.es',
+          );
+      },
+      { signal },
+    );
+  }
+  document.addEventListener('astro:page-load', setupComments);
+  document.addEventListener('astro:before-swap', () => controller?.abort());
+</script>

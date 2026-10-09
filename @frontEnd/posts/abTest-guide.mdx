@@ -9,6 +9,17 @@ tags:
   - 사용법
 ---
 
+import { Image } from 'astro:assets';
+import contentImage0 from "@images/@frontEnd/abTest-guide/01.png";
+import contentImage1 from "@images/@frontEnd/abTest-guide/02.png";
+import contentImage2 from "@images/@frontEnd/abTest-guide/03.png";
+import contentImage3 from "@images/@frontEnd/abTest-guide/04.png";
+import contentImage4 from "@images/@frontEnd/abTest-guide/05.png";
+import contentImage5 from "@images/@frontEnd/abTest-guide/06.png";
+import contentImage6 from "@images/@frontEnd/abTest-guide/07.png";
+import contentImage7 from "@images/@frontEnd/abTest-guide/08.png";
+import contentImage8 from "@images/@frontEnd/abTest-guide/09.png";
+
 이번에 선권이가 열심히 구현한 동아리 자체 AB 테스트 도구의 사용방법입니다.
 
 {/* truncate */}
@@ -19,17 +30,17 @@ tags:
 ## AB 테스트 생성법([어드민](https://admin.koreatech.in/abtest))
 ### 생성하기
 - **좌측의 탭에서 테스트 탭의 AB 테스트 클릭**
- <img src="/img/@frontEnd/abTest-guide/01.png" width="300px" alt="이미지" />
+ <Image src={contentImage0} width={300} alt="이미지" />
 <br/><br/>
 - **페이지 좌측상단의 생성 버튼을 클릭한다.**
- <img src="/img/@frontEnd/abTest-guide/02.png" width="700px" alt="이미지" />
+ <Image src={contentImage1} width={700} alt="이미지" />
 <br/><br/>
 - **모달에서 필요한 정보를 입력합니다.**
 1. AB 테스트의 제목은 해당 테스트를 의미하는 제목을 적어주시면 됩니다.
 1. 변수는 해당 테스트를 식별하는 유일한 값으로 다른 테스트와 같으면 안되며 영어로 작성해 주세요.
 1. 설명은 해당 테스트가 어떤 테스트인지 알 수 있도록 내용을 적어주세요.
 1. 모든 내용을 전부 기입한 후 다음을 클릭해 주세요.
- <img src="/img/@frontEnd/abTest-guide/03.png" width="600px" alt="이미지" /> 
+ <Image src={contentImage2} width={600} alt="이미지" /> 
 <br/><br/>
 - **다음 단계에서는 해당 테스트의 실험군 정보를 입력합니다.**
 1. 각 실험군의 제목은 해당 실험군을 의미하는 제목을 적어주세요.
@@ -38,10 +49,10 @@ tags:
 1. 실험군을 추가하고 싶으면 실험 추가버튼을 삭제하고 싶다면 삭제를 클릭해주세요.
 1. 삭제 버튼 클릭시 무조건 오른쪽 실험군부터 삭제됩니다.
 1. 각 실험군에 들어갈 사용자의 비율은 아래의 **슬라이드 바**를 통해서 조절해주세요!
-<img src="/img/@frontEnd/abTest-guide/04.png" width="600px" alt="이미지" />
+<Image src={contentImage3} width={600} alt="이미지" />
 <br/><br/>
 - **완료를 클릭하면 정상적으로 테스트 등록시 이런 토스트가 뜨게 됩니다.**
- <img src="/img/@frontEnd/abTest-guide/05.png" width="300px" alt="이미지" /> 
+ <Image src={contentImage4} width={300} alt="이미지" /> 
 
 ### 수정하기
 - **해당 테스트의 자세한 내용 확인하기**
@@ -49,19 +60,19 @@ tags:
 1. 변수들은 수정이 불가하며 화면상에 흰색 배경 값만 수정 가능합니다.
 1. 비율은 슬라이드바를 통해서만 조절해주세요.
 1. 변경되는 비율은 기존의 사용자들에게 적용되는것이 아닌 앞으로 편입되는 사용자들이 해당 비율에 따라 편입됩니다.
- <img src="/img/@frontEnd/abTest-guide/06.png" width="600px" alt="이미지" /> 
+ <Image src={contentImage5} width={600} alt="이미지" /> 
 - **수정 버튼으로 수정하기**
 1. 아래의 파란 버튼을 클릭하면 수정이 완료됩니다.
 1. 실험을 잘 못 생성하였다면 삭제 버튼을 이용해주세요.
- <img src="/img/@frontEnd/abTest-guide/07.png" width="600px" alt="이미지" /> 
+ <Image src={contentImage6} width={600} alt="이미지" /> 
 
 ### 승자 정하기
 - **실험군 변수 입력으로 승자 정하기**
 1. 승자로 정하고자 하는 실험군의 변수를 입력칸에 입력해주세요.
 1. 승자 정하기 버튼을 클릭해주세요.
- <img src="/img/@frontEnd/abTest-guide/08.png" width="600px" alt="이미지" /> 
+ <Image src={contentImage7} width={600} alt="이미지" /> 
 - **경고 모달에서 확정하기**
- <img src="/img/@frontEnd/abTest-guide/09.png" width="600px" alt="이미지" /> 
+ <Image src={contentImage8} width={600} alt="이미지" /> 
 
 ### 프론트에서 사용하기(KOIN_WEB_RECODE 기준)
 

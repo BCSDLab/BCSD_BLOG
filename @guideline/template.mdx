@@ -14,7 +14,7 @@ tags:
 {/* truncate */}
 
 import videoUrl from "./videos/example.mp4";
-import ReactPlayer from "react-player";
+import Video from "@components/Video.astro";
 
 ## 글 최상단에 블로깅 정보 적기
 
@@ -176,7 +176,7 @@ const highlight = "진하게!";
 :::
 ```
 
-:::note 여기에도 제목을 줄 수 있어요!
+:::note[여기에도 제목을 줄 수 있어요!]
 
 여기에도 `동일한` **마크다운** 문법을 _적으면_ 됩니다. 이렇게 [링크로 가기 `click`](#) 도 할 수 있어요.
 
@@ -208,40 +208,52 @@ const highlight = "진하게!";
 
 ## 사진 사용 예시
 
-사진을 사용하기 위해 root의 `/static` 경로에 사진을 넣어야 합니다.
-넣은 후 아래와 같이 사용합니다.
+이미지는 `static/img/`에 저장하고 import 없이 `@images` 경로로 작성합니다.
+Astro가 원본 크기를 읽고 이미지 최적화와 로딩 전 공간 확보를 처리합니다.
 
-```
-<img
-  src="/img/@frontEnd/example.png" // static 하위의 경로
-  style={{ marginBottom: "20px" }} // 다음 문장과 사진과의 간격을 줍니다.
-/>
+```md
+![예시 이미지](@images/@frontEnd/example.png)
 ```
 
-아래와 같이 사진이 나옵니다.
+파일명에 공백이 있으면 경로를 `< >`로 감쌉니다.
 
-<img src="/img/@frontEnd/example.png" style={{ marginBottom: "20px" }} />
+```md
+![설명](<@images/분야/글 이름/이미지 1.png>)
+```
+
+![예시 이미지](@images/@frontEnd/example.png)
+
+크기나 스타일을 따로 지정할 때만 `Image` 컴포넌트를 사용합니다.
+
+```mdx
+import { Image } from 'astro:assets';
+import exampleImage from '@images/@frontEnd/example.png';
+
+<Image src={exampleImage} alt="예시 이미지" width={400} />
+```
+
+이미지 설명은 대체 텍스트로 사용됩니다. GIF도 Markdown 문법으로 작성할 수 있습니다.
 
 ## 비디오 사용 예시
 
 비디오를 사용하기 위해서는 `{/* truncate */}` 앞에 사용할 비디오를 명시해 주어야 합니다.
 맨 윗글을 보시면 `{/* truncate */}` 을 확인 할 수 있습니다.
 비디오는 원하는 경로에 저장합니다. 되도록이면 쓰는 글에 가깝게 두거나 각 트랙 폴더에 만들어져 있는 video 폴더를 사용하는 것을 추천합니다.
-`import 비디오이름 from "상대경로"` 로 불러올 수 있습니다. `ReactPlayer`도 같이 불러옵니다.
+`import 비디오이름 from "상대경로"` 로 불러올 수 있습니다. `Video`도 같이 불러옵니다.
 
 아래 예시를 참고해 주세요.
 
 ```
 import videoUrl from "./videos/example.mp4";
-import ReactPlayer from "react-player"; // 이 문장은 어느 파일에서나 동일하게 사용합니다.
+import Video from "@components/Video.astro"; // 글 위치와 무관하게 같은 경로를 사용합니다.
 ```
 
 이제 가져와 봅시다!
 
 ```
-<ReactPlayer
+<Video
   controls // 컨트롤 바의 표시 유무입니다.
-  playing // 자동 재생 여부입니다.
+  playing // 음소거 상태로 자동 재생합니다.
   loop // 동영상이 끝나도 다시 처음부터 계속 재생할지를 결정합니다.
   url={videoUrl} // 위에서 작성한 "비디오이름"을 넣습니다.
   style={{ marginBottom: "20px" }} // 다음 문장과 동영상 간 간격을 줍니다.
@@ -250,7 +262,7 @@ import ReactPlayer from "react-player"; // 이 문장은 어느 파일에서나 
 
 아래와 같이 동영상이 나옵니다.
 
-<ReactPlayer
+<Video
   controls
   playing
   loop

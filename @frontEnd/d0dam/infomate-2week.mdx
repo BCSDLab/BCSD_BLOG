@@ -9,6 +9,7 @@ tags:
   - 브라우저
 ---
 
+
 인포메이트 2주차 공유(브라우저) 모음입니다.  
 
 아니 왜 로컬에서는 잘 되는데 사파리는 안되는거지? - 윤해진  
@@ -17,7 +18,7 @@ Cache-Control, Expires를 빠뜨리면 브라우저에서 무슨 일이 일어�
 
 {/* truncate */}
 
-import ReactPlayer from "react-player";
+import ReactPlayer from "@components/Video.astro";
 
 # **[인포메이트 2차시 공유]**
 
@@ -174,21 +175,13 @@ if ((response_code_ == net::HTTP_OK ||
 
 감시 창에서 `console.log`를 사용할 수도 있습니다. 예를 들어, 디버거에서 앱이 중단될 때마다 `localStorage`의 스냅샷을 덤프하고 싶다면 `console.table(loaclStorage)` 감지를 생성할 수 있습니다.
 
-<img
-  src="/img/@frontEnd/infomate-2week/watch-pane.png"
-  alt="이미지"
-  style={{ marginBottom: "20px" }}
-/>
+![이미지](<@images/@frontEnd/infomate-2week/watch-pane.png>)
 
 **2. 호출 스택 추적**
 
 `console.trace`를 사용하여 코드를 실행하면 호출되는 라인을 확인할 수 있습니다.
 
-<img
-  src="/img/@frontEnd/infomate-2week/trace.png"
-  alt="이미지"
-  style={{ marginBottom: "20px" }}
-/>
+![이미지](<@images/@frontEnd/infomate-2week/trace.png>)
 
 ### 프로그램 동작 변경하기
 
@@ -210,21 +203,13 @@ if ((response_code_ == net::HTTP_OK ||
 
 예를 들어, 현재 함수가 3개의 인수로 호출될 때만 일시 중지할 때입니다. `argument.callee.length===3`
 
-<img
-  src="/img/@frontEnd/infomate-2week/1.png"
-  alt="이미지"
-  style={{ marginBottom: "20px" }}
-/>
+![이미지](<@images/@frontEnd/infomate-2week/1.png>)
 
 **2. 항수 불일치 시 중단**
 
 현재 함수가 잘못된 인수 개수로 호출될 때만 일시 중지합니다. `(arguments.callee.length) != arguments.length`
 
-<img
-  src="/img/@frontEnd/infomate-2week/2.png"
-  alt="이미지"
-  style={{ marginBottom: "20px" }}
-/>
+![이미지](<@images/@frontEnd/infomate-2week/2.png>)
 
 함수 호출부의 버그를 찾을 때 유용합니다.
 

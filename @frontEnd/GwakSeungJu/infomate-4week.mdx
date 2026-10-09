@@ -9,6 +9,10 @@ tags:
   - 툴
 ---
 
+import { Image } from 'astro:assets';
+import contentImage5 from "@images/@frontEnd/infomate-4week/Untitled.png";
+import contentImage6 from "@images/@frontEnd/infomate-4week/Untitled 1.png";
+
 인포메이트 4주차 공유(툴) 모음입니다.    
 
 효율적인 CSS 작성, 어렵지 않아요! - 곽승주    
@@ -18,7 +22,7 @@ Mocking tool로 생산성 챙기기 - 김하나
 {/* truncate */}
 
 import videoUrl from "../videos/scale-up.mp4";
-import ReactPlayer from "react-player";
+import ReactPlayer from "@components/Video.astro";
 
 
 ## 효율적인 CSS 작성, 어렵지 않아요! - 곽승주
@@ -52,23 +56,23 @@ import ReactPlayer from "react-player";
 
 - 그림자 생성
     - `box-shadow` 속성으로 간단한 그림자만 구현을 했다면, 이제부터 [smooth shadow](https://shadows.brumm.af/)를 이용하여 부드러운 그림자를 생성할 수 있습니다. 오른쪽 그림자 스타일 도구를 적절히 조절하면 왼쪽 박스에 그 속성값과 속성값이 적용된 그림자를 보여줍니다.
-      <img src="/img/@frontEnd/infomate-4week/image04.png" alt="이미지" style={{ marginBottom: "20px" }} />
+      ![이미지](<@images/@frontEnd/infomate-4week/image04.png>)
     
 - Gradient
     - 단색만으로 웹 페이지를 스타일링하는 것이 지겨울 때 그라데이션이 들어간 색을 넣어 다채로운 페이지를 만들고 싶을 때가 있을 것입니다. 또한, 그라데이션이 들어간 디자인을 요구받을 시 정확하게 수행하기 어려운 경우가 종종 있을 것입니다. 이러할 때, [CSS 그라디언트(CSS Gradient)](https://cssgradient.io/)가 도움이 될 것입니다! CSS 그라디언트(CSS Gradient)는 그라데이션 배경색을 만드는 CSS 코드를 생성해줍니다.
-      <img src="/img/@frontEnd/infomate-4week/image05.png" alt="이미지" style={{ marginBottom: "20px" }} />
+      ![이미지](<@images/@frontEnd/infomate-4week/image05.png>)
         
 
 ### Layout 구성
 
 만약 아래와 같이 복잡한 배치 구성을 구현해야 할 경우 어떻게 구성할지 머리가 매우 아플 것입니다.
-<img src="/img/@frontEnd/infomate-4week/image01.png" alt="이미지" style={{ marginBottom: "20px" }} />
+![이미지](<@images/@frontEnd/infomate-4week/image01.png>)
 
 하지만, [CSS Grid Generator](https://cssgrid-generator.netlify.app/)를 이용한다면 빠르고 쉽게 이 배치를 구현할 수 있습니다.
-<img src="/img/@frontEnd/infomate-4week/image02.png" alt="이미지" style={{ marginBottom: "20px" }} />
+![이미지](<@images/@frontEnd/infomate-4week/image02.png>)
 
 단순 너비 비율 설정과 드래그만으로 배치 구성을 따라할 수 있고, 이를 통해 우측에 `Please may I have some code`를 클릭하면 우측 그림과 같은 코드를 제공해줍니다. 각 선택자에 `margin`이나 `background-color`등 자신이 원하는 속성을 추가하면 됩니다.
-<img src="/img/@frontEnd/infomate-4week/image03.png" alt="이미지" />
+![이미지](<@images/@frontEnd/infomate-4week/image03.png>)
 
 ## 결론
 
@@ -138,16 +142,16 @@ CDD(Component-Driven Development)는 **컴포넌트 단위 중심으로 개발�
 ## 활용 예시)
 <ul style={{ listStyle: "none", display: "flex", justifyContent: "space-between", padding:"0" }}>
   <li>
-    <img src="/img/@frontEnd/infomate-4week/Untitled.png" alt="이미지" style={{ height: "404px" }}/>
+    <Image src={contentImage5} alt="이미지" style={{ height: "404px" }}/>
   </li>
   <li>
-    <img src="/img/@frontEnd/infomate-4week/Untitled 1.png" alt="이미지" style={{ height: "250px" }} />
+    <Image src={contentImage6} alt="이미지" style={{ height: "250px" }} />
   </li>
 </ul>
 
 스토리 작성 
 
-<img src="/img/@frontEnd/infomate-4week/Untitled 2.png" alt="이미지" />
+![이미지](<@images/@frontEnd/infomate-4week/Untitled 2.png>)
 
 직접 확인 가능한 모습
 

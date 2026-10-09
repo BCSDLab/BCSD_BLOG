@@ -1,0 +1,225 @@
+.category {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+}
+.article-page {
+  padding-block: 32px 70px;
+}
+.article-header h1 {
+  font-size: clamp(30px, 3.6vw, 44px);
+  line-height: 1.4;
+  margin-top: 20px;
+  overflow-wrap: anywhere;
+}
+.article-description {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+.article-meta {
+  display: flex;
+  gap: 17px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 24px;
+}
+.article-content {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+.toc {
+  grid-column: 2;
+  grid-row: 1;
+  position: sticky;
+  top: 25px;
+  align-self: start;
+  max-height: calc(100vh - 50px);
+  overflow: auto;
+}
+.toc nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 1px solid var(--line);
+  padding-left: 15px;
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.toc .subheading {
+  padding-left: 12px;
+  font-size: 11px;
+}
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-block: 30px;
+}
+.tag-list > a {
+  padding-block: 7px;
+  padding-inline: 11px;
+  border-radius: 5px;
+  background: var(--accent-soft);
+  color: var(--primary);
+  font-size: 12px;
+}
+.post-pagination {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  border-top: 1px solid var(--line);
+  padding-top: 25px;
+  margin-top: 35px;
+}
+.post-pagination > a {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding-block: 16px;
+  padding-inline: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  line-height: 1.6;
+  font-size: 13px;
+}
+.post-pagination small {
+  color: var(--muted);
+  font-size: 11px;
+}
+.comments {
+  margin-top: 50px;
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+}
+.comments h2 {
+  font-size: 23px;
+}
+.comments > p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-block: 12px 24px;
+}
+.utterances {
+  max-width: 100%;
+}
+#utterances {
+  min-height: 330px;
+}
+.toc summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+.toc-current {
+  display: none;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.toc nav a {
+  border-left: 2px solid transparent;
+  padding-left: 9px;
+  margin-left: -17px;
+}
+.toc nav a.subheading {
+  padding-left: 21px;
+}
+.toc nav a[aria-current='location'] {
+  color: var(--primary);
+  border-left-color: var(--primary);
+  font-weight: 600;
+}
+.page-width.article-page {
+  width: min(var(--article-width), calc(100% - 80px));
+}
+.article-header {
+  max-width: none;
+  padding-block: 45px 35px;
+}
+.article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 0;
+  gap: 65px 0;
+  border-top: 1px solid var(--line);
+  padding-top: 35px;
+}
+.article-layout > .toc {
+  width: var(--toc-width);
+  margin-left: var(--toc-offset);
+}
+@media (max-width: 1359px) {
+  .toc nav {
+    margin-bottom: 12px;
+  }
+  .toc-current {
+    display: block;
+  }
+  .article-layout {
+    display: block;
+  }
+  .article-layout > .toc {
+    width: auto;
+    margin-left: 0;
+    margin-bottom: 24px;
+    top: 0;
+    z-index: 5;
+    max-height: min(60vh, 420px);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    padding-block: 12px;
+  }
+}
+@media (max-width: 1100px) {
+  .article-layout {
+    row-gap: 35px;
+  }
+}
+@media (max-width: 800px) {
+  .toc {
+    top: 0;
+    max-height: min(60vh, 420px);
+    display: block;
+    z-index: 5;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    padding-block: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .article-description {
+    font-size: 15px;
+  }
+  .article-meta {
+    gap: 12px;
+  }
+  .post-pagination {
+    gap: 10px;
+  }
+  .post-pagination > a {
+    padding-block: 12px;
+    padding-inline: 12px;
+    font-size: 12px;
+  }
+  .page-width.article-page {
+    width: calc(100% - 40px);
+  }
+  .article-header {
+    padding-block: 30px;
+  }
+  .article-layout {
+    padding-top: 15px;
+  }
+}

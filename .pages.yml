@@ -1,0 +1,312 @@
+# Pages CMS configuration
+#
+# 트랙별 폴더(@frontEnd, @backEnd, ...)는 src/data/site.ts의 분야 설정과 매핑된다.
+# 사이드바에서는 트랙별로 "글"과 "작성자 목록"을 하나의 group으로 묶어서 보여준다.
+#
+# 주의: 아래 글들은 `Video.astro` 등 커스텀 MDX 컴포넌트를 사용한다.
+# Pages CMS의 rich-text 에디터로 열었다 저장하면 JSX 문법이 깨질 수 있으므로,
+# 이 글들은 CMS에서 편집하지 말고 개발자가 직접 커밋할 것.
+#   - @frontEnd/Parksungju/global-state-management.mdx
+#   - @guideline/template.mdx
+#   - @frontEnd/GwakSeungJu/infomate-4week.mdx
+#   - @frontEnd/d0dam/infomate-2week.mdx
+#   - @frontEnd/hanagertrudeKim/infomate-1week.mdx
+#   - @frontEnd/hanagertrudeKim/infomate-5week.mdx
+
+# 커밋을 실제 로그인한 사람의 GitHub 신원으로 남겨서, register-authors.mjs가
+# 커밋의 실제 작성자를 식별해 authors 필드를 자동으로 채울 수 있게 한다.
+settings:
+  commit:
+    identity: user
+
+media:
+  input: static/img
+  output: /img
+
+content:
+  - name: introduce
+    label: Introduce
+    type: group
+    items:
+      - name: introduce-posts
+        label: 글
+        type: collection
+        path: "@introduce"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: &post-fields
+          - name: title
+            label: 제목
+            type: string
+            required: true
+          - name: description
+            label: 설명
+            type: string
+          - name: date
+            label: 작성일
+            type: date
+            required: true
+          - name: authors
+            label: 작성자
+            type: string
+            description: "비워두면 저장한 사람의 GitHub 계정으로 자동 입력됩니다. 다른 사람 이름으로 남기고 싶을 때만 GitHub username을 직접 입력하세요."
+          - name: keywords
+            label: 키워드
+            type: string
+            list: true
+          - name: tags
+            label: 태그
+            type: string
+            list: true
+          - name: draft
+            label: 초안 (사이트에 공개하지 않음)
+            type: boolean
+            default: false
+          - name: featured
+            label: 홈 추천 글
+            type: boolean
+            default: false
+          - name: body
+            label: 본문
+            type: rich-text
+      - name: introduce-authors
+        label: 작성자 목록
+        type: file
+        path: "@introduce/authors.yml"
+        format: yaml
+
+  - name: guideline
+    label: Guideline
+    type: group
+    items:
+      - name: guideline-posts
+        label: 글
+        type: collection
+        path: "@guideline"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: guideline-authors
+        label: 작성자 목록
+        type: file
+        path: "@guideline/authors.yml"
+        format: yaml
+
+  - name: front-end
+    label: Frontend
+    type: group
+    items:
+      - name: front-end-posts
+        label: 글
+        type: collection
+        path: "@frontEnd"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: front-end-authors
+        label: 작성자 목록
+        type: file
+        path: "@frontEnd/authors.yml"
+        format: yaml
+
+  - name: back-end
+    label: Backend
+    type: group
+    items:
+      - name: back-end-posts
+        label: 글
+        type: collection
+        path: "@backEnd"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: back-end-authors
+        label: 작성자 목록
+        type: file
+        path: "@backEnd/authors.yml"
+        format: yaml
+
+  - name: android
+    label: Android
+    type: group
+    items:
+      - name: android-posts
+        label: 글
+        type: collection
+        path: "@android"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: android-authors
+        label: 작성자 목록
+        type: file
+        path: "@android/authors.yml"
+        format: yaml
+
+  - name: ios
+    label: iOS
+    type: group
+    items:
+      - name: ios-posts
+        label: 글
+        type: collection
+        path: "@ios"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: ios-authors
+        label: 작성자 목록
+        type: file
+        path: "@ios/authors.yml"
+        format: yaml
+
+  - name: game
+    label: Game
+    type: group
+    items:
+      - name: game-posts
+        label: 글
+        type: collection
+        path: "@game"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: game-authors
+        label: 작성자 목록
+        type: file
+        path: "@game/authors.yml"
+        format: yaml
+
+  - name: design
+    label: Design
+    type: group
+    items:
+      - name: design-posts
+        label: 글
+        type: collection
+        path: "@design"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: design-authors
+        label: 작성자 목록
+        type: file
+        path: "@design/authors.yml"
+        format: yaml
+
+  - name: product-manager
+    label: PM
+    type: group
+    items:
+      - name: product-manager-posts
+        label: 글
+        type: collection
+        path: "@productManager"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: product-manager-authors
+        label: 작성자 목록
+        type: file
+        path: "@productManager/authors.yml"
+        format: yaml
+
+  - name: data-analyst
+    label: DA
+    type: group
+    items:
+      - name: data-analyst-posts
+        label: 글
+        type: collection
+        path: "@dataAnalyst"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: data-analyst-authors
+        label: 작성자 목록
+        type: file
+        path: "@dataAnalyst/authors.yml"
+        format: yaml
+
+  - name: security
+    label: Security
+    type: group
+    items:
+      - name: security-posts
+        label: 글
+        type: collection
+        path: "@security"
+        filename: "{primary}.mdx"
+        subfolders: true
+        view:
+          fields: [title, date, authors]
+          sort: [date]
+          default:
+            sort: date
+            order: desc
+        fields: *post-fields
+      - name: security-authors
+        label: 작성자 목록
+        type: file
+        path: "@security/authors.yml"
+        format: yaml

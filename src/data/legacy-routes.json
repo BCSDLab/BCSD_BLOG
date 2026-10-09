@@ -1,0 +1,583 @@
+{
+  "@design/posts/introduce-Design-2025.mdx": {
+    "url": "/design/posts/introduce-Design-2025",
+    "tags": [
+      {
+        "label": "Design",
+        "permalink": "/design/tags/design"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/design/tags/트랙-소개"
+      }
+    ]
+  },
+  "@security/posts/introduce-Security-2025.mdx": {
+    "url": "/security/posts/introduce-Security-2025",
+    "tags": [
+      {
+        "label": "Security",
+        "permalink": "/security/tags/security"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/security/tags/트랙-소개"
+      }
+    ]
+  },
+  "@dataAnalyst/posts/introduce-DA-2025.mdx": {
+    "url": "/data-analyst/posts/introduce-DA-2025",
+    "tags": [
+      {
+        "label": "DA",
+        "permalink": "/data-analyst/tags/da"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/data-analyst/tags/트랙-소개"
+      }
+    ]
+  },
+  "@productManager/posts/introduce-PM-2025.mdx": {
+    "url": "/product-manager/posts/introduce-PM-2025",
+    "tags": [
+      {
+        "label": "PM",
+        "permalink": "/product-manager/tags/pm"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/product-manager/tags/트랙-소개"
+      }
+    ]
+  },
+  "@productManager/yoonOneBeen/first-writing.mdx": {
+    "url": "/product-manager/yoonOneBeen/first-writing",
+    "tags": [
+      {
+        "label": "PM",
+        "permalink": "/product-manager/tags/pm"
+      }
+    ]
+  },
+  "@productManager/LUNA-KK/rawpotential.mdx": {
+    "url": "/product-manager/LUNA-KK/rawpotential",
+    "tags": [
+      {
+        "label": "코인",
+        "permalink": "/product-manager/tags/코인"
+      },
+      {
+        "label": "식단",
+        "permalink": "/product-manager/tags/식단"
+      },
+      {
+        "label": "생협",
+        "permalink": "/product-manager/tags/생협"
+      }
+    ]
+  },
+  "@introduce/what-is-bcsd.mdx": {
+    "url": "/introduce/what-is-bcsd",
+    "tags": []
+  },
+  "@introduce/bcsd-activity.mdx": {
+    "url": "/introduce/bcsd-activity",
+    "tags": []
+  },
+  "@introduce/introduce-tracks.mdx": {
+    "url": "/introduce/introduce-tracks",
+    "tags": []
+  },
+  "@game/posts/introduce-Game-2025.mdx": {
+    "url": "/game/posts/introduce-Game-2025",
+    "tags": [
+      {
+        "label": "Game",
+        "permalink": "/game/tags/game"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/game/tags/트랙-소개"
+      }
+    ]
+  },
+  "@ios/posts/introduce-iOS-2025.mdx": {
+    "url": "/ios/posts/introduce-iOS-2025",
+    "tags": [
+      {
+        "label": "iOS",
+        "permalink": "/ios/tags/i-os"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/ios/tags/트랙-소개"
+      }
+    ]
+  },
+  "@guideline/template.mdx": {
+    "url": "/guideline/template",
+    "tags": [
+      {
+        "label": "가이드",
+        "permalink": "/guideline/tags/가이드"
+      },
+      {
+        "label": "템플릿",
+        "permalink": "/guideline/tags/템플릿"
+      }
+    ]
+  },
+  "@guideline/guide-2.mdx": {
+    "url": "/guideline/guide-2",
+    "tags": [
+      {
+        "label": "가이드",
+        "permalink": "/guideline/tags/가이드"
+      },
+      {
+        "label": "업로드 방법",
+        "permalink": "/guideline/tags/업로드-방법"
+      }
+    ]
+  },
+  "@guideline/blog-direction.mdx": {
+    "url": "/guideline/blog-direction",
+    "tags": []
+  },
+  "@guideline/guide-1.mdx": {
+    "url": "/guideline/guide-1",
+    "tags": [
+      {
+        "label": "가이드",
+        "permalink": "/guideline/tags/가이드"
+      },
+      {
+        "label": "업로드 방법",
+        "permalink": "/guideline/tags/업로드-방법"
+      }
+    ]
+  },
+  "@android/posts/introduce-Android-2025.mdx": {
+    "url": "/android/posts/introduce-Android-2025",
+    "tags": [
+      {
+        "label": "Android",
+        "permalink": "/android/tags/android"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/android/tags/트랙-소개"
+      }
+    ]
+  },
+  "@android/jokwanhee/jkh_study_fork.mdx": {
+    "url": "/android/jokwanhee/jkh_study_fork",
+    "tags": [
+      {
+        "label": "안드로이드",
+        "permalink": "/android/tags/안드로이드"
+      },
+      {
+        "label": "스터디",
+        "permalink": "/android/tags/스터디"
+      }
+    ]
+  },
+  "@android/kongwoojin/r8-full-mode.mdx": {
+    "url": "/android/kongwoojin/r8-full-mode",
+    "tags": [
+      {
+        "label": "Android",
+        "permalink": "/android/tags/android"
+      },
+      {
+        "label": "R8",
+        "permalink": "/android/tags/r-8"
+      },
+      {
+        "label": "Proguard",
+        "permalink": "/android/tags/proguard"
+      },
+      {
+        "label": "난독화",
+        "permalink": "/android/tags/난독화"
+      }
+    ]
+  },
+  "@android/jokwanhee/jkh_fcm_data_message.mdx": {
+    "url": "/android/jokwanhee/jkh_fcm_data_message",
+    "tags": [
+      {
+        "label": "안드로이드",
+        "permalink": "/android/tags/안드로이드"
+      },
+      {
+        "label": "FCM",
+        "permalink": "/android/tags/fcm"
+      }
+    ]
+  },
+  "@android/jokwanhee/jkh_gradle_cleanup.mdx": {
+    "url": "/android/jokwanhee/jkh_gradle_cleanup",
+    "tags": [
+      {
+        "label": "안드로이드",
+        "permalink": "/android/tags/안드로이드"
+      },
+      {
+        "label": "Gradle",
+        "permalink": "/android/tags/gradle"
+      }
+    ]
+  },
+  "@android/jokwanhee/jkh_fcm.mdx": {
+    "url": "/android/jokwanhee/jkh_fcm",
+    "tags": [
+      {
+        "label": "코틀린 스프링",
+        "permalink": "/android/tags/코틀린-스프링"
+      },
+      {
+        "label": "Postman",
+        "permalink": "/android/tags/postman"
+      },
+      {
+        "label": "FCM",
+        "permalink": "/android/tags/fcm"
+      }
+    ]
+  },
+  "@android/jokwanhee/jkh_fcm_notification_message.mdx": {
+    "url": "/android/jokwanhee/jkh_fcm_notification_message",
+    "tags": [
+      {
+        "label": "안드로이드",
+        "permalink": "/android/tags/안드로이드"
+      },
+      {
+        "label": "FCM",
+        "permalink": "/android/tags/fcm"
+      }
+    ]
+  },
+  "@android/kongwoojin/kotlin-dsl-error-handling.mdx": {
+    "url": "/android/kongwoojin/kotlin-dsl-error-handling",
+    "tags": [
+      {
+        "label": "Android",
+        "permalink": "/android/tags/android"
+      },
+      {
+        "label": "Kotlin DSL",
+        "permalink": "/android/tags/kotlin-dsl"
+      }
+    ]
+  },
+  "@frontEnd/haejinyun/infomate-8week.mdx": {
+    "url": "/front-end/haejinyun/infomate-8week",
+    "tags": [
+      {
+        "label": "인포메이트",
+        "permalink": "/front-end/tags/인포메이트"
+      },
+      {
+        "label": "프레임워크",
+        "permalink": "/front-end/tags/프레임워크"
+      },
+      {
+        "label": "라이브러리",
+        "permalink": "/front-end/tags/라이브러리"
+      }
+    ]
+  },
+  "@frontEnd/GwakSeungJu/infomate-7week.mdx": {
+    "url": "/front-end/GwakSeungJu/infomate-7week",
+    "tags": [
+      {
+        "label": "인포메이트",
+        "permalink": "/front-end/tags/인포메이트"
+      },
+      {
+        "label": "알고리즘",
+        "permalink": "/front-end/tags/알고리즘"
+      }
+    ]
+  },
+  "@frontEnd/d0dam/infomate-2week.mdx": {
+    "url": "/front-end/d0dam/infomate-2week",
+    "tags": [
+      {
+        "label": "인포메이트",
+        "permalink": "/front-end/tags/인포메이트"
+      },
+      {
+        "label": "브라우저",
+        "permalink": "/front-end/tags/브라우저"
+      }
+    ]
+  },
+  "@frontEnd/posts/july-retrospect_daepan.mdx": {
+    "url": "/front-end/posts/july-retrospect_daepan",
+    "tags": [
+      {
+        "label": "월간 회고",
+        "permalink": "/front-end/tags/월간-회고"
+      },
+      {
+        "label": "레귤러 전환",
+        "permalink": "/front-end/tags/레귤러-전환"
+      }
+    ]
+  },
+  "@frontEnd/junghaesung79/koin-coop-web-separation.mdx": {
+    "url": "/front-end/junghaesung79/koin-coop-web-separation",
+    "tags": [
+      {
+        "label": "코인",
+        "permalink": "/front-end/tags/코인"
+      },
+      {
+        "label": "생협",
+        "permalink": "/front-end/tags/생협"
+      }
+    ]
+  },
+  "@frontEnd/junghaesung79/introduce-FE.mdx": {
+    "url": "/front-end/junghaesung79/introduce-FE",
+    "tags": [
+      {
+        "label": "FE",
+        "permalink": "/front-end/tags/fe"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/front-end/tags/트랙-소개"
+      }
+    ]
+  },
+  "@frontEnd/GwakSeungJu/infomate-6week.mdx": {
+    "url": "/front-end/GwakSeungJu/infomate-6week",
+    "tags": [
+      {
+        "label": "인포메이트",
+        "permalink": "/front-end/tags/인포메이트"
+      },
+      {
+        "label": "최적화",
+        "permalink": "/front-end/tags/최적화"
+      }
+    ]
+  },
+  "@frontEnd/hanagertrudeKim/infomate-1week.mdx": {
+    "url": "/front-end/hanagertrudeKim/infomate-1week",
+    "tags": [
+      {
+        "label": "인포메이트",
+        "permalink": "/front-end/tags/인포메이트"
+      },
+      {
+        "label": "JS",
+        "permalink": "/front-end/tags/js"
+      },
+      {
+        "label": "TS",
+        "permalink": "/front-end/tags/ts"
+      }
+    ]
+  },
+  "@frontEnd/posts/code-convention.mdx": {
+    "url": "/front-end/posts/code-convention",
+    "tags": [
+      {
+        "label": "협업",
+        "permalink": "/front-end/tags/협업"
+      },
+      {
+        "label": "코드 컨벤션",
+        "permalink": "/front-end/tags/코드-컨벤션"
+      }
+    ]
+  },
+  "@frontEnd/haejinyun/august-retrospect_haejin.mdx": {
+    "url": "/front-end/haejinyun/august-retrospect_haejin",
+    "tags": [
+      {
+        "label": "월간 회고",
+        "permalink": "/front-end/tags/월간-회고"
+      },
+      {
+        "label": "QA",
+        "permalink": "/front-end/tags/qa"
+      }
+    ]
+  },
+  "@frontEnd/junghaesung79/cholog-study-meetup.mdx": {
+    "url": "/front-end/junghaesung79/cholog-study-meetup",
+    "tags": [
+      {
+        "label": "초록스터디",
+        "permalink": "/front-end/tags/초록스터디"
+      }
+    ]
+  },
+  "@frontEnd/hanagertrudeKim/infomate-5week.mdx": {
+    "url": "/front-end/hanagertrudeKim/infomate-5week",
+    "tags": [
+      {
+        "label": "인포메이트",
+        "permalink": "/front-end/tags/인포메이트"
+      },
+      {
+        "label": "UX",
+        "permalink": "/front-end/tags/ux"
+      }
+    ]
+  },
+  "@frontEnd/posts/abTest-guide.mdx": {
+    "url": "/front-end/posts/abTest-guide",
+    "tags": [
+      {
+        "label": "AB 테스트",
+        "permalink": "/front-end/tags/ab-테스트"
+      },
+      {
+        "label": "사용법",
+        "permalink": "/front-end/tags/사용법"
+      }
+    ]
+  },
+  "@frontEnd/posts/react-query.mdx": {
+    "url": "/front-end/posts/react-query",
+    "tags": [
+      {
+        "label": "react-query",
+        "permalink": "/front-end/tags/react-query"
+      }
+    ]
+  },
+  "@frontEnd/haejinyun/infomate-9week.mdx": {
+    "url": "/front-end/haejinyun/infomate-9week",
+    "tags": [
+      {
+        "label": "인포메이트",
+        "permalink": "/front-end/tags/인포메이트"
+      },
+      {
+        "label": "최적화",
+        "permalink": "/front-end/tags/최적화"
+      }
+    ]
+  },
+  "@frontEnd/GwakSeungJu/april-retrospect_GwakSeungju.mdx": {
+    "url": "/front-end/GwakSeungJu/april-retrospect_GwakSeungju",
+    "tags": [
+      {
+        "label": "월간 회고",
+        "permalink": "/front-end/tags/월간-회고"
+      },
+      {
+        "label": "레귤러 전환",
+        "permalink": "/front-end/tags/레귤러-전환"
+      }
+    ]
+  },
+  "@frontEnd/posts/introduce-FE-2025.mdx": {
+    "url": "/front-end/posts/introduce-FE-2025",
+    "tags": [
+      {
+        "label": "FE",
+        "permalink": "/front-end/tags/fe"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/front-end/tags/트랙-소개"
+      }
+    ]
+  },
+  "@frontEnd/haejinyun/infomate-3week.mdx": {
+    "url": "/front-end/haejinyun/infomate-3week",
+    "tags": [
+      {
+        "label": "인포메이트",
+        "permalink": "/front-end/tags/인포메이트"
+      },
+      {
+        "label": "협업",
+        "permalink": "/front-end/tags/협업"
+      }
+    ]
+  },
+  "@frontEnd/GwakSeungJu/infomate-4week.mdx": {
+    "url": "/front-end/GwakSeungJu/infomate-4week",
+    "tags": [
+      {
+        "label": "인포메이트",
+        "permalink": "/front-end/tags/인포메이트"
+      },
+      {
+        "label": "툴",
+        "permalink": "/front-end/tags/툴"
+      }
+    ]
+  },
+  "@backEnd/songsunkook/abtest.mdx": {
+    "url": "/back-end/songsunkook/abtest",
+    "tags": [
+      {
+        "label": "AB테스트",
+        "permalink": "/back-end/tags/ab테스트"
+      },
+      {
+        "label": "내부 도구",
+        "permalink": "/back-end/tags/내부-도구"
+      },
+      {
+        "label": "설계",
+        "permalink": "/back-end/tags/설계"
+      }
+    ]
+  },
+  "@backEnd/posts/introduce-BE-2025.mdx": {
+    "url": "/back-end/posts/introduce-BE-2025",
+    "tags": [
+      {
+        "label": "BE",
+        "permalink": "/back-end/tags/be"
+      },
+      {
+        "label": "트랙 소개",
+        "permalink": "/back-end/tags/트랙-소개"
+      }
+    ]
+  },
+  "docs/intro.md": {
+    "url": "/docs/overview",
+    "tags": []
+  },
+  "docs/template/template.mdx": {
+    "url": "/docs/template/",
+    "tags": []
+  },
+  "@frontEnd/Parksungju/global-state-management.mdx": {
+    "url": "/front-end/Parksungju/global-state-management",
+    "tags": [
+      {
+        "label": "React",
+        "permalink": "/front-end/tags/react"
+      },
+      {
+        "label": "전역 상태 관리",
+        "permalink": "/front-end/tags/전역-상태-관리"
+      },
+      {
+        "label": "Redux",
+        "permalink": "/front-end/tags/redux"
+      },
+      {
+        "label": "Zustand",
+        "permalink": "/front-end/tags/zustand"
+      }
+    ]
+  }
+}

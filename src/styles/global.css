@@ -1,0 +1,8 @@
+/* Shared foundations first; each area owns its base and responsive rules. */
+@import './base.css';
+@import './header.css';
+@import './footer.css';
+@import './home.css';
+@import './listing.css';
+@import './article.css';
+@import './prose.css';
