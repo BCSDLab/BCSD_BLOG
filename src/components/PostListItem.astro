@@ -44,16 +44,35 @@ const description = /^설명글?\s*입니다\.?$/.test(post.data.description)
     </ul>
   )}
   <div class="post-byline">
-    {authors[0]?.image_url && (
-      <img
-        src={authors[0].image_url}
-        alt=""
-        width="22"
-        height="22"
-        loading="lazy"
-      />
-    )}
-    <span>{authors.map((author) => author.name).join(', ') || 'BCSD'}</span>
+    {authors.map((author, index) => {
+      const AuthorTag = author.url ? 'a' : 'span';
+      return (
+        <>
+          {index > 0 && <span aria-hidden="true">,</span>}
+          <AuthorTag
+            class="post-author"
+            href={author.url}
+            target={author.url ? '_blank' : undefined}
+            rel={author.url ? 'noreferrer' : undefined}
+            aria-label={
+              author.url ? `${author.name} 프로필 (새 탭)` : undefined
+            }
+          >
+            {index === 0 && author.image_url && (
+              <img
+                src={author.image_url}
+                alt=""
+                width="22"
+                height="22"
+                loading="lazy"
+              />
+            )}
+            <span>{author.name}</span>
+          </AuthorTag>
+        </>
+      );
+    })}
+    {authors.length === 0 && <span>BCSD</span>}
     {post.data.date && (
       <>
         <span class="meta-separator" aria-hidden="true">

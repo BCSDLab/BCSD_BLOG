@@ -38,6 +38,11 @@
   color: var(--muted);
   line-height: 1.6;
 }
+.post-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
 .post-byline img {
   width: 22px;
   height: 22px;
